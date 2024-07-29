@@ -109,16 +109,10 @@ namespace SFA.DAS.ApprenticeProgress.Api.Controllers
             public DateTime? CreatedDateTime { get; set; }
             public int? CategoryId { get; set; }
             public int? Status { get; set; }
-
-            // files block
             public List<ApprenticeTaskDataFileRequest> Files { get; set; } = null!;
-
-            // reminder block
             public int? ReminderUnit { get; set; }
             public int? ReminderValue { get; set; }
             public int? ReminderStatus { get; set; }
-
-            // ksbs linked
             public int[] KsbsLinked { get; set; }
         }
 
@@ -145,7 +139,7 @@ namespace SFA.DAS.ApprenticeProgress.Api.Controllers
         }
 
         // Update a task by Id
-        [HttpPut("{apprenticeshipIdentifier}/tasks/{taskId}")]
+        [HttpPost("{apprenticeshipIdentifier}/tasks/{taskId}")]
         public async Task<IActionResult> UpdateTaskByApprentishipIdAndTaskId(Guid apprenticeshipIdentifier, [FromBody] ApprenticeTaskDataRequest request)
         {
             await _mediator.Send(new UpdateTaskByApprentishipIdAndTaskIdCommand
