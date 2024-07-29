@@ -1,12 +1,12 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 using MediatR;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.VisualBasic;
 using SFA.DAS.ApprenticeProgress.Application.Commands;
+using SFA.DAS.ApprenticeProgress.Application.Models;
 using SFA.DAS.ApprenticeProgress.Application.Queries;
-using SFA.DAS.ApprenticeProgress.Domain.Entities;
 
 namespace SFA.DAS.ApprenticeProgress.Api.Controllers
 {
@@ -66,7 +66,7 @@ namespace SFA.DAS.ApprenticeProgress.Api.Controllers
         }
 
         // Gets the tasks
-        [HttpGet("{apprenticeshipIdentifier}/tasks")]
+        [HttpGet("{apprenticeshipIdentifier}/fromDate/{fromDate}/toDate/{toDate}/status/{status}")]
         public async Task<IActionResult> GetTasksByApprenticeshipId(Guid apprenticeshipIdentifier, DateTime? fromDate, DateTime? toDate, int status)
         {
             var result = await _mediator.Send(new GetTasksByApprenticeshipIdQuery { ApprenticeshipId = apprenticeshipIdentifier, Status = status, ToDate = toDate, FromDate = fromDate });
@@ -76,25 +76,50 @@ namespace SFA.DAS.ApprenticeProgress.Api.Controllers
 
         // Add a new tasks
         [HttpPost("{apprenticeshipIdentifier}/tasks")]
-        public async Task<IActionResult> AddTaskByApprenticeshipId(Guid apprenticeshipIdentifier, DateTime? dueDate, string title, string note, DateTime? completionDateTime, int status, [FromForm] int[] ksbsLinked, int reminderStatus, int reminderValue, int reminderUnit, [FromForm] IFormFile[] files, int? apprenticeshipCategoryId = 0)
+        public async Task<IActionResult> AddTaskByApprenticeshipId(Guid apprenticeshipIdentifier, [FromBody] ApprenticeTaskDataRequest request)
         {
             await _mediator.Send(new AddTaskByApprenticeshipIdCommand
             {
                 ApprenticeshipId = apprenticeshipIdentifier,
-                DueDate = dueDate.Value,
-                Title = title,
-                ApprenticeshipCategoryId = apprenticeshipCategoryId,
-                Note = note,
-                CompletionDateTime = completionDateTime.Value,
-                Status = status,
-                Files = files,
-                ReminderUnit = reminderUnit,
-                ReminderValue = reminderValue,
-                ReminderStatus = reminderStatus,
-                KsbsLinked = ksbsLinked,
+                DueDate = request.DueDate.Value,
+                Title = request.Title,
+                ApprenticeshipCategoryId = request.ApprenticeshipCategoryId,
+                Note = request.Note,
+                CompletionDateTime = request.CompletionDateTime.Value,
+                Status = request.Status,
+                Files = request.Files,
+                ReminderUnit = request.ReminderUnit,
+                ReminderValue = request.ReminderValue,
+                ReminderStatus = request.ReminderStatus,
+                KsbsLinked = request.KsbsLinked
             });
 
             return Ok();
+        }
+
+        public class ApprenticeTaskDataRequest
+        {
+            public Guid ApprenticeshipId { get; set; }
+            public int? TaskId { get; set; }
+            public DateTime? DueDate { get; set; }
+            public string Title { get; set; }
+            public int? ApprenticeshipCategoryId { get; set; }
+            public string Note { get; set; }
+            public DateTime? CompletionDateTime { get; set; }
+            public DateTime? CreatedDateTime { get; set; }
+            public int? CategoryId { get; set; }
+            public int? Status { get; set; }
+
+            // files block
+            public List<ApprenticeTaskDataFileRequest> Files { get; set; } = null!;
+
+            // reminder block
+            public int? ReminderUnit { get; set; }
+            public int? ReminderValue { get; set; }
+            public int? ReminderStatus { get; set; }
+
+            // ksbs linked
+            public int[] KsbsLinked { get; set; }
         }
 
         // chnage a task status
@@ -121,23 +146,23 @@ namespace SFA.DAS.ApprenticeProgress.Api.Controllers
 
         // Update a task by Id
         [HttpPut("{apprenticeshipIdentifier}/tasks/{taskId}")]
-        public async Task<IActionResult> UpdateTaskByApprentishipIdAndTaskId(Guid apprenticeshipIdentifier, int taskId, DateTime? dueDate, string title, string note, DateTime? completionDateTime, int status, [FromForm] int[] ksbsLinked, int reminderStatus, int reminderValue, int reminderUnit, [FromForm] IFormFile[] files, int? apprenticeshipCategoryId = 0)
+        public async Task<IActionResult> UpdateTaskByApprentishipIdAndTaskId(Guid apprenticeshipIdentifier, [FromBody] ApprenticeTaskDataRequest request)
         {
             await _mediator.Send(new UpdateTaskByApprentishipIdAndTaskIdCommand
             {
-                TaskId = taskId,
+                TaskId = request.TaskId.Value,
                 ApprenticeshipId = apprenticeshipIdentifier,
-                DueDate = dueDate.Value,
-                Title = title,
-                ApprenticeshipCategoryId = apprenticeshipCategoryId,
-                Note = note,
-                CompletionDateTime = completionDateTime.Value,
-                Status = status,
-                Files = files,
-                ReminderUnit = reminderUnit,
-                ReminderValue = reminderValue,
-                ReminderStatus = reminderStatus,
-                KsbsLinked = ksbsLinked
+                DueDate = request.DueDate.Value,
+                Title = request.Title,
+                ApprenticeshipCategoryId = request.ApprenticeshipCategoryId,
+                Note = request.Note,
+                CompletionDateTime = request.CompletionDateTime.Value,
+                Status = request.Status,
+                Files = request.Files,
+                ReminderUnit = request.ReminderUnit,
+                ReminderValue = request.ReminderValue,
+                ReminderStatus = request.ReminderStatus,
+                KsbsLinked = request.KsbsLinked
             });
 
             return Ok();

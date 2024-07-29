@@ -1,6 +1,8 @@
 using System;
+using System.Collections.Generic;
 using MediatR;
 using Microsoft.AspNetCore.Http;
+using SFA.DAS.ApprenticeProgress.Application.Models;
 
 namespace SFA.DAS.ApprenticeProgress.Application.Queries
 {
@@ -17,7 +19,7 @@ namespace SFA.DAS.ApprenticeProgress.Application.Queries
         public int? ApprenticeshipCategoryId { get; set; }
 
         // files block
-        public IFormFile[] Files { get; set; }
+        public List<ApprenticeTaskDataFileRequest> Files { get; set; }
 
         // reminder block
         public int? ReminderUnit { get; set; }

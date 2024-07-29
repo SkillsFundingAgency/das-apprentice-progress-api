@@ -1,5 +1,6 @@
 ﻿using System;
 using System.IO;
+using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 using MediatR;
@@ -45,9 +46,9 @@ namespace SFA.DAS.ApprenticeProgress.Application.Commands
                 var taskFile = new Domain.Entities.TaskFile
                 {
                     TaskId = (int)task.TaskId,
-                    FileType = file.ContentType, //Path.GetExtension(file.FileName),
+                    FileType = file.FileType, 
                     FileName = file.FileName,
-                    FileContents = StreamToByteArray(file.OpenReadStream())
+                    FileContents = Encoding.ASCII.GetBytes(file.FileContents)
                 };
 
                 _ApprenticeProgressDataContext.Add(taskFile);
@@ -82,19 +83,6 @@ namespace SFA.DAS.ApprenticeProgress.Application.Commands
             return Task.FromResult(Unit.Value);
         }
 
-        public static byte[] StreamToByteArray(Stream input)
-        {
-            byte[] buffer = new byte[16 * 1024];
-            using (MemoryStream ms = new MemoryStream())
-            {
-                int read;
-                while ((read = input.Read(buffer, 0, buffer.Length)) > 0)
-                {
-                    ms.Write(buffer, 0, read);
-                }
-                return ms.ToArray();
-            }
-        }
 
     }
 }

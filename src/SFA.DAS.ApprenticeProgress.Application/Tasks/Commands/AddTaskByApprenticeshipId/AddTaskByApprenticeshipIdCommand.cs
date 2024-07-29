@@ -1,6 +1,7 @@
 using System;
+using System.Collections.Generic;
 using MediatR;
-using Microsoft.AspNetCore.Http;
+using SFA.DAS.ApprenticeProgress.Application.Models;
 
 namespace SFA.DAS.ApprenticeProgress.Application.Commands
 {
@@ -19,7 +20,7 @@ namespace SFA.DAS.ApprenticeProgress.Application.Commands
         public int? Status { get; set; }
 
         // files block
-        public IFormFile[] Files { get; set; }
+        public List<ApprenticeTaskDataFileRequest> Files { get; set; }
 
         // reminder block
         public int? ReminderUnit { get; set; }
