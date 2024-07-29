@@ -1,0 +1,49 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <TargetFramework>net8.0</TargetFramework>
+    <ProjectGuid>9817A4FE-9D15-4C14-B798-D5717E70CCC1</ProjectGuid>
+  </PropertyGroup>
+  <ItemGroup>
+    <PackageReference Include="MediatR" Version="12.3.0" />
+    <PackageReference Include="FluentValidation.AspNetCore" Version="11.1.1" />
+    <PackageReference Include="Microsoft.Azure.Services.AppAuthentication" Version="1.6.2" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="8.0.7" />
+    <PackageReference Include="Newtonsoft.Json" Version="13.0.1" />
+    <PackageReference Include="Polly" Version="7.2.3" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\SFA.DAS.ApprenticeProgress.Domain\SFA.DAS.ApprenticeProgress.Domain.csproj" />
+    <ProjectReference Include="..\SFA.DAS.ApprenticeProgress.Data\SFA.DAS.ApprenticeProgress.Data.csproj" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Remove="Common\" />
+    <None Remove="Tasks\" />
+    <None Remove="Tasks\Queries\GetTaskCategory\" />
+    <None Remove="Tasks\Queries\GetTaskByApprentishipIdAndTaskId\" />
+    <None Remove="Tasks\Commands\" />
+    <None Remove="Tasks\Commands\AddTaskByApprenticeshipId\" />
+    <None Remove="Tasks\Commands\AddTaskCategory\" />
+    <None Remove="Tasks\Commands\DeleteTaskCategory\" />
+    <None Remove="Tasks\Commands\RemoveTaskByApprentishipIdAndTaskId\" />
+    <None Remove="Tasks\Commands\UpdateTaskByApprentishipIdAndTaskId\" />
+    <None Remove="Ksbs\" />
+    <None Remove="Tasks\Queries\GetTasksByApprenticeshipId\" />
+    <None Remove="Tasks\Commands\UpdateTaskStatus\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Common\" />
+    <Folder Include="Tasks\" />
+    <Folder Include="Tasks\Queries\GetTaskCategory\" />
+    <Folder Include="Tasks\Queries\GetTaskByApprentishipIdAndTaskId\" />
+    <Folder Include="Tasks\Commands\" />
+    <Folder Include="Tasks\Commands\AddTaskByApprenticeshipId\" />
+    <Folder Include="Tasks\Commands\AddTaskCategory\" />
+    <Folder Include="Tasks\Commands\DeleteTaskCategory\" />
+    <Folder Include="Tasks\Commands\RemoveTaskByApprentishipIdAndTaskId\" />
+    <Folder Include="Tasks\Commands\UpdateTaskByApprentishipIdAndTaskId\" />
+    <Folder Include="Ksbs\" />
+    <Folder Include="Tasks\Queries\GetTasksByApprenticeshipId\" />
+    <Folder Include="Tasks\Commands\UpdateTaskStatus\" />
+  </ItemGroup>
+</Project>
+
