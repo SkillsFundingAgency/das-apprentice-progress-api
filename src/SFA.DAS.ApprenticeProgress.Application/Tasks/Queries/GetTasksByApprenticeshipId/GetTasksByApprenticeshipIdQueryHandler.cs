@@ -21,18 +21,39 @@ namespace SFA.DAS.ApprenticeProgress.Application.Queries
 
         public async Task<GetTasksByApprenticeshipIdResult> Handle(GetTasksByApprenticeshipIdQuery request, CancellationToken cancellationToken)
         {
-            var tasks = await _ApprenticeProgressDataContext.Task
-                .Where(x =>
-                    x.ApprenticeshipId == request.ApprenticeshipId
-                    &&
-                    x.DueDate >= request.FromDate
-                    &&
-                    x.DueDate <= request.ToDate
-                    &&
-                    x.Status == (Domain.Entities.Task.TaskStatus)(int)request.Status)
-                .AsNoTracking()
-                .AsSingleQuery()
-                .ToListAsync(cancellationToken);
+            var tasks = new List<Domain.Entities.Task>();
+
+            if ((Domain.Entities.Task.TaskStatus)(int)request.Status == Domain.Entities.Task.TaskStatus.Todo)
+            {
+                tasks = await _ApprenticeProgressDataContext.Task
+                    .Where(x =>
+                        x.ApprenticeshipId == request.ApprenticeshipId
+                        &&
+                        x.DueDate >= request.FromDate
+                        &&
+                        x.DueDate <= request.ToDate
+                        &&
+                        x.Status == (Domain.Entities.Task.TaskStatus)(int)request.Status)
+                    .AsNoTracking()
+                    .AsSingleQuery()
+                    .ToListAsync(cancellationToken);
+            }
+
+            if ((Domain.Entities.Task.TaskStatus)(int)request.Status == Domain.Entities.Task.TaskStatus.Done)
+            {
+                tasks = await _ApprenticeProgressDataContext.Task
+                    .Where(x =>
+                        x.ApprenticeshipId == request.ApprenticeshipId
+                        &&
+                        x.CompletionDateTime >= request.FromDate
+                        &&
+                        x.CompletionDateTime <= request.ToDate
+                        &&
+                        x.Status == (Domain.Entities.Task.TaskStatus)(int)request.Status)
+                    .AsNoTracking()
+                    .AsSingleQuery()
+                    .ToListAsync(cancellationToken);
+            }
 
             foreach (var task in tasks)
             {
