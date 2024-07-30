@@ -1,9 +1,10 @@
-﻿using SFA.DAS.ApprenticeProgress.Application.Models;
+﻿using System.Collections.Generic;
+using SFA.DAS.ApprenticeProgress.Application.Models;
 
 namespace SFA.DAS.ApprenticeProgress.Application.Queries
 {
     public class GetTaskByApprentishipIdAndTaskIdResult : QueryResult<GetTaskByApprentishipIdAndTaskIdResult>
     {
-        public Domain.Entities.Task Task { get; set; }
+        public List<Domain.Entities.Task> Tasks { get; set; }
     }
 }
