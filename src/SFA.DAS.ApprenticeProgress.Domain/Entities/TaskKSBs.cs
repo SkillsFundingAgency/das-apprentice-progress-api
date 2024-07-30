@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace SFA.DAS.ApprenticeProgress.Domain.Entities
+﻿namespace SFA.DAS.ApprenticeProgress.Domain.Entities
 {
     public class TaskKSBs
     {

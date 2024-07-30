@@ -89,15 +89,6 @@ namespace SFA.DAS.ApprenticeProgress.Data
             modelBuilder.ApplyConfiguration(new TaskReminder());
 
             base.OnModelCreating(modelBuilder);
-
-
-          /*  modelBuilder.Entity<Domain.Entities.TaskCategory>()
-                   .HasOne(e => e.ApprenticeshipCategory)
-                   .WithOne(e => e.TaskCategory)
-                   .HasForeignKey<Domain.Entities.TaskCategory>(e => e.TaskId);*/
-                  
-
-
         }
     }
 }

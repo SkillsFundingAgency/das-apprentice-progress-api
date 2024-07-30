@@ -16,7 +16,6 @@
     <ProjectReference Include="..\SFA.DAS.ApprenticeProgress.Data\SFA.DAS.ApprenticeProgress.Data.csproj" />
   </ItemGroup>
   <ItemGroup>
-    <None Remove="Common\" />
     <None Remove="Tasks\" />
     <None Remove="Tasks\Queries\GetTaskCategory\" />
     <None Remove="Tasks\Queries\GetTaskByApprentishipIdAndTaskId\" />
@@ -31,7 +30,6 @@
     <None Remove="Tasks\Commands\UpdateTaskStatus\" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Common\" />
     <Folder Include="Tasks\" />
     <Folder Include="Tasks\Queries\GetTaskCategory\" />
     <Folder Include="Tasks\Queries\GetTaskByApprentishipIdAndTaskId\" />
