@@ -29,25 +29,30 @@ namespace SFA.DAS.ApprenticeProgress.Application.Commands
             var task = _ApprenticeProgressDataContext.Task
                 .Where(x => x.TaskId == request.TaskId && x.ApprenticeshipId == request.ApprenticeshipId)
                 .SingleOrDefault();
-            _ApprenticeProgressDataContext.Remove(task);
+            if (task != null)
+                _ApprenticeProgressDataContext.Remove(task);
 
             // files
             var taskFiles = _ApprenticeProgressDataContext.TaskFile
                  .Where(x => x.TaskId == request.TaskId)
-                 .ToListAsync();
-            _ApprenticeProgressDataContext.RemoveRange(taskFiles);
+                 .ToList();
+
+            if (taskFiles != null)
+                _ApprenticeProgressDataContext.RemoveRange(taskFiles);
 
             // linked ksbs
             var linkedKsbs = _ApprenticeProgressDataContext.TaskKSBs
                  .Where(x => x.TaskId == request.TaskId)
-                 .ToListAsync();
-            _ApprenticeProgressDataContext.RemoveRange(linkedKsbs);
+                 .ToList();
+            if (linkedKsbs != null)
+                _ApprenticeProgressDataContext.RemoveRange(linkedKsbs);
 
             // reminders
             var reminders = _ApprenticeProgressDataContext.TaskReminder
                  .Where(x => x.TaskId == request.TaskId)
-                 .ToListAsync();
-            _ApprenticeProgressDataContext.RemoveRange(reminders);
+                 .ToList();
+            if (reminders != null)
+                _ApprenticeProgressDataContext.RemoveRange(reminders);
 
             _ApprenticeProgressDataContext.SaveChanges();
 

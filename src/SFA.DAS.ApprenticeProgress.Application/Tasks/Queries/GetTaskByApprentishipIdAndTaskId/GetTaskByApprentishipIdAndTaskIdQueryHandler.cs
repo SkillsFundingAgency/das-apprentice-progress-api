@@ -15,8 +15,7 @@ namespace SFA.DAS.ApprenticeProgress.Application.Queries
         
         public GetTaskByApprentishipIdAndTaskIdQueryHandler(ApprenticeProgressDataContext ApprenticeProgressDataContext)
         {
-            _ApprenticeProgressDataContext = ApprenticeProgressDataContext;
-            
+            _ApprenticeProgressDataContext = ApprenticeProgressDataContext;   
         }
 
         public async Task<GetTaskByApprentishipIdAndTaskIdResult> Handle(GetTaskByApprentishipIdAndTaskIdQuery request, CancellationToken cancellationToken)
