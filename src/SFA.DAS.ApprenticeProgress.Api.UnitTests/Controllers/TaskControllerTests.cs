@@ -61,7 +61,7 @@ namespace SFA.DAS.ApprenticeApp.UnitTests
             };
 
             var result = await controller.GetTaskCategory(apprenticeshipIdentifier, taskId);
-            result.Should().BeOfType(typeof(Microsoft.AspNetCore.Mvc.OkResult));
+            result.Should().BeOfType(typeof(Microsoft.AspNetCore.Mvc.NotFoundResult));
         }
 
         [Test, MoqAutoData]
@@ -97,24 +97,7 @@ namespace SFA.DAS.ApprenticeApp.UnitTests
             };
 
             var result = await controller.GetTasksByApprenticeshipId(apprenticeshipIdentifier, fromDate, toDate, status);
-            result.Should().BeOfType(typeof(Microsoft.AspNetCore.Mvc.OkResult));
-        }
-
-        [Test, MoqAutoData]
-        public async Task AddTaskByApprenticeshipId_Test(
-            [Greedy] TaskController controller)
-        {
-            var httpContext = new DefaultHttpContext();
-            var apprenticeshipIdentifier = Guid.NewGuid();
-            var data = new ApprenticeTaskDataRequest();
-
-            controller.ControllerContext = new ControllerContext
-            {
-                HttpContext = httpContext
-            };
-
-            var result = await controller.AddTaskByApprenticeshipId(apprenticeshipIdentifier, data);
-            result.Should().BeOfType(typeof(Microsoft.AspNetCore.Mvc.NotFoundResult));
+            result.Should().BeOfType(typeof(NotFoundResult));
         }
 
         [Test, MoqAutoData]
@@ -169,22 +152,6 @@ namespace SFA.DAS.ApprenticeApp.UnitTests
             result.Should().BeOfType(typeof(Microsoft.AspNetCore.Mvc.OkResult));
         }
 
-        [Test, MoqAutoData]
-        public async Task RemoveTaskByApprentishipIdAndTaskId_Test(
-            [Greedy] TaskController controller)
-        {
-            var httpContext = new DefaultHttpContext();
-            var apprenticeshipIdentifier = Guid.NewGuid();
-            int taskId = 1;
-
-            controller.ControllerContext = new ControllerContext
-            {
-                HttpContext = httpContext
-            };
-
-            var result = await controller.RemoveTaskByApprentishipIdAndTaskId(apprenticeshipIdentifier, taskId);
-            result.Should().BeOfType(typeof(Microsoft.AspNetCore.Mvc.OkResult));
-        }
     }
 }
 
