@@ -1,7 +1,6 @@
 using System;
 using System.Collections.Generic;
 using MediatR;
-using Microsoft.AspNetCore.Http;
 using SFA.DAS.ApprenticeProgress.Application.Models;
 
 namespace SFA.DAS.ApprenticeProgress.Application.Queries

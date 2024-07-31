@@ -1,12 +1,10 @@
 ﻿using System.Threading;
 using System.Threading.Tasks;
 using MediatR;
-
 using SFA.DAS.ApprenticeProgress.Application.Queries;
 using SFA.DAS.ApprenticeProgress.Data;
 
 namespace SFA.DAS.ApprenticeProgress.Application.Commands
-
 {
     public class AddTaskCategoryCommandHandler : IRequestHandler<AddTaskCategoryCommand, Unit>
     {
@@ -18,7 +16,6 @@ namespace SFA.DAS.ApprenticeProgress.Application.Commands
         )
         {
             _ApprenticeProgressDataContext = ApprenticeProgressDataContext;
-            
         }
 
         public Task<Unit> Handle(AddTaskCategoryCommand request, CancellationToken cancellationToken)

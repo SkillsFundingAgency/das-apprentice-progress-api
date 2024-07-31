@@ -80,10 +80,5 @@ namespace SFA.DAS.ApprenticeProgress.Api.Controllers
         {
             return Ok();
         }
-
-
-
-
-
     }
 }

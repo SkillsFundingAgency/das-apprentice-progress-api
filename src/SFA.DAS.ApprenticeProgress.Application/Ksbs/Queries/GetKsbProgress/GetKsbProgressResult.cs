@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using SFA.DAS.ApprenticeProgress.Application.Models;
 
 namespace SFA.DAS.ApprenticeProgress.Application.Queries

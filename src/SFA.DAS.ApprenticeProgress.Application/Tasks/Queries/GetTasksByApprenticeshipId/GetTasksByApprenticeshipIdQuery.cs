@@ -9,6 +9,5 @@ namespace SFA.DAS.ApprenticeProgress.Application.Queries
         public int Status { get; set; }
         public DateTime? FromDate { get; set; }
         public DateTime? ToDate { get; set; }
-
     }
 }

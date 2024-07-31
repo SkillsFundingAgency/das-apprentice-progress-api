@@ -12,7 +12,6 @@ namespace SFA.DAS.ApprenticeProgress.Application.Queries
     {
         private readonly ApprenticeProgressDataContext _ApprenticeProgressDataContext;
 
-
         public GetKsbsByApprenticeshipIdQueryHandler(ApprenticeProgressDataContext ApprenticeProgressDataContext)
         {
             _ApprenticeProgressDataContext = ApprenticeProgressDataContext;

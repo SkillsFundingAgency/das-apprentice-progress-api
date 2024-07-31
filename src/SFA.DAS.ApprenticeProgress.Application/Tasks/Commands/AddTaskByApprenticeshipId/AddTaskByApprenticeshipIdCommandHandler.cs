@@ -7,7 +7,6 @@ using MediatR;
 using SFA.DAS.ApprenticeProgress.Data;
 
 namespace SFA.DAS.ApprenticeProgress.Application.Commands
-
 {
     public class AddTaskByApprenticeshipIdCommandHandler : IRequestHandler<AddTaskByApprenticeshipIdCommand, Unit>
     {
@@ -82,7 +81,5 @@ namespace SFA.DAS.ApprenticeProgress.Application.Commands
 
             return Task.FromResult(Unit.Value);
         }
-
-
     }
 }

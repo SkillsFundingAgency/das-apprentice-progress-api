@@ -3,7 +3,6 @@ using System.Threading;
 using System.Threading.Tasks;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
-
 using SFA.DAS.ApprenticeProgress.Data;
 
 namespace SFA.DAS.ApprenticeProgress.Application.Queries
@@ -15,7 +14,6 @@ namespace SFA.DAS.ApprenticeProgress.Application.Queries
         public GetKsbProgressQueryHandler(ApprenticeProgressDataContext ApprenticeProgressDataContext)
         {
             _ApprenticeProgressDataContext = ApprenticeProgressDataContext;
-
         }
 
         public async Task<GetKsbProgressResult> Handle(GetKsbProgressQuery request, CancellationToken cancellationToken)

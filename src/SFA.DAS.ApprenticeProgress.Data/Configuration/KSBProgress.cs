@@ -1,8 +1,10 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using System.Diagnostics.CodeAnalysis;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
 namespace SFA.DAS.ApprenticeProgress.Data.Configuration
 {
+    [ExcludeFromCodeCoverage]
     public class KSBProgress : IEntityTypeConfiguration<Domain.Entities.KSBProgress>
     {
         public void Configure(EntityTypeBuilder<Domain.Entities.KSBProgress> builder)

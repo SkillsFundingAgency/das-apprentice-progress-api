@@ -2,13 +2,10 @@
 using System.Threading;
 using System.Threading.Tasks;
 using MediatR;
-using Microsoft.EntityFrameworkCore;
-
 using SFA.DAS.ApprenticeProgress.Application.Queries;
 using SFA.DAS.ApprenticeProgress.Data;
 
 namespace SFA.DAS.ApprenticeProgress.Application.Commands
-
 {
     public class RemoveTaskByApprentishipIdAndTaskIdCommandHandler : IRequestHandler<RemoveTaskByApprentishipIdAndTaskIdCommand, Unit>
     {
@@ -20,7 +17,6 @@ namespace SFA.DAS.ApprenticeProgress.Application.Commands
         )
         {
             _ApprenticeProgressDataContext = ApprenticeProgressDataContext;
-            
         }
 
         public Task<Unit> Handle(RemoveTaskByApprentishipIdAndTaskIdCommand request, CancellationToken cancellationToken)

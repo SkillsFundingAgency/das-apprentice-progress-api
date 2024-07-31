@@ -6,7 +6,6 @@ using System.Threading;
 using System.Threading.Tasks;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
-
 using SFA.DAS.ApprenticeProgress.Application.Queries;
 using SFA.DAS.ApprenticeProgress.Data;
 
@@ -23,7 +22,6 @@ namespace SFA.DAS.ApprenticeProgress.Application.Commands
         )
         {
             _ApprenticeProgressDataContext = ApprenticeProgressDataContext;
-            
         }
 
         public async Task<Unit> Handle(UpdateTaskByApprentishipIdAndTaskIdCommand request, CancellationToken cancellationToken)
@@ -117,9 +115,7 @@ namespace SFA.DAS.ApprenticeProgress.Application.Commands
                 _ApprenticeProgressDataContext.SaveChanges();
             }
 
-
             return Unit.Value;
         }
-
     }
 }

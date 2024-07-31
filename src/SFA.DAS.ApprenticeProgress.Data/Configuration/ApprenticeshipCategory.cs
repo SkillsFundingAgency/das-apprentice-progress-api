@@ -1,8 +1,10 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using System.Diagnostics.CodeAnalysis;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
 namespace SFA.DAS.ApprenticeProgress.Data.Configuration
 {
+    [ExcludeFromCodeCoverage]
     public class ApprenticeshipCategory : IEntityTypeConfiguration<Domain.Entities.ApprenticeshipCategory>
     {
         public void Configure(EntityTypeBuilder<Domain.Entities.ApprenticeshipCategory> builder)

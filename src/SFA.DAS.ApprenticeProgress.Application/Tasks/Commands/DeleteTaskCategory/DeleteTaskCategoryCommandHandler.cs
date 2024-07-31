@@ -3,12 +3,10 @@ using System.Threading;
 using System.Threading.Tasks;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
-
 using SFA.DAS.ApprenticeProgress.Application.Queries;
 using SFA.DAS.ApprenticeProgress.Data;
 
 namespace SFA.DAS.ApprenticeProgress.Application.Commands
-
 {
     public class DeleteTaskCategoryCommandHandler : IRequestHandler<DeleteTaskCategoryCommand, Unit>
     {
@@ -20,7 +18,6 @@ namespace SFA.DAS.ApprenticeProgress.Application.Commands
         )
         {
             _ApprenticeProgressDataContext = ApprenticeProgressDataContext;
-            
         }
 
         public Task<Unit> Handle(DeleteTaskCategoryCommand request, CancellationToken cancellationToken)
