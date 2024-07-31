@@ -28,6 +28,7 @@
     <None Remove="Ksbs\" />
     <None Remove="Tasks\Queries\GetTasksByApprenticeshipId\" />
     <None Remove="Tasks\Commands\UpdateTaskStatus\" />
+    <None Remove="Ksbs\Commands\AddOrUpdateKsbProgress\" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Tasks\" />
@@ -42,6 +43,7 @@
     <Folder Include="Ksbs\" />
     <Folder Include="Tasks\Queries\GetTasksByApprenticeshipId\" />
     <Folder Include="Tasks\Commands\UpdateTaskStatus\" />
+    <Folder Include="Ksbs\Commands\AddOrUpdateKsbProgress\" />
   </ItemGroup>
 </Project>
 
