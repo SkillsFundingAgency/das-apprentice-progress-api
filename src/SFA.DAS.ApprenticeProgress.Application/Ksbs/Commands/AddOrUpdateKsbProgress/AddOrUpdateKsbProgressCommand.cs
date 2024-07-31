@@ -10,5 +10,6 @@ namespace SFA.DAS.ApprenticeProgress.Application.Commands
         public Guid KSBId { get; set; }
         public string KsbKey { get; set; }
         public int CurrentStatus { get; set; }
+        public string Note { get; set; }
     }
 }

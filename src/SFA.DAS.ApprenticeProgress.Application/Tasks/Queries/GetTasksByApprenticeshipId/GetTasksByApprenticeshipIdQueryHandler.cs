@@ -34,6 +34,7 @@ namespace SFA.DAS.ApprenticeProgress.Application.Queries
                         x.DueDate <= request.ToDate
                         &&
                         x.Status == (Domain.Entities.Task.TaskStatus)(int)request.Status)
+                    .OrderBy(x => x.DueDate)
                     .AsNoTracking()
                     .AsSingleQuery()
                     .ToListAsync(cancellationToken);
@@ -50,6 +51,7 @@ namespace SFA.DAS.ApprenticeProgress.Application.Queries
                         x.CompletionDateTime <= request.ToDate
                         &&
                         x.Status == (Domain.Entities.Task.TaskStatus)(int)request.Status)
+                    .OrderBy(x => x.CompletionDateTime)
                     .AsNoTracking()
                     .AsSingleQuery()
                     .ToListAsync(cancellationToken);

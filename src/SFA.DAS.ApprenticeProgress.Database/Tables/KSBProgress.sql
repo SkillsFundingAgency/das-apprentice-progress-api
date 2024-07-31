@@ -8,7 +8,8 @@ CREATE TABLE [dbo].[KSBProgress](
     [KSBProgressType] [int] NOT NULL,
     [KSBId] [uniqueidentifier] NOT NULL,
     [KSBKey] [nvarchar](max) NOT NULL,
-    [CurrentStatus] [int] NOT NULL
+    [CurrentStatus] [int] NOT NULL,
+    [Note] [nvarchar](max) NULL
 ) ON [PRIMARY] TEXTIMAGE_ON [PRIMARY]
 GO
 ALTER TABLE [dbo].[KSBProgress] ADD PRIMARY KEY CLUSTERED 

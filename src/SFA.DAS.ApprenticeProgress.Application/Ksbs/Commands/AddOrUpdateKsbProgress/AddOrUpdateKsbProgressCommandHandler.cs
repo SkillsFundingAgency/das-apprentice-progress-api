@@ -37,6 +37,7 @@ namespace SFA.DAS.ApprenticeProgress.Application.Commands
             {
                 // update it
                 ksbProgress.CurrentStatus = (Domain.Entities.KSBStatus)request.CurrentStatus;
+                ksbProgress.Note = request.Note;
                 _ApprenticeProgressDataContext.SaveChanges();
             }
             else
@@ -48,7 +49,8 @@ namespace SFA.DAS.ApprenticeProgress.Application.Commands
                     KSBProgressType = (Domain.Entities.KSBProgressType)request.KSBProgressType,
                     KSBId = request.KSBId,
                     KSBKey = request.KsbKey,
-                    CurrentStatus = (Domain.Entities.KSBStatus)request.CurrentStatus
+                    CurrentStatus = (Domain.Entities.KSBStatus)request.CurrentStatus,
+                    Note = request.Note
                 };
 
                 _ApprenticeProgressDataContext.Add(ksbprogress);
