@@ -43,7 +43,22 @@ namespace SFA.DAS.ApprenticeProgress.Api.Controllers
             public int? CurrentStatus { get; set; }
         }
 
-        //
+
+        // Remove task to ksb join
+        [HttpDelete("{apprenticeshipIdentifier}/ksbs/{ksbProgressId}/taskid/{taskId}")]
+        public async Task<IActionResult> RemoveTaskToKsbProgress(Guid apprenticeshipIdentifier, int ksbProgressId, int taskId)
+        {
+            await _mediator.Send(new RemoveTaskToKsbProgressCommand
+            {
+                KsbProgressId = ksbProgressId,
+                TaskId = taskId
+            });
+
+            return Ok();
+        }
+
+
+
 
 
         // gets the ksb statsus
