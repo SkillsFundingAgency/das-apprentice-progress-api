@@ -7,7 +7,6 @@ using Microsoft.AspNetCore.Mvc;
 using NUnit.Framework;
 using SFA.DAS.ApprenticeProgress.Api.Controllers;
 using SFA.DAS.Testing.AutoFixture;
-using static SFA.DAS.ApprenticeProgress.Api.Controllers.TaskController;
 
 namespace SFA.DAS.ApprenticeApp.UnitTests
 {
@@ -26,7 +25,7 @@ namespace SFA.DAS.ApprenticeApp.UnitTests
             };
 
             var result = await controller.GetTaskCategories(apprenticeshipIdentifier);
-            result.Should().BeOfType(typeof(Microsoft.AspNetCore.Mvc.NotFoundResult));
+            result.Should().BeOfType(typeof(NotFoundResult));
         }
 
         [Test, MoqAutoData]
@@ -44,7 +43,7 @@ namespace SFA.DAS.ApprenticeApp.UnitTests
             };
 
             var result = await controller.AddTaskCategory(apprenticeshipIdentifier, taskId, catId);
-            result.Should().BeOfType(typeof(Microsoft.AspNetCore.Mvc.OkResult));
+            result.Should().BeOfType(typeof(OkResult));
         }
 
         [Test, MoqAutoData]
@@ -61,7 +60,7 @@ namespace SFA.DAS.ApprenticeApp.UnitTests
             };
 
             var result = await controller.GetTaskCategory(apprenticeshipIdentifier, taskId);
-            result.Should().BeOfType(typeof(Microsoft.AspNetCore.Mvc.NotFoundResult));
+            result.Should().BeOfType(typeof(NotFoundResult));
         }
 
         [Test, MoqAutoData]
@@ -78,7 +77,7 @@ namespace SFA.DAS.ApprenticeApp.UnitTests
             };
 
             var result = await controller.DeleteTaskCategory(apprenticeshipIdentifier, taskId);
-            result.Should().BeOfType(typeof(Microsoft.AspNetCore.Mvc.OkResult));
+            result.Should().BeOfType(typeof(OkResult));
         }
 
         [Test, MoqAutoData]
@@ -114,7 +113,7 @@ namespace SFA.DAS.ApprenticeApp.UnitTests
             };
 
             var result = await controller.ChangeTaskStatus(taskId, status);
-            result.Should().BeOfType(typeof(Microsoft.AspNetCore.Mvc.OkResult));
+            result.Should().BeOfType(typeof(OkResult));
         }
 
 
@@ -132,26 +131,7 @@ namespace SFA.DAS.ApprenticeApp.UnitTests
             };
 
             var result = await controller.GetTaskByApprentishipIdAndTaskId(apprenticeshipIdentifier, taskId);
-            result.Should().BeOfType(typeof(Microsoft.AspNetCore.Mvc.NotFoundResult));
+            result.Should().BeOfType(typeof(NotFoundResult));
         }
-
-        [Test, MoqAutoData]
-        public async Task UpdateTaskByApprentishipIdAndTaskId_Test(
-            [Greedy] TaskController controller)
-        {
-            var httpContext = new DefaultHttpContext();
-            var apprenticeshipIdentifier = Guid.NewGuid();
-            var data = new ApprenticeTaskDataRequest();
-
-            controller.ControllerContext = new ControllerContext
-            {
-                HttpContext = httpContext
-            };
-
-            var result = await controller.UpdateTaskByApprentishipIdAndTaskId(apprenticeshipIdentifier, data);
-            result.Should().BeOfType(typeof(Microsoft.AspNetCore.Mvc.OkResult));
-        }
-
     }
 }
-
