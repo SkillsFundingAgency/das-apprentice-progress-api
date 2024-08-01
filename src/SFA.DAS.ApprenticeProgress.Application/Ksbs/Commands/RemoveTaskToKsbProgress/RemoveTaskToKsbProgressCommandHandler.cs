@@ -28,6 +28,8 @@ namespace SFA.DAS.ApprenticeProgress.Application.Commands
             if (taskKsb != null)
                 _ApprenticeProgressDataContext.Remove(taskKsb);
 
+            _ApprenticeProgressDataContext.SaveChanges();
+
             return await Task.FromResult(Unit.Value);
         }
     }
