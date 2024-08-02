@@ -57,7 +57,6 @@
   <ItemGroup>
     <Folder Include="Properties" />
     <Folder Include="Tables\" />
-    <Folder Include="Scripts\" />
   </ItemGroup>
   <ItemGroup>
     <Build Include="Tables\ApprenticeshipCategory.sql" />
@@ -68,8 +67,5 @@
     <Build Include="Tables\TaskFile.sql" />
     <Build Include="Tables\TaskKSBs.sql" />
     <Build Include="Tables\TaskReminder.sql" />
-  </ItemGroup>
-  <ItemGroup>
-    <RefactorLog Include="SFA.DAS.ApprenticeProgress.Database.refactorlog" />
   </ItemGroup>
 </Project>
