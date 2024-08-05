@@ -31,7 +31,7 @@ namespace SFA.DAS.ApprenticeProgress.Application.Commands
                 x.ApprenticeshipId == request.ApprenticeshipId
                 &&
                 x.TaskId == request.TaskId)
-                .SingleAsync(cancellationToken);
+                .SingleOrDefaultAsync(cancellationToken);
 
             if (task != null)
             {
@@ -75,44 +75,53 @@ namespace SFA.DAS.ApprenticeProgress.Application.Commands
 
 
             // add files
-            foreach (var file in request.Files)
+            if (request.Files != null)
             {
-                // add validation
-                var taskFile = new Domain.Entities.TaskFile
+                foreach (var file in request.Files)
                 {
-                    TaskId = (int)task.TaskId,
-                    FileType = file.FileType, 
-                    FileName = file.FileName,
-                    FileContents = Encoding.ASCII.GetBytes(file.FileContents)
-                };
+                    // add validation
+                    var taskFile = new Domain.Entities.TaskFile
+                    {
+                        TaskId = (int)task.TaskId,
+                        FileType = file.FileType,
+                        FileName = file.FileName,
+                        FileContents = Encoding.ASCII.GetBytes(file.FileContents)
+                    };
 
-                _ApprenticeProgressDataContext.Add(taskFile);
-                _ApprenticeProgressDataContext.SaveChanges();
+                    _ApprenticeProgressDataContext.Add(taskFile);
+                    _ApprenticeProgressDataContext.SaveChanges();
+                }
             }
 
             // add reminder
-            var taskReminder = new Domain.Entities.TaskReminder
+            if (task != null)
             {
-                TaskId = (int)task.TaskId,
-                ReminderUnit = (Domain.Entities.ReminderUnit)request.ReminderUnit,
-                ReminderValue = request.ReminderValue,
-                Status = (Domain.Entities.ReminderStatus?)(int)request.ReminderStatus
-            };
-
-            _ApprenticeProgressDataContext.Add(taskReminder);
-            _ApprenticeProgressDataContext.SaveChanges();
-
-            // add ksbprogress
-            foreach (var ksb in request.KsbsLinked)
-            {
-                // add join
-                var taskKsbJoin = new Domain.Entities.TaskKSBs
+                var taskReminder = new Domain.Entities.TaskReminder
                 {
                     TaskId = (int)task.TaskId,
-                    KSBProgressId = ksb
+                    ReminderUnit = (Domain.Entities.ReminderUnit)request.ReminderUnit,
+                    ReminderValue = request.ReminderValue,
+                    Status = (Domain.Entities.ReminderStatus?)(int)request.ReminderStatus
                 };
-                _ApprenticeProgressDataContext.Add(taskKsbJoin);
+
+                _ApprenticeProgressDataContext.Add(taskReminder);
                 _ApprenticeProgressDataContext.SaveChanges();
+            }
+
+            // add ksbprogress
+            if (request.KsbsLinked != null)
+            {
+                foreach (var ksb in request.KsbsLinked)
+                {
+                    // add join
+                    var taskKsbJoin = new Domain.Entities.TaskKSBs
+                    {
+                        TaskId = (int)task.TaskId,
+                        KSBProgressId = ksb
+                    };
+                    _ApprenticeProgressDataContext.Add(taskKsbJoin);
+                    _ApprenticeProgressDataContext.SaveChanges();
+                }
             }
 
             return Unit.Value;

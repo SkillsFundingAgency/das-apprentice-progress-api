@@ -27,9 +27,11 @@ namespace SFA.DAS.ApprenticeProgress.Application.Queries
                     x.TaskId == request.TaskId)
                 .AsNoTracking()
                 .AsSingleQuery()
-                .SingleAsync(cancellationToken);
+                .SingleOrDefaultAsync(cancellationToken);
 
-                // get task categories
+            // get task categories
+            if (task != null)
+            {
                 var taskCategories = await _ApprenticeProgressDataContext.ApprenticeshipCategory
                 .Where(x =>
                     x.CategoryId == task.ApprenticeshipCategoryId)
@@ -64,6 +66,7 @@ namespace SFA.DAS.ApprenticeProgress.Application.Queries
                     .AsSingleQuery()
                     .ToListAsync(cancellationToken);
                 task.TaskLinkedKsbs = taskLinkedKsbs;
+            }
 
             var result = new GetTaskByApprentishipIdAndTaskIdResult
             {

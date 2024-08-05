@@ -28,8 +28,12 @@ namespace SFA.DAS.ApprenticeProgress.Application.Commands
                 .AsNoTracking()
                 .AsSingleQuery()
                 .SingleOrDefault();
-             _ApprenticeProgressDataContext.Remove(task);
-             _ApprenticeProgressDataContext.SaveChanges();
+
+            if (task != null)
+            {
+                _ApprenticeProgressDataContext.Remove(task);
+                _ApprenticeProgressDataContext.SaveChanges();
+            }
 
             return Task.FromResult(Unit.Value);
         }

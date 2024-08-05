@@ -25,7 +25,7 @@ namespace SFA.DAS.ApprenticeProgress.Application.Commands
         {
             var task = await _ApprenticeProgressDataContext.Task
                 .Where(x => x.TaskId == request.TaskId)
-                .SingleAsync(cancellationToken);
+                .SingleOrDefaultAsync(cancellationToken);
 
             if (task != null)
             {

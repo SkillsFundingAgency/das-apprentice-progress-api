@@ -20,7 +20,7 @@ namespace SFA.DAS.ApprenticeProgress.Application.Commands
         public int? Status { get; set; }
 
         // files block
-        public List<ApprenticeTaskDataFileRequest> Files { get; set; }
+        public List<ApprenticeTaskDataFileRequest>? Files { get; set;}
 
         // reminder block
         public int? ReminderUnit { get; set; }

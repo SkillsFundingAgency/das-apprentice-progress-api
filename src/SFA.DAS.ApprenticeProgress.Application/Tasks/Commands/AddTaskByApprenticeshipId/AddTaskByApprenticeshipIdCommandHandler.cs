@@ -39,19 +39,22 @@ namespace SFA.DAS.ApprenticeProgress.Application.Commands
             _ApprenticeProgressDataContext.SaveChanges();
 
             // add files
-            foreach (var file in request.Files)
+            if (request.Files != null)
             {
-                // add validation
-                var taskFile = new Domain.Entities.TaskFile
+                foreach (var file in request.Files)
                 {
-                    TaskId = (int)task.TaskId,
-                    FileType = file.FileType, 
-                    FileName = file.FileName,
-                    FileContents = Encoding.ASCII.GetBytes(file.FileContents)
-                };
+                    // add validation
+                    var taskFile = new Domain.Entities.TaskFile
+                    {
+                        TaskId = (int)task.TaskId,
+                        FileType = file.FileType,
+                        FileName = file.FileName,
+                        FileContents = Encoding.ASCII.GetBytes(file.FileContents)
+                    };
 
-                _ApprenticeProgressDataContext.Add(taskFile);
-                _ApprenticeProgressDataContext.SaveChanges();
+                    _ApprenticeProgressDataContext.Add(taskFile);
+                    _ApprenticeProgressDataContext.SaveChanges();
+                }
             }
 
             // add reminder
@@ -67,16 +70,19 @@ namespace SFA.DAS.ApprenticeProgress.Application.Commands
             _ApprenticeProgressDataContext.SaveChanges();
 
             // add ksbprogress
-            foreach (var ksb in request.KsbsLinked)
+            if (request.KsbsLinked != null)
             {
-                // add join
-                var taskKsbJoin = new Domain.Entities.TaskKSBs
+                foreach (var ksb in request.KsbsLinked)
                 {
-                    TaskId = (int)task.TaskId,
-                    KSBProgressId = ksb
-                };
-                _ApprenticeProgressDataContext.Add(taskKsbJoin);
-                _ApprenticeProgressDataContext.SaveChanges();
+                    // add join
+                    var taskKsbJoin = new Domain.Entities.TaskKSBs
+                    {
+                        TaskId = (int)task.TaskId,
+                        KSBProgressId = ksb
+                    };
+                    _ApprenticeProgressDataContext.Add(taskKsbJoin);
+                    _ApprenticeProgressDataContext.SaveChanges();
+                }
             }
 
             return Task.FromResult(Unit.Value);

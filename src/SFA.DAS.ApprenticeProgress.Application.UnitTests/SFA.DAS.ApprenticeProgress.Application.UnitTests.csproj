@@ -40,9 +40,11 @@
     <None Remove="Microsoft.EntityFrameworkCore.Proxies" />
     <None Remove="Handlers\" />
     <None Remove="Handlers\KsbHandlers\" />
+    <None Remove="Handlers\TaskHandlers\" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Handlers\" />
     <Folder Include="Handlers\KsbHandlers\" />
+    <Folder Include="Handlers\TaskHandlers\" />
   </ItemGroup>
 </Project>
