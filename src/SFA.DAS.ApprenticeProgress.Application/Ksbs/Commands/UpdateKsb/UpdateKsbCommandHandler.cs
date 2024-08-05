@@ -21,14 +21,10 @@ namespace SFA.DAS.ApprenticeProgress.Application.Commands
 
         public async Task<Unit> Handle(UpdateKsbCommand request, CancellationToken cancellationToken)
         {
-            // do something
             var categories = await _ApprenticeProgressDataContext.ApprenticeshipCategory
-                //.Where(x =>
-              //      x.ApprenticeshipId == request.ApprenticeId)
                 .AsNoTracking()
                 .AsSingleQuery()
                 .ToListAsync(cancellationToken);
-
 
             return Unit.Value;
         }

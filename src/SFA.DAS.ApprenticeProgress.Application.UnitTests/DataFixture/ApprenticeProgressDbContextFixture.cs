@@ -19,7 +19,7 @@ namespace SFA.DAS.ApprenticeProgress.Application.UnitTests.DataFixture
 
         public ApprenticeProgressDataContext DbContext { get; private set; }
 
-     //   [TearDown]
-     //   public void TearDown() => DbContext?.Dispose();
+        [TearDown]
+        public void TearDown() => DbContext?.Dispose();
     }
 }

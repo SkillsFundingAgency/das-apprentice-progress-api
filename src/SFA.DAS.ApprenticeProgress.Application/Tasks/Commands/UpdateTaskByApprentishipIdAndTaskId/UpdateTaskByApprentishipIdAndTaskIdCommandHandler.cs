@@ -10,7 +10,6 @@ using SFA.DAS.ApprenticeProgress.Application.Queries;
 using SFA.DAS.ApprenticeProgress.Data;
 
 namespace SFA.DAS.ApprenticeProgress.Application.Commands
-
 {
     public class UpdateTaskByApprentishipIdAndTaskIdCommandHandler : IRequestHandler<UpdateTaskByApprentishipIdAndTaskIdCommand, Unit>
     {
@@ -72,7 +71,6 @@ namespace SFA.DAS.ApprenticeProgress.Application.Commands
                 _ApprenticeProgressDataContext.RemoveRange(reminders);
 
             _ApprenticeProgressDataContext.SaveChanges();
-
 
             // add files
             if (request.Files != null)

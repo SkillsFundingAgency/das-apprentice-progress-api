@@ -7,7 +7,6 @@ using SFA.DAS.ApprenticeProgress.Application.Queries;
 using SFA.DAS.ApprenticeProgress.Data;
 
 namespace SFA.DAS.ApprenticeProgress.Application.Commands
-
 {
     public class UpdateTaskStatusCommandHandler : IRequestHandler<UpdateTaskStatusCommand, Unit>
     {
