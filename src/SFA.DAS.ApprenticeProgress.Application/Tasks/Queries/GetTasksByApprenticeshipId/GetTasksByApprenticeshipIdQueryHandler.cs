@@ -58,7 +58,6 @@ namespace SFA.DAS.ApprenticeProgress.Application.Queries
 
             foreach (var task in tasks)
             {
-                // get task categories
                 var taskCategories = await _ApprenticeProgressDataContext.ApprenticeshipCategory
                 .Where(x =>
                     x.CategoryId == task.ApprenticeshipCategoryId)
@@ -67,7 +66,6 @@ namespace SFA.DAS.ApprenticeProgress.Application.Queries
                 .ToListAsync(cancellationToken);
                 task.ApprenticeshipCategory = taskCategories;
 
-                // get task files
                 var taskFiles = await _ApprenticeProgressDataContext.TaskFile
                     .Where(x =>
                         x.TaskId == task.TaskId)
@@ -76,7 +74,6 @@ namespace SFA.DAS.ApprenticeProgress.Application.Queries
                     .ToListAsync(cancellationToken);
                 task.TaskFiles = taskFiles;
 
-                // get task reminders
                 var taskReminders = await _ApprenticeProgressDataContext.TaskReminder
                     .Where(x =>
                         x.TaskId == task.TaskId)
@@ -85,7 +82,6 @@ namespace SFA.DAS.ApprenticeProgress.Application.Queries
                     .ToListAsync(cancellationToken);
                 task.TaskReminders = taskReminders;
 
-                // get linked ksbs
                 var taskLinkedKsbs = await _ApprenticeProgressDataContext.TaskKSBs
                     .Where(x =>
                         x.TaskId == task.TaskId)

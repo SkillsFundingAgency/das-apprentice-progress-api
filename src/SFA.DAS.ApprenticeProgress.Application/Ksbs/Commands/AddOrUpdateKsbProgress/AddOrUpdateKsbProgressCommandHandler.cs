@@ -21,25 +21,22 @@ namespace SFA.DAS.ApprenticeProgress.Application.Commands
 
         public async Task<Unit> Handle(AddOrUpdateKsbProgressCommand request, CancellationToken cancellationToken)
         {
-            // get ksbprogress first
             var ksbProgress = await _ApprenticeProgressDataContext.KSBProgress
                 .Where(x =>
                     x.KSBId == request.KSBId
                     &&
                     x.ApprenticeshipId == request.ApprenticeshipId
                     )
-                .SingleOrDefaultAsync();
+                .SingleOrDefaultAsync(cancellationToken: cancellationToken);
 
             if (ksbProgress != null)
             {
-                // update it
                 ksbProgress.CurrentStatus = (Domain.Entities.KSBStatus)request.CurrentStatus;
                 ksbProgress.Note = request.Note;
                 _ApprenticeProgressDataContext.SaveChanges();
             }
             else
             {
-                // add one
                 var ksbprogress = new Domain.Entities.KSBProgress
                 {
                     ApprenticeshipId = request.ApprenticeshipId,
