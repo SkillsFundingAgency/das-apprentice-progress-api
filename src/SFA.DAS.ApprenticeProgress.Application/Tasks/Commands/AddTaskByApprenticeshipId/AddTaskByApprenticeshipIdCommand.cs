@@ -28,6 +28,6 @@ namespace SFA.DAS.ApprenticeProgress.Application.Commands
         public int? ReminderStatus { get; set; }
 
         // ksbs linked
-        public int[] KsbsLinked { get; set; }
+        public string[] KsbsLinked { get; set; }
     }
 }

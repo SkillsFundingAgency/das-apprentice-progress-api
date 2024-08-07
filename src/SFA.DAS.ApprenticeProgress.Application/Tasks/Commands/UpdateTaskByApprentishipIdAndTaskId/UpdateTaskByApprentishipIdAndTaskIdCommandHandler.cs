@@ -106,19 +106,30 @@ namespace SFA.DAS.ApprenticeProgress.Application.Commands
                 _ApprenticeProgressDataContext.SaveChanges();
             }
 
-            // add ksbprogress
+            // get the ksb first
             if (request.KsbsLinked != null)
             {
                 foreach (var ksb in request.KsbsLinked)
                 {
-                    // add join
-                    var taskKsbJoin = new Domain.Entities.TaskKSBs
+                    var ksbkey = new Guid(ksb);
+
+                    // get the ksb progress item
+                    var ksbprogressitems
+                               = _ApprenticeProgressDataContext.KSBProgress
+                                .Where(x => x.KSBId == ksbkey && x.ApprenticeshipId == request.ApprenticeshipId)
+                                .FirstOrDefault();
+
+                    if (ksbprogressitems != null)
                     {
-                        TaskId = (int)task.TaskId,
-                        KSBProgressId = ksb
-                    };
-                    _ApprenticeProgressDataContext.Add(taskKsbJoin);
-                    _ApprenticeProgressDataContext.SaveChanges();
+                        // add join
+                        var taskKsbJoin = new Domain.Entities.TaskKSBs
+                        {
+                            TaskId = (int)task.TaskId,
+                            KSBProgressId = ksbprogressitems.KSBProgressId
+                        };
+                        _ApprenticeProgressDataContext.Add(taskKsbJoin);
+                        _ApprenticeProgressDataContext.SaveChanges();
+                    }
                 }
             }
 

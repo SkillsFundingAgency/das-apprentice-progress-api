@@ -112,7 +112,7 @@ namespace SFA.DAS.ApprenticeProgress.Api.Controllers
             public int? ReminderUnit { get; set; }
             public int? ReminderValue { get; set; }
             public int? ReminderStatus { get; set; }
-            public int[] KsbsLinked { get; set; }
+            public string[] KsbsLinked { get; set; }
         }
 
         // chnage a task status
