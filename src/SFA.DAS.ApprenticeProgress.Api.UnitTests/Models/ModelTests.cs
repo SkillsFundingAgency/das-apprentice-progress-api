@@ -45,6 +45,7 @@ namespace SFA.DAS.ApprenticeApp.UnitTests
 
         }
 
+        [Test]
         public void ApprenticeTaskDataFileRequest_test()
         {
             var sut = new ApprenticeTaskDataFileRequest
