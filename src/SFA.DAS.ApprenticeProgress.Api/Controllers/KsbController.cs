@@ -3,6 +3,7 @@ using System.Threading.Tasks;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 using SFA.DAS.ApprenticeProgress.Application.Commands;
+using SFA.DAS.ApprenticeProgress.Application.Queries;
 
 namespace SFA.DAS.ApprenticeProgress.Api.Controllers
 {
@@ -57,7 +58,15 @@ namespace SFA.DAS.ApprenticeProgress.Api.Controllers
             return Ok();
         }
 
+        // gets ksb progress for user based on passed in string list
+        [HttpGet("{apprenticeshipIdentifier}/ksbs")]
+        public async Task<IActionResult> GetKsbsByApprenticeshipIdAndGuidListQuery(Guid apprenticeshipIdentifier, [FromQuery] Guid[] guids)
+        {
+            var result = await _mediator.Send(new GetKsbsByApprenticeshipIdAndGuidListQuery { ApprenticeshipId = apprenticeshipIdentifier, KsbIds = guids});
+            if (result == null) return NotFound();
+            return Ok(result);
 
+        }
 
 
 
@@ -75,12 +84,6 @@ namespace SFA.DAS.ApprenticeProgress.Api.Controllers
             return Ok();
         }
 
-        // gets the ksbs
-        [HttpGet("{apprenticeshipIdentifier}/ksbs")]
-        public async Task<IActionResult> GetKsbsByApprenticeshipIdQuery(Guid apprenticeshipIdentifier)
-        {
-            return Ok();
-        }
 
         // gets the ksb progress
         [HttpGet("{apprenticeshipIdentifier}/ksbs/{ksbKey}")]
