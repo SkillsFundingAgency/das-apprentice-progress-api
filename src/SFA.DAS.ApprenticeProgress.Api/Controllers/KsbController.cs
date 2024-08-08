@@ -65,7 +65,6 @@ namespace SFA.DAS.ApprenticeProgress.Api.Controllers
             var result = await _mediator.Send(new GetKsbsByApprenticeshipIdAndGuidListQuery { ApprenticeshipId = apprenticeshipIdentifier, KsbIds = guids});
             if (result == null) return NotFound();
             return Ok(result);
-
         }
 
 
