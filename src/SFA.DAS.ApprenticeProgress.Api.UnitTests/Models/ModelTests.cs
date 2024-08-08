@@ -55,9 +55,9 @@ namespace SFA.DAS.ApprenticeApp.UnitTests
                 FileType = "type"
             };
 
-            Assert.AreEqual("contents", sut.FileType);
-            Assert.AreEqual("name", sut.FileName);
             Assert.AreEqual("type", sut.FileType);
+            Assert.AreEqual("name", sut.FileName);
+            Assert.AreEqual("contents", sut.FileType);
 
         }
 
