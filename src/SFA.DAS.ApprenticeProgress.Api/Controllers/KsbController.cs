@@ -67,35 +67,5 @@ namespace SFA.DAS.ApprenticeProgress.Api.Controllers
             return Ok(result);
         }
 
-
-
-        // gets the ksb statsus
-        [HttpGet("ksbStatuses")]
-        public async Task<IActionResult> GetKsbStatuses()
-        {
-            return Ok();
-        }
-
-        // gets the ksb types
-        [HttpGet("ksbTypes")]
-        public async Task<IActionResult> GetKsbTypes()
-        {
-            return Ok();
-        }
-
-
-        // gets the ksb progress
-        [HttpGet("{apprenticeshipIdentifier}/ksbs/{ksbKey}")]
-        public async Task<IActionResult> GetKsbProgress(Guid apprenticeshipIdentifier, int ksbKey)
-        {
-            return Ok();
-        }
-
-        // Update a task by Id
-        [HttpPut("{apprenticeshipIdentifier}/ksbs/{ksbKey}")]
-        public async Task<IActionResult> UpdateKsb(Guid apprenticeshipIdentifier, int? ksbKey)
-        {
-            return Ok();
-        }
     }
 }

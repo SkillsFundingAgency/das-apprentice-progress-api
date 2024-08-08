@@ -44,8 +44,10 @@
   <ItemGroup>
     <None Remove="NSubstitute" />
     <None Remove="Controllers\" />
+    <None Remove="Models\" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Controllers\" />
+    <Folder Include="Models\" />
   </ItemGroup>
 </Project>
