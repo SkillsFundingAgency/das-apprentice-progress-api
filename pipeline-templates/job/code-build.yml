@@ -22,7 +22,7 @@ jobs:
     inputs:
       command: publish
       publishWebProjects: false 
-      projects: src/${{ parameters.SolutionBaseName }}/${{ parameters.SolutionBaseName }}.Api.csproj
+      projects: src/${{ parameters.SolutionBaseName }}.Api/${{ parameters.SolutionBaseName }}.Api.csproj
       arguments: -o $(build.artifactstagingdirectory)/publish -c ${{ parameters.BuildConfiguration }} --no-build
       modifyOutputPath: true
       zipAfterPublish: true
