@@ -170,6 +170,57 @@ namespace SFA.DAS.ApprenticeApp.UnitTests
             result.Should().BeOfType(typeof(OkResult));
         }
 
+        [Test, MoqAutoData]
+        public async Task UpdateTaskByApprenticeshipIdAndTaskId_test(
+            [Greedy] TaskController controller)
+        {
+            var httpContext = new DefaultHttpContext();
+            var apprenticeshipIdentifier = Guid.NewGuid();
+            int taskId = 1;
+
+            ApprenticeTaskDataRequest data = new ApprenticeTaskDataRequest()
+            {
+                TaskId = 1,
+                ApprenticeshipId = new Guid("9D2B0228-4D0D-4C23-8B49-01A698857709"),
+                DueDate = new DateTime(2019, 05, 09),
+                Title = "title",
+                ApprenticeshipCategoryId = 0,
+                Note = "note",
+                CompletionDateTime = new DateTime(2019, 05, 09),
+                CreatedDateTime = new DateTime(2019, 05, 09),
+                CategoryId = 1,
+                Status = 1,
+                ReminderValue = 1,
+                ReminderUnit = 1,
+                ReminderStatus = 1
+            };
+
+            controller.ControllerContext = new ControllerContext
+            {
+                HttpContext = httpContext
+            };
+
+            var result = await controller.UpdateTaskByApprenticeshipIdAndTaskId(apprenticeshipIdentifier, data);
+            result.Should().BeOfType(typeof(OkResult));
+        }
+
+
+        [Test, MoqAutoData]
+        public async Task RemoveTaskByApprenticeshipIdAndTaskId_test(
+               [Greedy] TaskController controller)
+        {
+            var httpContext = new DefaultHttpContext();
+            var apprenticeshipIdentifier = Guid.NewGuid();
+            int taskId = 1;
+
+            controller.ControllerContext = new ControllerContext
+            {
+                HttpContext = httpContext
+            };
+
+            var result = await controller.RemoveTaskByApprenticeshipIdAndTaskId(apprenticeshipIdentifier, taskId);
+            result.Should().BeOfType(typeof(OkResult));
+        }
 
     }
 }
