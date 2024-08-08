@@ -1,8 +1,4 @@
-﻿SET ANSI_NULLS ON
-GO
-SET QUOTED_IDENTIFIER ON
-GO
-CREATE TABLE [dbo].[TaskCategory](
+﻿CREATE TABLE [dbo].[TaskCategory](
     [TaskId] [int] NOT NULL,
     [CategoryId] [int] NOT NULL
 ) ON [PRIMARY]

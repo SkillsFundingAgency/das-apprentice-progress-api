@@ -1,8 +1,4 @@
-﻿SET ANSI_NULLS ON
-GO
-SET QUOTED_IDENTIFIER ON
-GO
-CREATE TABLE [dbo].[ApprenticeshipCategory](
+﻿CREATE TABLE [dbo].[ApprenticeshipCategory](
     [CategoryId] [int] NOT NULL,
     [ApprenticeshipId] [uniqueidentifier] NULL,
     [Title] [nvarchar](255) NULL

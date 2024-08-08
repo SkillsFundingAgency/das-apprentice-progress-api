@@ -1,8 +1,4 @@
-﻿SET ANSI_NULLS ON
-GO
-SET QUOTED_IDENTIFIER ON
-GO
-CREATE TABLE [dbo].[TaskReminder](
+﻿CREATE TABLE [dbo].[TaskReminder](
     [ReminderId] [int] IDENTITY(1,1) NOT NULL,
     [TaskId] [int] NOT NULL,
     [ReminderValue] [int] NULL,

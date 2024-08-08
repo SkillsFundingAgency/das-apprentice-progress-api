@@ -1,8 +1,4 @@
-﻿SET ANSI_NULLS ON
-GO
-SET QUOTED_IDENTIFIER ON
-GO
-CREATE TABLE [dbo].[KSBProgressStatusHistory](
+﻿CREATE TABLE [dbo].[KSBProgressStatusHistory](
     [KSBProgressId] [bigint] NOT NULL,
     [Status] [int] NULL,
     [StatusTime] [datetime2](7) NULL

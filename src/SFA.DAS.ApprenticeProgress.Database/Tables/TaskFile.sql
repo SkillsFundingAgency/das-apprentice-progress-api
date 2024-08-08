@@ -1,8 +1,4 @@
-﻿SET ANSI_NULLS ON
-GO
-SET QUOTED_IDENTIFIER ON
-GO
-CREATE TABLE [dbo].[TaskFile](
+﻿CREATE TABLE [dbo].[TaskFile](
     [TaskFileId] [int] IDENTITY(1,1) NOT NULL,
     [TaskId] [int] NOT NULL,
     [FileName] [nvarchar](max) NULL,

@@ -1,8 +1,4 @@
-﻿SET ANSI_NULLS ON
-GO
-SET QUOTED_IDENTIFIER ON
-GO
-CREATE TABLE [dbo].[Task](
+﻿CREATE TABLE [dbo].[Task](
     [TaskId] [int] IDENTITY(1,1) NOT NULL,
     [ApprenticeshipId] [uniqueidentifier] NOT NULL,
     [DueDate] [datetime2](7) NULL,

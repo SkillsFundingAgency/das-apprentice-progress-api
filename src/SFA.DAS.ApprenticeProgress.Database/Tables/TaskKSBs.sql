@@ -1,8 +1,4 @@
-﻿SET ANSI_NULLS ON
-GO
-SET QUOTED_IDENTIFIER ON
-GO
-CREATE TABLE [dbo].[TaskKSBs](
+﻿CREATE TABLE [dbo].[TaskKSBs](
     [TaskId] [int] NOT NULL,
     [KSBProgressId] [int] NOT NULL
 ) ON [PRIMARY]
