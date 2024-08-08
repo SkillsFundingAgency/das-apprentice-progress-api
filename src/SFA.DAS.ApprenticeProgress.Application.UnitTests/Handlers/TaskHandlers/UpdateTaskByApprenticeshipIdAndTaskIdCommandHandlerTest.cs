@@ -19,7 +19,7 @@ namespace SFA.DAS.ApprenticeProgress.Application.UnitTests.DataFixture
         private readonly Fixture _fixture = new();
 
         [Test, MoqAutoData]
-        public async System.Threading.Tasks.Task UpdateTaskByApprenticeshipIdAndTaskIdCommandHandler_test()
+        public async System.Threading.Tasks.Task UpdateTaskByApprenticeshipIdAndTaskIdCommandHandler_test_with_task()
         {
             await PopulateDbContext();
 
@@ -40,6 +40,23 @@ namespace SFA.DAS.ApprenticeProgress.Application.UnitTests.DataFixture
                 ReminderUnit = 1,
                 ReminderValue = 1
             };
+
+            var result = await addTaskByApprenticeshipIdCommandHandler.Handle(command, CancellationToken.None);
+            Assert.That(result, Is.Not.Null);
+        }
+
+        [Test, MoqAutoData]
+        public async System.Threading.Tasks.Task UpdateTaskByApprenticeshipIdAndTaskIdCommandHandler_test_no_task()
+        {
+            await PopulateDbContext();
+
+            var addTaskByApprenticeshipIdCommandHandler = new UpdateTaskByApprenticeshipIdAndTaskIdCommandHandler(DbContext);
+
+            var command = new UpdateTaskByApprenticeshipIdAndTaskIdCommand()
+            {
+                TaskId = 0,
+            };
+
 
             var result = await addTaskByApprenticeshipIdCommandHandler.Handle(command, CancellationToken.None);
             Assert.That(result, Is.Not.Null);

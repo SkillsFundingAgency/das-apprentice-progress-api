@@ -91,11 +91,14 @@ namespace SFA.DAS.ApprenticeProgress.Domain.UnitTests
             var sut = new TaskCategory
             {
                 TaskId = 1,
-                CategoryId = 2
+                CategoryId = 2,
+                ApprenticeshipCategory = new ApprenticeshipCategory() { CategoryId = 1, Title = "title"}
             };
 
             Assert.AreEqual(1, sut.TaskId);
             Assert.AreEqual(2, sut.CategoryId);
+            Assert.AreEqual("title", sut.ApprenticeshipCategory.Title);
+            Assert.AreEqual(1, sut.ApprenticeshipCategory.CategoryId);
         }
 
         [Test]
