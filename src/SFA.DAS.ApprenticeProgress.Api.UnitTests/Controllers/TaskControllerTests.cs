@@ -118,7 +118,7 @@ namespace SFA.DAS.ApprenticeApp.UnitTests
 
 
         [Test, MoqAutoData]
-        public async Task GetTaskByApprentishipIdAndTaskId_test(
+        public async Task GetTaskByApprenticeshipIdAndTaskId_test(
             [Greedy] TaskController controller)
         {
             var httpContext = new DefaultHttpContext();
@@ -130,7 +130,7 @@ namespace SFA.DAS.ApprenticeApp.UnitTests
                 HttpContext = httpContext
             };
 
-            var result = await controller.GetTaskByApprentishipIdAndTaskId(apprenticeshipIdentifier, taskId);
+            var result = await controller.GetTaskByApprenticeshipIdAndTaskId(apprenticeshipIdentifier, taskId);
             result.Should().BeOfType(typeof(NotFoundResult));
         }
     }

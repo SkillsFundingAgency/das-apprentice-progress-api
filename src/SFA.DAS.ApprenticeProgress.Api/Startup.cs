@@ -91,7 +91,7 @@ namespace SFA.DAS.ApprenticeProgress.Api
                     .AddDbContextCheck<ApprenticeProgressDataContext>();
             }
 
-            services.AddMediatR(cfg => cfg.RegisterServicesFromAssemblyContaining<GetTaskByApprentishipIdAndTaskIdQueryHandler>());
+            services.AddMediatR(cfg => cfg.RegisterServicesFromAssemblyContaining<GetTaskByApprenticeshipIdAndTaskIdQueryHandler>());
 
             services.AddDatabaseRegistration(_configuration, _configuration["EnvironmentName"]);
 

@@ -5,7 +5,7 @@ using SFA.DAS.ApprenticeProgress.Application.Models;
 
 namespace SFA.DAS.ApprenticeProgress.Application.Queries
 {
-    public class UpdateTaskByApprentishipIdAndTaskIdCommand : IRequest<Unit>
+    public class UpdateTaskByApprenticeshipIdAndTaskIdCommand : IRequest<Unit>
     {
         public Guid ApprenticeshipId { get; set; }
         public int TaskId { get; set; }

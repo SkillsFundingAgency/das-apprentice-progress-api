@@ -130,18 +130,18 @@ namespace SFA.DAS.ApprenticeProgress.Api.Controllers
 
         // Get a task by Id
         [HttpGet("{apprenticeshipIdentifier}/tasks/{taskId}")]
-        public async Task<IActionResult> GetTaskByApprentishipIdAndTaskId(Guid apprenticeshipIdentifier, int taskId)
+        public async Task<IActionResult> GetTaskByApprenticeshipIdAndTaskId(Guid apprenticeshipIdentifier, int taskId)
         {
-            var result = await _mediator.Send(new GetTaskByApprentishipIdAndTaskIdQuery { ApprenticeshipId = apprenticeshipIdentifier, TaskId = taskId });
+            var result = await _mediator.Send(new GetTaskByApprenticeshipIdAndTaskIdQuery { ApprenticeshipId = apprenticeshipIdentifier, TaskId = taskId });
             if (result == null) return NotFound();
             return Ok(result);
         }
 
         // Update a task by Id
         [HttpPost("{apprenticeshipIdentifier}/tasks/{taskId}")]
-        public async Task<IActionResult> UpdateTaskByApprentishipIdAndTaskId(Guid apprenticeshipIdentifier, [FromBody] ApprenticeTaskDataRequest request)
+        public async Task<IActionResult> UpdateTaskByApprenticeshipIdAndTaskId(Guid apprenticeshipIdentifier, [FromBody] ApprenticeTaskDataRequest request)
         {
-            await _mediator.Send(new UpdateTaskByApprentishipIdAndTaskIdCommand
+            await _mediator.Send(new UpdateTaskByApprenticeshipIdAndTaskIdCommand
             {
                 TaskId = request.TaskId.Value,
                 ApprenticeshipId = apprenticeshipIdentifier,
@@ -163,9 +163,9 @@ namespace SFA.DAS.ApprenticeProgress.Api.Controllers
 
         // Remove a task Id
         [HttpDelete("{apprenticeshipIdentifier}/tasks/{taskId}")]
-        public async Task<IActionResult> RemoveTaskByApprentishipIdAndTaskId(Guid apprenticeshipIdentifier, int taskId)
+        public async Task<IActionResult> RemoveTaskByApprenticeshipIdAndTaskId(Guid apprenticeshipIdentifier, int taskId)
         {
-            await _mediator.Send(new RemoveTaskByApprentishipIdAndTaskIdCommand
+            await _mediator.Send(new RemoveTaskByApprenticeshipIdAndTaskIdCommand
             {
                 ApprenticeshipId = apprenticeshipIdentifier,
                 TaskId = taskId

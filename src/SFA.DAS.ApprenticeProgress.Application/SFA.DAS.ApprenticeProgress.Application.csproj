@@ -18,13 +18,13 @@
   <ItemGroup>
     <None Remove="Tasks\" />
     <None Remove="Tasks\Queries\GetTaskCategory\" />
-    <None Remove="Tasks\Queries\GetTaskByApprentishipIdAndTaskId\" />
+    <None Remove="Tasks\Queries\GetTaskByApprenticeshipIdAndTaskId\" />
     <None Remove="Tasks\Commands\" />
     <None Remove="Tasks\Commands\AddTaskByApprenticeshipId\" />
     <None Remove="Tasks\Commands\AddTaskCategory\" />
     <None Remove="Tasks\Commands\DeleteTaskCategory\" />
-    <None Remove="Tasks\Commands\RemoveTaskByApprentishipIdAndTaskId\" />
-    <None Remove="Tasks\Commands\UpdateTaskByApprentishipIdAndTaskId\" />
+    <None Remove="Tasks\Commands\RemoveTaskByApprenticeshipIdAndTaskId\" />
+    <None Remove="Tasks\Commands\UpdateTaskByApprenticeshipIdAndTaskId\" />
     <None Remove="Ksbs\" />
     <None Remove="Tasks\Queries\GetTasksByApprenticeshipId\" />
     <None Remove="Tasks\Commands\UpdateTaskStatus\" />
@@ -35,13 +35,13 @@
   <ItemGroup>
     <Folder Include="Tasks\" />
     <Folder Include="Tasks\Queries\GetTaskCategory\" />
-    <Folder Include="Tasks\Queries\GetTaskByApprentishipIdAndTaskId\" />
+    <Folder Include="Tasks\Queries\GetTaskByApprenticeshipIdAndTaskId\" />
     <Folder Include="Tasks\Commands\" />
     <Folder Include="Tasks\Commands\AddTaskByApprenticeshipId\" />
     <Folder Include="Tasks\Commands\AddTaskCategory\" />
     <Folder Include="Tasks\Commands\DeleteTaskCategory\" />
-    <Folder Include="Tasks\Commands\RemoveTaskByApprentishipIdAndTaskId\" />
-    <Folder Include="Tasks\Commands\UpdateTaskByApprentishipIdAndTaskId\" />
+    <Folder Include="Tasks\Commands\RemoveTaskByApprenticeshipIdAndTaskId\" />
+    <Folder Include="Tasks\Commands\UpdateTaskByApprenticeshipIdAndTaskId\" />
     <Folder Include="Ksbs\" />
     <Folder Include="Tasks\Queries\GetTasksByApprenticeshipId\" />
     <Folder Include="Tasks\Commands\UpdateTaskStatus\" />

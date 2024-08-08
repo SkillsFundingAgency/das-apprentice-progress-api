@@ -11,11 +11,11 @@ using SFA.DAS.ApprenticeProgress.Data;
 
 namespace SFA.DAS.ApprenticeProgress.Application.Commands
 {
-    public class UpdateTaskByApprentishipIdAndTaskIdCommandHandler : IRequestHandler<UpdateTaskByApprentishipIdAndTaskIdCommand, Unit>
+    public class UpdateTaskByApprenticeshipIdAndTaskIdCommandHandler : IRequestHandler<UpdateTaskByApprenticeshipIdAndTaskIdCommand, Unit>
     {
         private readonly ApprenticeProgressDataContext _ApprenticeProgressDataContext;
         
-        public UpdateTaskByApprentishipIdAndTaskIdCommandHandler
+        public UpdateTaskByApprenticeshipIdAndTaskIdCommandHandler
         (
             ApprenticeProgressDataContext ApprenticeProgressDataContext
         )
@@ -23,7 +23,7 @@ namespace SFA.DAS.ApprenticeProgress.Application.Commands
             _ApprenticeProgressDataContext = ApprenticeProgressDataContext;
         }
 
-        public async Task<Unit> Handle(UpdateTaskByApprentishipIdAndTaskIdCommand request, CancellationToken cancellationToken)
+        public async Task<Unit> Handle(UpdateTaskByApprenticeshipIdAndTaskIdCommand request, CancellationToken cancellationToken)
         {
             var task = await _ApprenticeProgressDataContext.Task
                 .Where(x =>

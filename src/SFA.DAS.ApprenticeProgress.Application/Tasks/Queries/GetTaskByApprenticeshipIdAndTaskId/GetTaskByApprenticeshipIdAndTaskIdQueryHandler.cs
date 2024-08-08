@@ -9,16 +9,16 @@ using SFA.DAS.ApprenticeProgress.Data;
 
 namespace SFA.DAS.ApprenticeProgress.Application.Queries
 {
-    public class GetTaskByApprentishipIdAndTaskIdQueryHandler : IRequestHandler<GetTaskByApprentishipIdAndTaskIdQuery, GetTaskByApprentishipIdAndTaskIdResult>
+    public class GetTaskByApprenticeshipIdAndTaskIdQueryHandler : IRequestHandler<GetTaskByApprenticeshipIdAndTaskIdQuery, GetTaskByApprenticeshipIdAndTaskIdResult>
     {
         private readonly ApprenticeProgressDataContext _ApprenticeProgressDataContext;
         
-        public GetTaskByApprentishipIdAndTaskIdQueryHandler(ApprenticeProgressDataContext ApprenticeProgressDataContext)
+        public GetTaskByApprenticeshipIdAndTaskIdQueryHandler(ApprenticeProgressDataContext ApprenticeProgressDataContext)
         {
             _ApprenticeProgressDataContext = ApprenticeProgressDataContext;   
         }
 
-        public async Task<GetTaskByApprentishipIdAndTaskIdResult> Handle(GetTaskByApprentishipIdAndTaskIdQuery request, CancellationToken cancellationToken)
+        public async Task<GetTaskByApprenticeshipIdAndTaskIdResult> Handle(GetTaskByApprenticeshipIdAndTaskIdQuery request, CancellationToken cancellationToken)
         {
             var task = await _ApprenticeProgressDataContext.Task
                 .Where(x =>
@@ -64,7 +64,7 @@ namespace SFA.DAS.ApprenticeProgress.Application.Queries
                 task.TaskLinkedKsbs = taskLinkedKsbs;
             }
 
-            var result = new GetTaskByApprentishipIdAndTaskIdResult
+            var result = new GetTaskByApprenticeshipIdAndTaskIdResult
             {
                 Tasks = new List<Domain.Entities.Task>(){ task }
             };

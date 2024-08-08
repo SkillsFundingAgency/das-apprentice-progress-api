@@ -14,18 +14,18 @@ using SFA.DAS.Testing.AutoFixture;
 
 namespace SFA.DAS.ApprenticeProgress.Application.UnitTests.DataFixture
 {
-    public class UpdateTaskByApprentishipIdAndTaskIdCommandHandlerTest : ApprenticeProgressDbContextFixture
+    public class UpdateTaskByApprenticeshipIdAndTaskIdCommandHandlerTest : ApprenticeProgressDbContextFixture
     {
         private readonly Fixture _fixture = new();
 
         [Test, MoqAutoData]
-        public async System.Threading.Tasks.Task UpdateTaskByApprentishipIdAndTaskIdCommandHandler_test()
+        public async System.Threading.Tasks.Task UpdateTaskByApprenticeshipIdAndTaskIdCommandHandler_test()
         {
             await PopulateDbContext();
 
-            var addTaskByApprenticeshipIdCommandHandler = new UpdateTaskByApprentishipIdAndTaskIdCommandHandler(DbContext);
+            var addTaskByApprenticeshipIdCommandHandler = new UpdateTaskByApprenticeshipIdAndTaskIdCommandHandler(DbContext);
 
-            var command = new UpdateTaskByApprentishipIdAndTaskIdCommand()
+            var command = new UpdateTaskByApprenticeshipIdAndTaskIdCommand()
             {
                 TaskId = 1,
                 ApprenticeshipId = new Guid("9D2B0228-4D0D-4C23-8B49-01A698857709"),
