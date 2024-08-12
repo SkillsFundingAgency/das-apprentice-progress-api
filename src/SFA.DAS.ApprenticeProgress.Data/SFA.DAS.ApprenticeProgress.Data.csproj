@@ -1,0 +1,23 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <TargetFramework>net8.0</TargetFramework>
+    <ProjectGuid>A644BCD7-58DE-49BB-93C9-6D9439A2D051</ProjectGuid>
+  </PropertyGroup>
+  <ItemGroup>
+    <PackageReference Include="Lucene.Net" Version="4.8.0-beta00008" />
+    <PackageReference Include="Lucene.Net.Analysis.Phonetic" Version="4.8.0-beta00008" />
+    <PackageReference Include="Microsoft.Azure.Services.AppAuthentication" Version="1.6.2" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Proxies" Version="6.0.6" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="6.0.6" />
+    <PackageReference Include="Microsoft.Data.SqlClient" Version="5.2.1" />
+    <PackageReference Include="Microsoft.IdentityModel.JsonWebTokens" Version="8.0.1" />
+    <PackageReference Include="System.Drawing.Common" Version="8.0.7" />
+    <PackageReference Include="System.IdentityModel.Tokens.Jwt" Version="8.0.1" />
+    <PackageReference Include="System.Text.RegularExpressions" Version="4.3.1" />
+    <PackageReference Include="Azure.Identity" Version="1.12.0" />
+    <PackageReference Include="Microsoft.Identity.Client" Version="4.63.0" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\SFA.DAS.ApprenticeProgress.Domain\SFA.DAS.ApprenticeProgress.Domain.csproj" />
+  </ItemGroup>
+</Project>
