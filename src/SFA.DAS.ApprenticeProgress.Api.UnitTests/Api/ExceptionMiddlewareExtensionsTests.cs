@@ -1,16 +1,15 @@
 namespace SFA.DAS.ApprenticeProgress.Api.UnitTests.AppStart
 {
-    using SFA.DAS.ApprenticeProgress.Api.AppStart;
     using System;
-    using NUnit.Framework;
-    using NSubstitute;
     using Microsoft.AspNetCore.Builder;
     using Microsoft.Extensions.Logging;
+    using NSubstitute;
+    using NUnit.Framework;
+    using SFA.DAS.ApprenticeProgress.Api.AppStart;
 
     [TestFixture]
     public static class ExceptionMiddlewareExtensionsTests
     {
-
         [Test]
         public static void CannotCallConfigureExceptionHandlerWithNullApp()
         {

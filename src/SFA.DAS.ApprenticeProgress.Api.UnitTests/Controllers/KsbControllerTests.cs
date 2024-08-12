@@ -38,7 +38,6 @@ namespace SFA.DAS.ApprenticeApp.UnitTests
             result.Should().BeOfType(typeof(OkResult));
         }
 
-
         [Test, MoqAutoData]
         public async Task RemoveTaskToKsbProgress_test(
             [Greedy] KsbController controller)
@@ -76,7 +75,6 @@ namespace SFA.DAS.ApprenticeApp.UnitTests
             result.Should().BeOfType(typeof(NotFoundResult));
         }
 
-
         [Test, MoqAutoData]
         public async Task GetKsbsByApprenticeshipIdQuery_test(
             [Greedy] KsbController controller)
@@ -94,7 +92,5 @@ namespace SFA.DAS.ApprenticeApp.UnitTests
             var result = await controller.GetKsbsByApprenticeshipId(apprenticeshipIdentifier);
             result.Should().BeOfType(typeof(NotFoundResult));
         }
-
-
     }
 }

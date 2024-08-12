@@ -7,7 +7,6 @@ namespace SFA.DAS.ApprenticeApp.UnitTests
 {
     public class ModelTests
     {
-      
         [Test]
         public void ApprenticeTaskDataRequest_test()
         {
@@ -42,7 +41,6 @@ namespace SFA.DAS.ApprenticeApp.UnitTests
             Assert.AreEqual(1, sut.ReminderValue);
             Assert.AreEqual(1, sut.ReminderUnit);
             Assert.AreEqual(1, sut.ReminderStatus);
-
         }
 
         [Test]
@@ -58,10 +56,6 @@ namespace SFA.DAS.ApprenticeApp.UnitTests
             Assert.AreEqual("type", sut.FileType);
             Assert.AreEqual("name", sut.FileName);
             Assert.AreEqual("contents", sut.FileContents);
-
         }
-
-
-        
     }
 }

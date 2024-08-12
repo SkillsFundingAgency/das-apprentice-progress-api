@@ -30,6 +30,5 @@ namespace SFA.DAS.ApprenticeProgress.Application.UnitTests.DataFixture
             await DbContext.KSBProgress.AddRangeAsync(ksbprogress);
             await DbContext.SaveChangesAsync();
         }
-
     }
 }

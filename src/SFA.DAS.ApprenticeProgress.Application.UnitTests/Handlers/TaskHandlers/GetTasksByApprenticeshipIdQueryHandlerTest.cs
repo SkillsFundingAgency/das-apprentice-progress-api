@@ -64,6 +64,5 @@ namespace SFA.DAS.ApprenticeProgress.Application.UnitTests.DataFixture
             await DbContext.Task.AddRangeAsync(tasks);
             await DbContext.SaveChangesAsync();
         }
-
     }
 }

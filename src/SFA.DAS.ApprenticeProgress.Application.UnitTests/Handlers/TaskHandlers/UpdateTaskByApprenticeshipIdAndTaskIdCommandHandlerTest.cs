@@ -2,14 +2,9 @@
 using System.Linq;
 using System.Threading;
 using AutoFixture;
-using FluentAssertions.Equivalency;
-using Microsoft.VisualBasic;
 using NUnit.Framework;
 using SFA.DAS.ApprenticeProgress.Application.Commands;
-using SFA.DAS.ApprenticeProgress.Application.Models;
 using SFA.DAS.ApprenticeProgress.Application.Queries;
-using SFA.DAS.ApprenticeProgress.Data.Configuration;
-using SFA.DAS.ApprenticeProgress.Domain.Entities;
 using SFA.DAS.Testing.AutoFixture;
 
 namespace SFA.DAS.ApprenticeProgress.Application.UnitTests.DataFixture
@@ -57,7 +52,6 @@ namespace SFA.DAS.ApprenticeProgress.Application.UnitTests.DataFixture
                 TaskId = 0,
             };
 
-
             var result = await addTaskByApprenticeshipIdCommandHandler.Handle(command, CancellationToken.None);
             Assert.That(result, Is.Not.Null);
         }
@@ -68,6 +62,5 @@ namespace SFA.DAS.ApprenticeProgress.Application.UnitTests.DataFixture
             await DbContext.Task.AddRangeAsync(tasks);
             await DbContext.SaveChangesAsync();
         }
-
     }
 }

@@ -120,7 +120,6 @@ namespace SFA.DAS.ApprenticeProgress.Domain.UnitTests
             Assert.AreEqual(new byte[] { 0x20, 0x20, 0x20, 0x20, 0x20, 0x20, 0x20 }, sut.FileContents);
         }
 
-
         [Test]
         public void TaskKSBs_Entity_Test()
         {

@@ -1,10 +1,9 @@
 namespace SFA.DAS.ApprenticeProgress.Api.UnitTests.AppStart
 {
-    using SFA.DAS.ApprenticeProgress.Api.AppStart;
     using System;
-    using NUnit.Framework;
-    using NSubstitute;
     using Microsoft.AspNetCore.Builder;
+    using NUnit.Framework;
+    using SFA.DAS.ApprenticeProgress.Api.AppStart;
 
     [TestFixture]
     public static class HealthCheckStartupTests

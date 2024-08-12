@@ -1,12 +1,9 @@
-﻿using System;
-using System.Linq;
+﻿using System.Linq;
 using System.Threading;
 using AutoFixture;
 using NUnit.Framework;
 using SFA.DAS.ApprenticeProgress.Application.Commands;
-using SFA.DAS.ApprenticeProgress.Application.Models;
 using SFA.DAS.ApprenticeProgress.Application.Queries;
-using SFA.DAS.ApprenticeProgress.Domain.Entities;
 using SFA.DAS.Testing.AutoFixture;
 
 namespace SFA.DAS.ApprenticeProgress.Application.UnitTests.DataFixture
@@ -37,6 +34,5 @@ namespace SFA.DAS.ApprenticeProgress.Application.UnitTests.DataFixture
             await DbContext.Task.AddRangeAsync(ksbprogress);
             await DbContext.SaveChangesAsync();
         }
-
     }
 }

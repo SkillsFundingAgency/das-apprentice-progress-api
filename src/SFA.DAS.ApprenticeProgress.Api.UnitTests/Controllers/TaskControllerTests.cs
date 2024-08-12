@@ -117,7 +117,6 @@ namespace SFA.DAS.ApprenticeApp.UnitTests
             result.Should().BeOfType(typeof(OkResult));
         }
 
-
         [Test, MoqAutoData]
         public async Task GetTaskByApprenticeshipIdAndTaskId_test(
             [Greedy] TaskController controller)
@@ -134,7 +133,6 @@ namespace SFA.DAS.ApprenticeApp.UnitTests
             var result = await controller.GetTaskByApprenticeshipIdAndTaskId(apprenticeshipIdentifier, taskId);
             result.Should().BeOfType(typeof(NotFoundResult));
         }
-
 
         [Test, MoqAutoData]
         public async Task AddTaskByApprenticeshipId_test(
@@ -176,7 +174,6 @@ namespace SFA.DAS.ApprenticeApp.UnitTests
         {
             var httpContext = new DefaultHttpContext();
             var apprenticeshipIdentifier = Guid.NewGuid();
-            int taskId = 1;
 
             ApprenticeTaskDataRequest data = new ApprenticeTaskDataRequest()
             {
@@ -204,7 +201,6 @@ namespace SFA.DAS.ApprenticeApp.UnitTests
             result.Should().BeOfType(typeof(OkResult));
         }
 
-
         [Test, MoqAutoData]
         public async Task RemoveTaskByApprenticeshipIdAndTaskId_test(
                [Greedy] TaskController controller)
@@ -221,6 +217,5 @@ namespace SFA.DAS.ApprenticeApp.UnitTests
             var result = await controller.RemoveTaskByApprenticeshipIdAndTaskId(apprenticeshipIdentifier, taskId);
             result.Should().BeOfType(typeof(OkResult));
         }
-
     }
 }
