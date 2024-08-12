@@ -3,8 +3,6 @@ using System.Linq;
 using System.Threading;
 using AutoFixture;
 using NUnit.Framework;
-using SFA.DAS.ApprenticeProgress.Application.Commands;
-using SFA.DAS.ApprenticeProgress.Application.Models;
 using SFA.DAS.ApprenticeProgress.Application.Queries;
 using SFA.DAS.ApprenticeProgress.Domain.Entities;
 using SFA.DAS.Testing.AutoFixture;
