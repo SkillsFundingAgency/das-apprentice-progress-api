@@ -5,6 +5,6 @@ namespace SFA.DAS.ApprenticeProgress.Domain.Configuration
     [ExcludeFromCodeCoverage]
     public class ApprenticeProgressConfiguration
     {
-        public string ConnectionString { get ; set ; }
+        public string SqlConnectionString { get ; set ; }
     }
 }

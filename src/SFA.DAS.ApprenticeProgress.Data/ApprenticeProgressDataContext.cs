@@ -65,7 +65,7 @@ namespace SFA.DAS.ApprenticeProgress.Data
             
             var connection = new SqlConnection
             {
-                ConnectionString = _configuration.ConnectionString,
+                ConnectionString = _configuration.SqlConnectionString,
                 AccessToken = _azureServiceTokenProvider.GetAccessTokenAsync(AzureResource).Result,
             };
             

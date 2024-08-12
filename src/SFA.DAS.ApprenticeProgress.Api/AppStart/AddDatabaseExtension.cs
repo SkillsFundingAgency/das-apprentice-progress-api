@@ -19,7 +19,7 @@ namespace SFA.DAS.ApprenticeProgress.Api.AppStart
             }
             else if (environmentName.Equals("LOCAL", StringComparison.CurrentCultureIgnoreCase))
             {
-                services.AddDbContext<ApprenticeProgressDataContext>(options => options.UseSqlServer(config["ApplicationSettings:ConnectionString"]),ServiceLifetime.Transient);
+                services.AddDbContext<ApprenticeProgressDataContext>(options => options.UseSqlServer(config["ApplicationSettings:SqlConnectionString"]),ServiceLifetime.Transient);
             }
             else
             {
