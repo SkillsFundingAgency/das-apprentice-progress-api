@@ -17,15 +17,12 @@ namespace SFA.DAS.ApprenticeProgress.Application.Queries
         public int? Status { get; set; }
         public int? ApprenticeshipCategoryId { get; set; }
 
-        // files block
         public List<ApprenticeTaskDataFileRequest> Files { get; set; }
 
-        // reminder block
         public int? ReminderUnit { get; set; }
         public int? ReminderValue { get; set; }
         public int? ReminderStatus { get; set; }
 
-        // ksbs linked
         public string[] KsbsLinked { get; set; }
     }
 }

@@ -19,7 +19,6 @@ namespace SFA.DAS.ApprenticeProgress.Api.Controllers
             _mediator = mediator;
         }
 
-        // Add or update ksb progress
         [HttpPost("{apprenticeshipIdentifier}/ksbs/")]
         public async Task<IActionResult> AddUpdateKsbProgress(Guid apprenticeshipIdentifier, [FromBody] ApprenticeKsbProgressData request)
         {
@@ -44,7 +43,6 @@ namespace SFA.DAS.ApprenticeProgress.Api.Controllers
             public int? CurrentStatus { get; set; }
         }
 
-        // Remove task to ksb join
         [HttpDelete("{apprenticeshipIdentifier}/ksbs/{ksbProgressId}/taskid/{taskId}")]
         public async Task<IActionResult> RemoveTaskToKsbProgress(Guid apprenticeshipIdentifier, int ksbProgressId, int taskId)
         {
@@ -57,7 +55,6 @@ namespace SFA.DAS.ApprenticeProgress.Api.Controllers
             return Ok();
         }
 
-        // gets ksb progress for user based on passed in string list
         [HttpGet("{apprenticeshipIdentifier}/ksbsguids")]
         public async Task<IActionResult> GetKsbsByApprenticeshipIdAndGuidListQuery(Guid apprenticeshipIdentifier, [FromQuery] Guid[] guids)
         {
@@ -66,8 +63,6 @@ namespace SFA.DAS.ApprenticeProgress.Api.Controllers
             return Ok(result);
         }
 
-
-        // gets ksb progress for user based on passed in string list
         [HttpGet("{apprenticeshipIdentifier}/ksbs")]
         public async Task<IActionResult> GetKsbsByApprenticeshipId(Guid apprenticeshipIdentifier)
         {

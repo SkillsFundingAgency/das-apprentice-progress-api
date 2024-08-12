@@ -7,7 +7,6 @@ namespace SFA.DAS.ApprenticeProgress.Application.Commands
 {
     public class AddTaskByApprenticeshipIdCommand : IRequest<Unit>
     {
-        // task block
         public Guid ApprenticeshipId { get; set; }
         public int? TaskId { get; set; }
         public DateTime? DueDate { get; set; }
@@ -19,15 +18,12 @@ namespace SFA.DAS.ApprenticeProgress.Application.Commands
         public int? CategoryId { get; set; }
         public int? Status { get; set; }
 
-        // files block
         public List<ApprenticeTaskDataFileRequest>? Files { get; set;}
 
-        // reminder block
         public int? ReminderUnit { get; set; }
         public int? ReminderValue { get; set; }
         public int? ReminderStatus { get; set; }
 
-        // ksbs linked
         public string[] KsbsLinked { get; set; }
     }
 }

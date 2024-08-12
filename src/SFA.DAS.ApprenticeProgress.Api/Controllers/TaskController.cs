@@ -21,7 +21,6 @@ namespace SFA.DAS.ApprenticeProgress.Api.Controllers
             _mediator = mediator;
         }
 
-        // gets the task categories
         [HttpGet("{apprenticeshipIdentifier}/taskCategories")]
         public async Task<IActionResult> GetTaskCategories(Guid apprenticeshipIdentifier)
         {
@@ -30,7 +29,6 @@ namespace SFA.DAS.ApprenticeProgress.Api.Controllers
             return Ok(result);
         }
 
-        // adds a new task categories
         [HttpPost("{apprenticeshipIdentifier}/taskCategories")]
         public async Task<IActionResult> AddTaskCategory(Guid apprenticeshipIdentifier, int taskId, int categoryId)
         {
@@ -43,7 +41,6 @@ namespace SFA.DAS.ApprenticeProgress.Api.Controllers
             return Ok();
         }
 
-        // gets the task category
         [HttpGet("{apprenticeshipIdentifier}/taskCategories/{taskCategoryId}")]
         public async Task<IActionResult> GetTaskCategory(Guid apprenticeshipIdentifier, int taskId)
         {
@@ -52,7 +49,6 @@ namespace SFA.DAS.ApprenticeProgress.Api.Controllers
             return Ok(result);
         }
 
-        // delete a task category
         [HttpDelete("{apprenticeshipIdentifier}/taskCategories/{taskCategoryId}")]
         public async Task<IActionResult> DeleteTaskCategory(Guid apprenticeshipIdentifier, int? taskCategoryId = 0)
         {
@@ -64,7 +60,6 @@ namespace SFA.DAS.ApprenticeProgress.Api.Controllers
             return Ok();
         }
 
-        // Gets the tasks
         [HttpGet("{apprenticeshipIdentifier}/fromDate/{fromDate}/toDate/{toDate}/status/{status}")]
         public async Task<IActionResult> GetTasksByApprenticeshipId(Guid apprenticeshipIdentifier, DateTime? fromDate, DateTime? toDate, int status)
         {
@@ -73,7 +68,6 @@ namespace SFA.DAS.ApprenticeProgress.Api.Controllers
             return Ok(result);
         }
 
-        // Add a new tasks
         [HttpPost("{apprenticeshipIdentifier}/tasks")]
         public async Task<IActionResult> AddTaskByApprenticeshipId(Guid apprenticeshipIdentifier, [FromBody] ApprenticeTaskDataRequest request)
         {
@@ -115,7 +109,6 @@ namespace SFA.DAS.ApprenticeProgress.Api.Controllers
             public string[] KsbsLinked { get; set; }
         }
 
-        // chnage a task status
         [HttpPost("{apprenticeshipIdentifier}/tasks/{taskId}/changestatus/{status}")]
         public async Task<IActionResult> ChangeTaskStatus(int taskId, int status)
         {
@@ -128,7 +121,6 @@ namespace SFA.DAS.ApprenticeProgress.Api.Controllers
             return Ok();
         }
 
-        // Get a task by Id
         [HttpGet("{apprenticeshipIdentifier}/tasks/{taskId}")]
         public async Task<IActionResult> GetTaskByApprenticeshipIdAndTaskId(Guid apprenticeshipIdentifier, int taskId)
         {
@@ -137,7 +129,6 @@ namespace SFA.DAS.ApprenticeProgress.Api.Controllers
             return Ok(result);
         }
 
-        // Update a task by Id
         [HttpPost("{apprenticeshipIdentifier}/tasks/{taskId}")]
         public async Task<IActionResult> UpdateTaskByApprenticeshipIdAndTaskId(Guid apprenticeshipIdentifier, [FromBody] ApprenticeTaskDataRequest request)
         {
@@ -161,7 +152,6 @@ namespace SFA.DAS.ApprenticeProgress.Api.Controllers
             return Ok();
         }
 
-        // Remove a task Id
         [HttpDelete("{apprenticeshipIdentifier}/tasks/{taskId}")]
         public async Task<IActionResult> RemoveTaskByApprenticeshipIdAndTaskId(Guid apprenticeshipIdentifier, int taskId)
         {

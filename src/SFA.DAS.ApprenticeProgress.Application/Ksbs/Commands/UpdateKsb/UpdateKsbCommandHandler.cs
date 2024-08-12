@@ -5,7 +5,6 @@ using Microsoft.EntityFrameworkCore;
 using SFA.DAS.ApprenticeProgress.Data;
 
 namespace SFA.DAS.ApprenticeProgress.Application.Commands
-
 {
     public class UpdateKsbCommandHandler : IRequestHandler<UpdateKsbCommand, Unit>
     {
