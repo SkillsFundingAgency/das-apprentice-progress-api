@@ -58,10 +58,20 @@ namespace SFA.DAS.ApprenticeProgress.Api.Controllers
         }
 
         // gets ksb progress for user based on passed in string list
-        [HttpGet("{apprenticeshipIdentifier}/ksbs")]
+        [HttpGet("{apprenticeshipIdentifier}/ksbsguids")]
         public async Task<IActionResult> GetKsbsByApprenticeshipIdAndGuidListQuery(Guid apprenticeshipIdentifier, [FromQuery] Guid[] guids)
         {
             var result = await _mediator.Send(new GetKsbsByApprenticeshipIdAndGuidListQuery { ApprenticeshipId = apprenticeshipIdentifier, KsbIds = guids});
+            if (result == null) return NotFound();
+            return Ok(result);
+        }
+
+
+        // gets ksb progress for user based on passed in string list
+        [HttpGet("{apprenticeshipIdentifier}/ksbs")]
+        public async Task<IActionResult> GetKsbsByApprenticeshipId(Guid apprenticeshipIdentifier)
+        {
+            var result = await _mediator.Send(new GetKsbsByApprenticeshipIdQuery{ ApprenticeshipId = apprenticeshipIdentifier });
             if (result == null) return NotFound();
             return Ok(result);
         }
