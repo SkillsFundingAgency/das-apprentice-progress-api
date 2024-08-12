@@ -22,6 +22,7 @@ namespace SFA.DAS.ApprenticeProgress.Application.Commands
 
         public Task<Unit> Handle(AddTaskByApprenticeshipIdCommand request, CancellationToken cancellationToken)
         {
+            // add task itself
             var task = new Domain.Entities.Task
             {
                 ApprenticeshipId = request.ApprenticeshipId,
@@ -37,6 +38,7 @@ namespace SFA.DAS.ApprenticeProgress.Application.Commands
             _ApprenticeProgressDataContext.Add(task);
             _ApprenticeProgressDataContext.SaveChanges();
 
+            // add files
             if (request.Files != null)
             {
                 foreach (var file in request.Files)
@@ -55,6 +57,7 @@ namespace SFA.DAS.ApprenticeProgress.Application.Commands
                 }
             }
 
+            // add reminder
             var taskReminder = new Domain.Entities.TaskReminder
             {
                 TaskId = (int)task.TaskId,
@@ -66,13 +69,16 @@ namespace SFA.DAS.ApprenticeProgress.Application.Commands
             _ApprenticeProgressDataContext.Add(taskReminder);
             _ApprenticeProgressDataContext.SaveChanges();
 
+            // add ksbprogress
 
+            // get the ksb first
             if (request.KsbsLinked != null)
             {
                 foreach (var ksb in request.KsbsLinked)
                 {
                     var ksbkey = new Guid(ksb);
 
+                    // get the ksb progress item
                     var ksbprogressitems
                                = _ApprenticeProgressDataContext.KSBProgress
                                 .Where(x => x.KSBId == ksbkey && x.ApprenticeshipId == request.ApprenticeshipId)
@@ -80,6 +86,7 @@ namespace SFA.DAS.ApprenticeProgress.Application.Commands
 
                     if (ksbprogressitems != null)
                     {
+                        // add join
                         var taskKsbJoin = new Domain.Entities.TaskKSBs
                         {
                             TaskId = (int)task.TaskId,

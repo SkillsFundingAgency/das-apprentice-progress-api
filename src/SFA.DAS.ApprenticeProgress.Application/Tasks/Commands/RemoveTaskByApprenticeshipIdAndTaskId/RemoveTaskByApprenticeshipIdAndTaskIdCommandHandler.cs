@@ -21,13 +21,14 @@ namespace SFA.DAS.ApprenticeProgress.Application.Commands
 
         public Task<Unit> Handle(RemoveTaskByApprenticeshipIdAndTaskIdCommand request, CancellationToken cancellationToken)
         {
+            // task
             var task = _ApprenticeProgressDataContext.Task
                 .Where(x => x.TaskId == request.TaskId && x.ApprenticeshipId == request.ApprenticeshipId)
                 .SingleOrDefault();
-
             if (task != null)
                 _ApprenticeProgressDataContext.Remove(task);
 
+            // files
             var taskFiles = _ApprenticeProgressDataContext.TaskFile
                  .Where(x => x.TaskId == request.TaskId)
                  .ToList();
@@ -35,12 +36,14 @@ namespace SFA.DAS.ApprenticeProgress.Application.Commands
             if (taskFiles != null)
                 _ApprenticeProgressDataContext.RemoveRange(taskFiles);
 
+            // linked ksbs
             var linkedKsbs = _ApprenticeProgressDataContext.TaskKSBs
                  .Where(x => x.TaskId == request.TaskId)
                  .ToList();
             if (linkedKsbs != null)
                 _ApprenticeProgressDataContext.RemoveRange(linkedKsbs);
 
+            // reminders
             var reminders = _ApprenticeProgressDataContext.TaskReminder
                  .Where(x => x.TaskId == request.TaskId)
                  .ToList();

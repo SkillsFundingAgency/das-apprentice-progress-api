@@ -1,4 +1,5 @@
 ﻿using System;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading;
@@ -43,6 +44,9 @@ namespace SFA.DAS.ApprenticeProgress.Application.Commands
                 _ApprenticeProgressDataContext.SaveChanges();
             }
 
+            // first remove all asssets then re-save
+
+            // files
             var taskFiles = _ApprenticeProgressDataContext.TaskFile
                  .Where(x => x.TaskId == request.TaskId)
                  .ToList();
@@ -50,6 +54,7 @@ namespace SFA.DAS.ApprenticeProgress.Application.Commands
             if (taskFiles != null)
                 _ApprenticeProgressDataContext.RemoveRange(taskFiles);
 
+            // linked ksbs
             var linkedKsbs = _ApprenticeProgressDataContext.TaskKSBs
                  .Where(x => x.TaskId == request.TaskId)
                  .ToList();
@@ -57,6 +62,7 @@ namespace SFA.DAS.ApprenticeProgress.Application.Commands
             if (linkedKsbs != null)
                 _ApprenticeProgressDataContext.RemoveRange(linkedKsbs);
 
+            // reminders
             var reminders = _ApprenticeProgressDataContext.TaskReminder
                  .Where(x => x.TaskId == request.TaskId)
                  .ToList();
@@ -66,6 +72,7 @@ namespace SFA.DAS.ApprenticeProgress.Application.Commands
 
             _ApprenticeProgressDataContext.SaveChanges();
 
+            // add files
             if (task != null)
             {
                 if (request.Files != null)
@@ -85,7 +92,11 @@ namespace SFA.DAS.ApprenticeProgress.Application.Commands
                         _ApprenticeProgressDataContext.SaveChanges();
                     }
                 }
-           
+            }
+
+            // add reminder
+            if (task != null)
+            {
                 var taskReminder = new Domain.Entities.TaskReminder
                 {
                     TaskId = (int)task.TaskId,
@@ -96,13 +107,18 @@ namespace SFA.DAS.ApprenticeProgress.Application.Commands
 
                 _ApprenticeProgressDataContext.Add(taskReminder);
                 _ApprenticeProgressDataContext.SaveChanges();
-           
+            }
+
+            // get the ksb first
+            if (task != null)
+            {
                 if (request.KsbsLinked != null)
                 {
                     foreach (var ksb in request.KsbsLinked)
                     {
                         var ksbkey = new Guid(ksb);
 
+                        // get the ksb progress item
                         var ksbprogressitems
                                    = _ApprenticeProgressDataContext.KSBProgress
                                     .Where(x => x.KSBId == ksbkey && x.ApprenticeshipId == request.ApprenticeshipId)
@@ -110,6 +126,7 @@ namespace SFA.DAS.ApprenticeProgress.Application.Commands
 
                         if (ksbprogressitems != null)
                         {
+                            // add join
                             var taskKsbJoin = new Domain.Entities.TaskKSBs
                             {
                                 TaskId = (int)task.TaskId,
