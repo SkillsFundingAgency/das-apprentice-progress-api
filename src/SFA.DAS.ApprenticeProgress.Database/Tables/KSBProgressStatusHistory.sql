@@ -1,5 +1,5 @@
 ﻿CREATE TABLE [dbo].[KSBProgressStatusHistory](
-    [KSBProgressId] [bigint] NOT NULL,
+    [KSBProgressId] [int] NOT NULL,
     [Status] [int] NULL,
     [StatusTime] [datetime2](7) NULL
 ) ON [PRIMARY]

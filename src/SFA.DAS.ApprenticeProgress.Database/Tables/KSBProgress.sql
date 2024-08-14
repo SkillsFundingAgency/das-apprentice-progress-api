@@ -1,6 +1,6 @@
 ﻿CREATE TABLE [dbo].[KSBProgress](
     [KSBProgressId] [int] IDENTITY(1,1) NOT NULL,
-    [ApprenticeshipId] [uniqueidentifier] NOT NULL,
+    [ApprenticeshipId] [bigint] NOT NULL,
     [KSBProgressType] [int] NOT NULL,
     [KSBId] [uniqueidentifier] NOT NULL,
     [KSBKey] [nvarchar](max) NOT NULL,
