@@ -22,7 +22,7 @@ namespace SFA.DAS.ApprenticeProgress.Application.UnitTests.DataFixture
             var command = new AddTaskByApprenticeshipIdCommand()
             {
                 TaskId = 1,
-                ApprenticeshipId = new Guid("9D2B0228-4D0D-4C23-8B49-01A698857709"),
+                ApprenticeshipId = 1,
                 DueDate = new DateTime(2019, 05, 09),
                 Title = "title",
                 ApprenticeshipCategoryId = 0,

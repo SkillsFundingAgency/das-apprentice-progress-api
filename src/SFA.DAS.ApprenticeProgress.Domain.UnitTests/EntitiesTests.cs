@@ -24,7 +24,7 @@ namespace SFA.DAS.ApprenticeProgress.Domain.UnitTests
         {
             var sut = new KSBProgress
             {
-                ApprenticeshipId = new Guid("9D2B0228-4D0D-4C23-8B49-01A698857709"),
+                ApprenticeshipId = 1,
                 KSBProgressId = 1,
                 KSBProgressType = KSBProgressType.Behaviour,
                 KSBId = new Guid("0D2B0228-4D0D-4C23-8B49-01A698857709"),
@@ -33,7 +33,7 @@ namespace SFA.DAS.ApprenticeProgress.Domain.UnitTests
                 Note = "note"
             };
 
-            Assert.AreEqual(new Guid("9D2B0228-4D0D-4C23-8B49-01A698857709"), sut.ApprenticeshipId);
+            Assert.AreEqual(1, sut.ApprenticeshipId);
             Assert.AreEqual(1, sut.KSBProgressId);
             Assert.AreEqual(KSBProgressType.Behaviour, sut.KSBProgressType);
             Assert.AreEqual(new Guid("0D2B0228-4D0D-4C23-8B49-01A698857709"), sut.KSBId);
@@ -64,7 +64,7 @@ namespace SFA.DAS.ApprenticeProgress.Domain.UnitTests
             var sut = new Task
             {
                 TaskId = 1,
-                ApprenticeshipId = new Guid("9D2B0228-4D0D-4C23-8B49-01A698857709"),
+                ApprenticeshipId = 1,
                 DueDate = new DateTime(2019, 05, 09),
                 Title = "title",
                 ApprenticeshipCategoryId = 0,
@@ -75,7 +75,7 @@ namespace SFA.DAS.ApprenticeProgress.Domain.UnitTests
             };
 
             Assert.AreEqual(1, sut.TaskId);
-            Assert.AreEqual(new Guid("9D2B0228-4D0D-4C23-8B49-01A698857709"), sut.ApprenticeshipId);
+            Assert.AreEqual(1, sut.ApprenticeshipId);
             Assert.AreEqual(new DateTime(2019, 05, 09), sut.DueDate);
             Assert.AreEqual("title", sut.Title);
             Assert.AreEqual(0, sut.ApprenticeshipCategoryId);

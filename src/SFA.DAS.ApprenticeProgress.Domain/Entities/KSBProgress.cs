@@ -4,7 +4,7 @@ namespace SFA.DAS.ApprenticeProgress.Domain.Entities
 {
     public class KSBProgress
     {
-        public Guid ApprenticeshipId { get; set; }
+        public long ApprenticeshipId { get; set; }
         public int? KSBProgressId { get; set; }
         public KSBProgressType? KSBProgressType { get; set; }
         public Guid KSBId { get; set; }

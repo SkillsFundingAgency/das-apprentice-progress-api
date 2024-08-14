@@ -23,7 +23,7 @@ namespace SFA.DAS.ApprenticeProgress.Application.UnitTests.DataFixture
             var command = new GetTasksByApprenticeshipIdQuery
             {
                 Status = 0,
-                ApprenticeshipId = new Guid("fd0daf58-af19-440d-b52f-7e1d47267d3b"),
+                ApprenticeshipId = 1,
                 FromDate = new DateTime(2020, 1, 1),
                 ToDate = new DateTime(2030, 1, 1)
             };
@@ -42,7 +42,7 @@ namespace SFA.DAS.ApprenticeProgress.Application.UnitTests.DataFixture
             var command = new GetTasksByApprenticeshipIdQuery
             {
                 Status = 1,
-                ApprenticeshipId = new Guid("fd0daf58-af19-440d-b52f-7e1d47267d3b"),
+                ApprenticeshipId = 1,
                 FromDate = new DateTime(2020, 1, 1),
                 ToDate = new DateTime(2030, 1, 1)
             };
@@ -54,11 +54,11 @@ namespace SFA.DAS.ApprenticeProgress.Application.UnitTests.DataFixture
         {
             var tasks = _fixture.CreateMany<Domain.Entities.Task>().ToArray();
             tasks[0].DueDate = new DateTime(2025, 1, 1);
-            tasks[0].ApprenticeshipId = new Guid("fd0daf58-af19-440d-b52f-7e1d47267d3b");
+            tasks[0].ApprenticeshipId = 1;
             tasks[0].Status = Task.TaskStatus.Todo;
 
             tasks[1].DueDate = new DateTime(2025, 1, 1);
-            tasks[1].ApprenticeshipId = new Guid("fd0daf58-af19-440d-b52f-7e1d47267d3b");
+            tasks[1].ApprenticeshipId = 1;
             tasks[1].Status = Task.TaskStatus.Done;
 
             await DbContext.Task.AddRangeAsync(tasks);

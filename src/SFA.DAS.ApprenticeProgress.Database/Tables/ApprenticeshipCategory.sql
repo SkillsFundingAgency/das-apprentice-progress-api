@@ -1,6 +1,5 @@
 ﻿CREATE TABLE [dbo].[ApprenticeshipCategory](
     [CategoryId] [int] NOT NULL,
-    [ApprenticeshipId] [uniqueidentifier] NULL,
     [Title] [nvarchar](255) NULL
 ) ON [PRIMARY]
 GO

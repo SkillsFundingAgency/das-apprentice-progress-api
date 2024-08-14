@@ -18,7 +18,7 @@ namespace SFA.DAS.ApprenticeApp.UnitTests
             [Greedy] TaskController controller)
         {
             var httpContext = new DefaultHttpContext();
-            var apprenticeshipIdentifier = Guid.NewGuid();
+            var apprenticeshipIdentifier = 1;
 
             controller.ControllerContext = new ControllerContext
             {
@@ -34,7 +34,7 @@ namespace SFA.DAS.ApprenticeApp.UnitTests
             [Greedy] TaskController controller)
         {
             var httpContext = new DefaultHttpContext();
-            var apprenticeshipIdentifier = Guid.NewGuid();
+            var apprenticeshipIdentifier = 1;
             int taskId = 1;
             int catId = 1;
 
@@ -52,7 +52,7 @@ namespace SFA.DAS.ApprenticeApp.UnitTests
             [Greedy] TaskController controller)
         {
             var httpContext = new DefaultHttpContext();
-            var apprenticeshipIdentifier = Guid.NewGuid();
+            var apprenticeshipIdentifier = 1;
             int taskId = 1;
 
             controller.ControllerContext = new ControllerContext
@@ -69,7 +69,7 @@ namespace SFA.DAS.ApprenticeApp.UnitTests
             [Greedy] TaskController controller)
         {
             var httpContext = new DefaultHttpContext();
-            var apprenticeshipIdentifier = Guid.NewGuid();
+            var apprenticeshipIdentifier = 1;
             int taskId = 1;
 
             controller.ControllerContext = new ControllerContext
@@ -86,7 +86,7 @@ namespace SFA.DAS.ApprenticeApp.UnitTests
             [Greedy] TaskController controller)
         {
             var httpContext = new DefaultHttpContext();
-            var apprenticeshipIdentifier = Guid.NewGuid();
+            var apprenticeshipIdentifier = 1;
             var fromDate = new DateTime();
             var toDate = new DateTime();
             int status = 1;
@@ -122,7 +122,7 @@ namespace SFA.DAS.ApprenticeApp.UnitTests
             [Greedy] TaskController controller)
         {
             var httpContext = new DefaultHttpContext();
-            var apprenticeshipIdentifier = Guid.NewGuid();
+            var apprenticeshipIdentifier = 1;
             int taskId = 1;
 
             controller.ControllerContext = new ControllerContext
@@ -139,13 +139,13 @@ namespace SFA.DAS.ApprenticeApp.UnitTests
             [Greedy] TaskController controller)
         {
             var httpContext = new DefaultHttpContext();
-            var apprenticeshipIdentifier = Guid.NewGuid();
+            var apprenticeshipIdentifier = 1;
             int taskId = 1;
 
             ApprenticeTaskDataRequest data = new ApprenticeTaskDataRequest()
             {
                 TaskId = 1,
-                ApprenticeshipId = new Guid("9D2B0228-4D0D-4C23-8B49-01A698857709"),
+                ApprenticeshipId = 1,
                 DueDate = new DateTime(2019, 05, 09),
                 Title = "title",
                 ApprenticeshipCategoryId = 0,
@@ -173,12 +173,12 @@ namespace SFA.DAS.ApprenticeApp.UnitTests
             [Greedy] TaskController controller)
         {
             var httpContext = new DefaultHttpContext();
-            var apprenticeshipIdentifier = Guid.NewGuid();
+            var apprenticeshipIdentifier = 1;
 
             ApprenticeTaskDataRequest data = new ApprenticeTaskDataRequest()
             {
                 TaskId = 1,
-                ApprenticeshipId = new Guid("9D2B0228-4D0D-4C23-8B49-01A698857709"),
+                ApprenticeshipId = 1,
                 DueDate = new DateTime(2019, 05, 09),
                 Title = "title",
                 ApprenticeshipCategoryId = 0,
@@ -206,7 +206,7 @@ namespace SFA.DAS.ApprenticeApp.UnitTests
                [Greedy] TaskController controller)
         {
             var httpContext = new DefaultHttpContext();
-            var apprenticeshipIdentifier = Guid.NewGuid();
+            var apprenticeshipIdentifier = 1;
             int taskId = 1;
 
             controller.ControllerContext = new ControllerContext

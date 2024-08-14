@@ -20,7 +20,7 @@ namespace SFA.DAS.ApprenticeProgress.Api.Controllers
         }
 
         [HttpPost("{apprenticeshipIdentifier}/ksbs/")]
-        public async Task<IActionResult> AddUpdateKsbProgress(Guid apprenticeshipIdentifier, [FromBody] ApprenticeKsbProgressData request)
+        public async Task<IActionResult> AddUpdateKsbProgress(long apprenticeshipIdentifier, [FromBody] ApprenticeKsbProgressData request)
         {
             await _mediator.Send(new AddOrUpdateKsbProgressCommand
             {
@@ -36,7 +36,7 @@ namespace SFA.DAS.ApprenticeProgress.Api.Controllers
 
         public class ApprenticeKsbProgressData
         {
-            public Guid ApprenticeshipId { get; set; }
+            public long ApprenticeshipId { get; set; }
             public int? KSBProgressType { get; set; }
             public Guid? KSBId { get; set; }
             public string KsbKey { get; set; }
@@ -44,7 +44,7 @@ namespace SFA.DAS.ApprenticeProgress.Api.Controllers
         }
 
         [HttpDelete("{apprenticeshipIdentifier}/ksbs/{ksbProgressId}/taskid/{taskId}")]
-        public async Task<IActionResult> RemoveTaskToKsbProgress(Guid apprenticeshipIdentifier, int ksbProgressId, int taskId)
+        public async Task<IActionResult> RemoveTaskToKsbProgress(long apprenticeshipIdentifier, int ksbProgressId, int taskId)
         {
             await _mediator.Send(new RemoveTaskToKsbProgressCommand
             {
@@ -56,7 +56,7 @@ namespace SFA.DAS.ApprenticeProgress.Api.Controllers
         }
 
         [HttpGet("{apprenticeshipIdentifier}/ksbsguids")]
-        public async Task<IActionResult> GetKsbsByApprenticeshipIdAndGuidListQuery(Guid apprenticeshipIdentifier, [FromQuery] Guid[] guids)
+        public async Task<IActionResult> GetKsbsByApprenticeshipIdAndGuidListQuery(long apprenticeshipIdentifier, [FromQuery] Guid[] guids)
         {
             var result = await _mediator.Send(new GetKsbsByApprenticeshipIdAndGuidListQuery { ApprenticeshipId = apprenticeshipIdentifier, KsbIds = guids});
             if (result == null) return NotFound();
@@ -64,7 +64,7 @@ namespace SFA.DAS.ApprenticeProgress.Api.Controllers
         }
 
         [HttpGet("{apprenticeshipIdentifier}/ksbs")]
-        public async Task<IActionResult> GetKsbsByApprenticeshipId(Guid apprenticeshipIdentifier)
+        public async Task<IActionResult> GetKsbsByApprenticeshipId(long apprenticeshipIdentifier)
         {
             var result = await _mediator.Send(new GetKsbsByApprenticeshipIdQuery{ ApprenticeshipId = apprenticeshipIdentifier });
             if (result == null) return NotFound();

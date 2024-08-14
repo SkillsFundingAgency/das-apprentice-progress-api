@@ -7,7 +7,7 @@ namespace SFA.DAS.ApprenticeProgress.Application.Queries
 {
     public class UpdateTaskByApprenticeshipIdAndTaskIdCommand : IRequest<Unit>
     {
-        public Guid ApprenticeshipId { get; set; }
+        public long ApprenticeshipId { get; set; }
         public int TaskId { get; set; }
         public DateTime? DueDate { get; set; }
         public string Title { get; set; }

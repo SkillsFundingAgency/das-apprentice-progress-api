@@ -5,6 +5,6 @@ namespace SFA.DAS.ApprenticeProgress.Application.Queries
 {
     public class GetKsbStatusesQuery : IRequest<GetKsbStatusesResult>
     {
-        public Guid ApprenticeshipId { get; set; }
+        public long ApprenticeshipId { get; set; }
     }
 }

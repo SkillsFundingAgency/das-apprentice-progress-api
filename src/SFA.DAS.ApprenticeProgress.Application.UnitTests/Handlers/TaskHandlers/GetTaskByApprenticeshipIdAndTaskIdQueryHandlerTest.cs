@@ -23,7 +23,7 @@ namespace SFA.DAS.ApprenticeProgress.Application.UnitTests.DataFixture
             var command = new GetTaskByApprenticeshipIdAndTaskIdQuery
             {
                 TaskId = 1,
-                ApprenticeshipId = new Guid("fd0daf58-af19-440d-b52f-7e1d47267d3b")
+                ApprenticeshipId = 1
             };
 
             var result = await getTaskByApprenticeshipIdAndTaskIdQueryHandler.Handle(command, CancellationToken.None);
@@ -35,7 +35,7 @@ namespace SFA.DAS.ApprenticeProgress.Application.UnitTests.DataFixture
             var tasks = _fixture.CreateMany<Domain.Entities.Task>().ToArray();
 
             tasks[0].DueDate = new DateTime(2025, 1, 1);
-            tasks[0].ApprenticeshipId = new Guid("fd0daf58-af19-440d-b52f-7e1d47267d3b");
+            tasks[0].ApprenticeshipId = 1;
             tasks[0].Status = Task.TaskStatus.Todo;
             tasks[0].TaskId = 1;
 

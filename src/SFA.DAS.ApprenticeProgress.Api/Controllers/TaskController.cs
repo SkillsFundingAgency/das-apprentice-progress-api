@@ -22,7 +22,7 @@ namespace SFA.DAS.ApprenticeProgress.Api.Controllers
         }
 
         [HttpGet("{apprenticeshipIdentifier}/taskCategories")]
-        public async Task<IActionResult> GetTaskCategories(Guid apprenticeshipIdentifier)
+        public async Task<IActionResult> GetTaskCategories(long apprenticeshipIdentifier)
         {
             var result = await _mediator.Send(new GetTaskCategoriesQuery());
             if (result == null) return NotFound();
@@ -30,7 +30,7 @@ namespace SFA.DAS.ApprenticeProgress.Api.Controllers
         }
 
         [HttpPost("{apprenticeshipIdentifier}/taskCategories")]
-        public async Task<IActionResult> AddTaskCategory(Guid apprenticeshipIdentifier, int taskId, int categoryId)
+        public async Task<IActionResult> AddTaskCategory(long apprenticeshipIdentifier, int taskId, int categoryId)
         {
             await _mediator.Send(new AddTaskCategoryCommand
             {
@@ -42,7 +42,7 @@ namespace SFA.DAS.ApprenticeProgress.Api.Controllers
         }
 
         [HttpGet("{apprenticeshipIdentifier}/taskCategories/{taskCategoryId}")]
-        public async Task<IActionResult> GetTaskCategory(Guid apprenticeshipIdentifier, int taskId)
+        public async Task<IActionResult> GetTaskCategory(long apprenticeshipIdentifier, int taskId)
         {
             var result = await _mediator.Send(new GetTaskCategoryQuery { TaskId = taskId });
             if (result == null) return NotFound();
@@ -50,7 +50,7 @@ namespace SFA.DAS.ApprenticeProgress.Api.Controllers
         }
 
         [HttpDelete("{apprenticeshipIdentifier}/taskCategories/{taskCategoryId}")]
-        public async Task<IActionResult> DeleteTaskCategory(Guid apprenticeshipIdentifier, int? taskCategoryId = 0)
+        public async Task<IActionResult> DeleteTaskCategory(long apprenticeshipIdentifier, int? taskCategoryId = 0)
         {
             await _mediator.Send(new DeleteTaskCategoryCommand
             {
@@ -61,7 +61,7 @@ namespace SFA.DAS.ApprenticeProgress.Api.Controllers
         }
 
         [HttpGet("{apprenticeshipIdentifier}/fromDate/{fromDate}/toDate/{toDate}/status/{status}")]
-        public async Task<IActionResult> GetTasksByApprenticeshipId(Guid apprenticeshipIdentifier, DateTime? fromDate, DateTime? toDate, int status)
+        public async Task<IActionResult> GetTasksByApprenticeshipId(long apprenticeshipIdentifier, DateTime? fromDate, DateTime? toDate, int status)
         {
             var result = await _mediator.Send(new GetTasksByApprenticeshipIdQuery { ApprenticeshipId = apprenticeshipIdentifier, Status = status, ToDate = toDate, FromDate = fromDate });
             if (result == null) return NotFound();
@@ -69,7 +69,7 @@ namespace SFA.DAS.ApprenticeProgress.Api.Controllers
         }
 
         [HttpPost("{apprenticeshipIdentifier}/tasks")]
-        public async Task<IActionResult> AddTaskByApprenticeshipId(Guid apprenticeshipIdentifier, [FromBody] ApprenticeTaskDataRequest request)
+        public async Task<IActionResult> AddTaskByApprenticeshipId(long apprenticeshipIdentifier, [FromBody] ApprenticeTaskDataRequest request)
         {
             await _mediator.Send(new AddTaskByApprenticeshipIdCommand
             {
@@ -92,7 +92,7 @@ namespace SFA.DAS.ApprenticeProgress.Api.Controllers
 
         public class ApprenticeTaskDataRequest
         {
-            public Guid ApprenticeshipId { get; set; }
+            public long ApprenticeshipId { get; set; }
             public int? TaskId { get; set; }
             public DateTime? DueDate { get; set; }
             public string Title { get; set; }
@@ -122,7 +122,7 @@ namespace SFA.DAS.ApprenticeProgress.Api.Controllers
         }
 
         [HttpGet("{apprenticeshipIdentifier}/tasks/{taskId}")]
-        public async Task<IActionResult> GetTaskByApprenticeshipIdAndTaskId(Guid apprenticeshipIdentifier, int taskId)
+        public async Task<IActionResult> GetTaskByApprenticeshipIdAndTaskId(long apprenticeshipIdentifier, int taskId)
         {
             var result = await _mediator.Send(new GetTaskByApprenticeshipIdAndTaskIdQuery { ApprenticeshipId = apprenticeshipIdentifier, TaskId = taskId });
             if (result == null) return NotFound();
@@ -130,7 +130,7 @@ namespace SFA.DAS.ApprenticeProgress.Api.Controllers
         }
 
         [HttpPost("{apprenticeshipIdentifier}/tasks/{taskId}")]
-        public async Task<IActionResult> UpdateTaskByApprenticeshipIdAndTaskId(Guid apprenticeshipIdentifier, [FromBody] ApprenticeTaskDataRequest request)
+        public async Task<IActionResult> UpdateTaskByApprenticeshipIdAndTaskId(long apprenticeshipIdentifier, [FromBody] ApprenticeTaskDataRequest request)
         {
             await _mediator.Send(new UpdateTaskByApprenticeshipIdAndTaskIdCommand
             {
@@ -153,7 +153,7 @@ namespace SFA.DAS.ApprenticeProgress.Api.Controllers
         }
 
         [HttpDelete("{apprenticeshipIdentifier}/tasks/{taskId}")]
-        public async Task<IActionResult> RemoveTaskByApprenticeshipIdAndTaskId(Guid apprenticeshipIdentifier, int taskId)
+        public async Task<IActionResult> RemoveTaskByApprenticeshipIdAndTaskId(long apprenticeshipIdentifier, int taskId)
         {
             await _mediator.Send(new RemoveTaskByApprenticeshipIdAndTaskIdCommand
             {

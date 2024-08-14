@@ -18,11 +18,11 @@ namespace SFA.DAS.ApprenticeApp.UnitTests
             [Greedy] KsbController controller)
         {
             var httpContext = new DefaultHttpContext();
-            var apprenticeshipIdentifier = Guid.NewGuid();
+            var apprenticeshipIdentifier = 1;
 
             var data = new ApprenticeKsbProgressData
             {
-                ApprenticeshipId = new Guid(),
+                ApprenticeshipId = 1,
                 KSBProgressType = 1,
                 KSBId = new Guid(),
                 KsbKey = "key",
@@ -43,7 +43,7 @@ namespace SFA.DAS.ApprenticeApp.UnitTests
             [Greedy] KsbController controller)
         {
             var httpContext = new DefaultHttpContext();
-            var apprenticeshipIdentifier = Guid.NewGuid();
+            var apprenticeshipIdentifier = 1;
 
             int ksbProgressId = 1;
             int taskId = 1;
@@ -62,7 +62,7 @@ namespace SFA.DAS.ApprenticeApp.UnitTests
             [Greedy] KsbController controller)
         {
             var httpContext = new DefaultHttpContext();
-            var apprenticeshipIdentifier = Guid.NewGuid();
+            var apprenticeshipIdentifier = 1;
 
             var guidlist = new Guid[] { Guid.NewGuid(), Guid.NewGuid() };
 
@@ -80,7 +80,7 @@ namespace SFA.DAS.ApprenticeApp.UnitTests
             [Greedy] KsbController controller)
         {
             var httpContext = new DefaultHttpContext();
-            var apprenticeshipIdentifier = Guid.NewGuid();
+            var apprenticeshipIdentifier = 1;
 
             var guidlist = new Guid[] { Guid.NewGuid(), Guid.NewGuid() };
 

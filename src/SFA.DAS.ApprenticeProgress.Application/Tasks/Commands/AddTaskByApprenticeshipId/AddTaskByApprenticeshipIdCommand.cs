@@ -7,7 +7,7 @@ namespace SFA.DAS.ApprenticeProgress.Application.Commands
 {
     public class AddTaskByApprenticeshipIdCommand : IRequest<Unit>
     {
-        public Guid ApprenticeshipId { get; set; }
+        public long ApprenticeshipId { get; set; }
         public int? TaskId { get; set; }
         public DateTime? DueDate { get; set; }
         public string Title { get; set; }

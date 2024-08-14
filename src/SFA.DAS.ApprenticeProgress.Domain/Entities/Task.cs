@@ -7,7 +7,7 @@ namespace SFA.DAS.ApprenticeProgress.Domain.Entities
     public class Task
     {
         public int TaskId { get; set; }
-        public Guid ApprenticeshipId { get; set; }
+        public long ApprenticeshipId { get; set; }
         public DateTime? DueDate { get; set; }
         public string Title { get; set; }
         public int? ApprenticeshipCategoryId { get; set; }
