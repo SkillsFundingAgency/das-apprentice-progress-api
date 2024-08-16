@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace SFA.DAS.ApprenticeProgress.Domain.Entities
 {
@@ -11,6 +13,9 @@ namespace SFA.DAS.ApprenticeProgress.Domain.Entities
         public string KSBKey { get; set; }
         public KSBStatus? CurrentStatus { get; set; }
         public string Note { get; set; }
+
+        [NotMapped]
+        public List<Task> Tasks { get; set; }
     }
 
     [Flags]

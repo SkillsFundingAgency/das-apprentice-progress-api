@@ -22,9 +22,29 @@ namespace SFA.DAS.ApprenticeProgress.Application.Queries
             var ksbs = await _ApprenticeProgressDataContext.KSBProgress
                 .Where(x =>
                     x.ApprenticeshipId == request.ApprenticeshipId)
-                .AsNoTracking()
-                .AsSingleQuery()
                 .ToListAsync(cancellationToken);
+
+            if (ksbs.Count > 0)
+            {
+                foreach (var ksb in ksbs)
+                {
+                    var taskJoins = await _ApprenticeProgressDataContext.TaskKSBs
+                        .Where(x =>
+                            x.KSBProgressId == ksb.KSBProgressId)
+                            .Select(y => y.TaskId)
+                        .ToListAsync(cancellationToken);
+
+                    if (taskJoins != null)
+                    {
+                        var tasks = await _ApprenticeProgressDataContext.Task
+                            .Where(x => taskJoins.Contains(x.TaskId))
+                            .ToListAsync(cancellationToken);
+
+                        ksb.Tasks = tasks;
+                    }
+
+                }
+            }
 
             var result = new GetKsbsByApprenticeshipIdResult
             {
