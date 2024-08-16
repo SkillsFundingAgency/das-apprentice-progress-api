@@ -19,8 +19,10 @@ namespace SFA.DAS.ApprenticeProgress.Application.UnitTests.DataFixture
 
             var getKsbProgressQuery = new GetKsbsByApprenticeshipIdQueryHandler(DbContext);
 
-            var command = new GetKsbsByApprenticeshipIdQuery();
-            command.ApprenticeshipId = 1;
+            var command = new GetKsbsByApprenticeshipIdQuery
+            {
+                ApprenticeshipId = 1
+            };
 
             var result = await getKsbProgressQuery.Handle(command, CancellationToken.None);
             Assert.That(result, Is.Not.Null);
