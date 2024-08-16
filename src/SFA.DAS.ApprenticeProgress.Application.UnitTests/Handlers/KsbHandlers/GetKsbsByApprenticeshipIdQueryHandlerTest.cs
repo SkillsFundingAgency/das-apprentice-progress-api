@@ -1,4 +1,5 @@
-﻿using System.Linq;
+﻿using System;
+using System.Linq;
 using System.Threading;
 using AutoFixture;
 using NUnit.Framework;
@@ -19,6 +20,7 @@ namespace SFA.DAS.ApprenticeProgress.Application.UnitTests.DataFixture
             var getKsbProgressQuery = new GetKsbsByApprenticeshipIdQueryHandler(DbContext);
 
             var command = new GetKsbsByApprenticeshipIdQuery();
+            command.ApprenticeshipId = 1;
 
             var result = await getKsbProgressQuery.Handle(command, CancellationToken.None);
             Assert.That(result, Is.Not.Null);
@@ -28,6 +30,17 @@ namespace SFA.DAS.ApprenticeProgress.Application.UnitTests.DataFixture
         {
             var ksbprogress = _fixture.CreateMany<Domain.Entities.KSBProgress>().ToArray();
             await DbContext.KSBProgress.AddRangeAsync(ksbprogress);
+            ksbprogress[0].ApprenticeshipId = 1;
+
+            var taskJoins = _fixture.CreateMany<Domain.Entities.TaskKSBs>().ToArray();
+            await DbContext.KSBProgress.AddRangeAsync(ksbprogress);
+            taskJoins[0].TaskId = 1;
+            taskJoins[0].KSBProgressId = 1;
+
+            var tasks = _fixture.CreateMany<Domain.Entities.Task>().ToArray();
+            await DbContext.KSBProgress.AddRangeAsync(ksbprogress);
+            tasks[0].TaskId = 1;
+
             await DbContext.SaveChangesAsync();
         }
     }
