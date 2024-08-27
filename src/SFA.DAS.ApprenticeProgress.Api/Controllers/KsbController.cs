@@ -28,6 +28,7 @@ namespace SFA.DAS.ApprenticeProgress.Api.Controllers
                 KSBProgressType = request.KSBProgressType.Value,
                 KSBId = request.KSBId.Value,
                 KsbKey = request.KsbKey,
+                Note = request.Note,
                 CurrentStatus = request.CurrentStatus.Value
             });
 
@@ -40,6 +41,7 @@ namespace SFA.DAS.ApprenticeProgress.Api.Controllers
             public int? KSBProgressType { get; set; }
             public Guid? KSBId { get; set; }
             public string KsbKey { get; set; }
+            public string Note { get; set; }
             public int? CurrentStatus { get; set; }
         }
 
