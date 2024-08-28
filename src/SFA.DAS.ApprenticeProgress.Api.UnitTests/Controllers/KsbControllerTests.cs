@@ -92,5 +92,23 @@ namespace SFA.DAS.ApprenticeApp.UnitTests
             var result = await controller.GetKsbsByApprenticeshipId(apprenticeshipIdentifier);
             result.Should().BeOfType(typeof(NotFoundResult));
         }
+
+        [Test, MoqAutoData]
+        public async Task GetKsbsProgressForTask_test(
+            [Greedy] KsbController controller)
+        {
+            var httpContext = new DefaultHttpContext();
+            var apprenticeshipIdentifier = 1;
+            int taskId = 1;
+
+            controller.ControllerContext = new ControllerContext
+            {
+                HttpContext = httpContext
+            };
+
+            var result = await controller.GetKsbsProgressForTask(apprenticeshipIdentifier, taskId);
+            result.Should().BeOfType(typeof(NotFoundResult));
+        }
+
     }
 }

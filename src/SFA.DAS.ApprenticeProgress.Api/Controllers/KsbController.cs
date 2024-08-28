@@ -72,5 +72,15 @@ namespace SFA.DAS.ApprenticeProgress.Api.Controllers
             if (result == null) return NotFound();
             return Ok(result);
         }
+
+
+        [HttpGet("{apprenticeshipIdentifier}/ksbs/taskid/{taskId}")]
+        public async Task<IActionResult> GetKsbsProgressForTask(long apprenticeshipIdentifier, int taskId)
+        {
+            var result = await _mediator.Send(new GetKsbsProgressForTaskQuery { ApprenticeshipId = apprenticeshipIdentifier, TaskId = taskId });
+            if (result == null) return NotFound();
+            return Ok(result);
+        }
+
     }
 }
