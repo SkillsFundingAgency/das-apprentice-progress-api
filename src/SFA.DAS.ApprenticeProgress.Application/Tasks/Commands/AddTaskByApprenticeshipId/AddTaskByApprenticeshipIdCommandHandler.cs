@@ -56,21 +56,8 @@ namespace SFA.DAS.ApprenticeProgress.Application.Commands
                     _ApprenticeProgressDataContext.SaveChanges();
                 }
             }
-
-            // add reminder
-            var taskReminder = new Domain.Entities.TaskReminder
-            {
-                TaskId = (int)task.TaskId,
-                ReminderUnit = (Domain.Entities.ReminderUnit)request.ReminderUnit,
-                ReminderValue = request.ReminderValue,
-                Status = (Domain.Entities.ReminderStatus?)(int)request.ReminderStatus
-            };
-
-            _ApprenticeProgressDataContext.Add(taskReminder);
-            _ApprenticeProgressDataContext.SaveChanges();
-
+                        
             // add ksbprogress
-
             // get the ksb first
             if (request.KsbsLinked != null)
             {
@@ -97,6 +84,18 @@ namespace SFA.DAS.ApprenticeProgress.Application.Commands
                     }
                 }
             }
+
+            // add reminder
+            var taskReminder = new Domain.Entities.TaskReminder
+            {
+                TaskId = (int)task.TaskId,
+                ReminderUnit = (Domain.Entities.ReminderUnit)request.ReminderUnit,
+                ReminderValue = request.ReminderValue,
+                Status = (Domain.Entities.ReminderStatus?)(int)request.ReminderStatus
+            };
+
+            _ApprenticeProgressDataContext.Add(taskReminder);
+            _ApprenticeProgressDataContext.SaveChanges();
 
             return Task.FromResult(Unit.Value);
         }
