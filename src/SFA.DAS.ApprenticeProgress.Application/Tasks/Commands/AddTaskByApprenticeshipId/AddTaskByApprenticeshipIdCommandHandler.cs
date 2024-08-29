@@ -11,7 +11,7 @@ namespace SFA.DAS.ApprenticeProgress.Application.Commands
     public class AddTaskByApprenticeshipIdCommandHandler : IRequestHandler<AddTaskByApprenticeshipIdCommand, Unit>
     {
         private readonly ApprenticeProgressDataContext _ApprenticeProgressDataContext;
-        
+
         public AddTaskByApprenticeshipIdCommandHandler
         (
             ApprenticeProgressDataContext ApprenticeProgressDataContext
@@ -56,10 +56,10 @@ namespace SFA.DAS.ApprenticeProgress.Application.Commands
                     _ApprenticeProgressDataContext.SaveChanges();
                 }
             }
-                        
+
             // add ksbprogress
             // get the ksb first
-            if (request.KsbsLinked != null)
+            if (request.KsbsLinked != null && request.KsbsLinked[0] != null)
             {
                 foreach (var ksb in request.KsbsLinked)
                 {
@@ -86,16 +86,19 @@ namespace SFA.DAS.ApprenticeProgress.Application.Commands
             }
 
             // add reminder
-            var taskReminder = new Domain.Entities.TaskReminder
+            if (request.ReminderUnit != null && request.ReminderValue != null)
             {
-                TaskId = (int)task.TaskId,
-                ReminderUnit = (Domain.Entities.ReminderUnit)request.ReminderUnit,
-                ReminderValue = request.ReminderValue,
-                Status = (Domain.Entities.ReminderStatus?)(int)request.ReminderStatus
-            };
+                var taskReminder = new Domain.Entities.TaskReminder
+                {
+                    TaskId = (int)task.TaskId,
+                    ReminderUnit = (Domain.Entities.ReminderUnit)request.ReminderUnit,
+                    ReminderValue = request.ReminderValue,
+                    Status = (Domain.Entities.ReminderStatus?)(int)request.ReminderStatus
+                };
 
-            _ApprenticeProgressDataContext.Add(taskReminder);
-            _ApprenticeProgressDataContext.SaveChanges();
+                _ApprenticeProgressDataContext.Add(taskReminder);
+                _ApprenticeProgressDataContext.SaveChanges();
+            }
 
             return Task.FromResult(Unit.Value);
         }
