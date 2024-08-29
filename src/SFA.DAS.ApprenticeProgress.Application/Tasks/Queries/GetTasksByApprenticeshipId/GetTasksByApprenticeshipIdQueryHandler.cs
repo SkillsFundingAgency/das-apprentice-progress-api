@@ -33,6 +33,8 @@ namespace SFA.DAS.ApprenticeProgress.Application.Queries
                         x.DueDate <= request.ToDate
                         &&
                         x.Status == (Domain.Entities.Task.TaskStatus)(int)request.Status)
+                    .AsNoTracking()
+                    .AsSingleQuery()
                     .ToListAsync(cancellationToken);
             }
 
@@ -47,6 +49,8 @@ namespace SFA.DAS.ApprenticeProgress.Application.Queries
                         x.CompletionDateTime <= request.ToDate
                         &&
                         x.Status == (Domain.Entities.Task.TaskStatus)(int)request.Status)
+                    .AsNoTracking()
+                    .AsSingleQuery()
                     .ToListAsync(cancellationToken);
             }
 
@@ -55,24 +59,32 @@ namespace SFA.DAS.ApprenticeProgress.Application.Queries
                 var taskCategories = await _ApprenticeProgressDataContext.ApprenticeshipCategory
                 .Where(x =>
                     x.CategoryId == task.ApprenticeshipCategoryId)
+                    .AsNoTracking()
+                    .AsSingleQuery()
                 .ToListAsync(cancellationToken);
                 task.ApprenticeshipCategory = taskCategories;
 
                 var taskFiles = await _ApprenticeProgressDataContext.TaskFile
                     .Where(x =>
                         x.TaskId == task.TaskId)
+                    .AsNoTracking()
+                    .AsSingleQuery()
                     .ToListAsync(cancellationToken);
                 task.TaskFiles = taskFiles;
 
                 var taskReminders = await _ApprenticeProgressDataContext.TaskReminder
                     .Where(x =>
                         x.TaskId == task.TaskId)
+                    .AsNoTracking()
+                    .AsSingleQuery()
                     .ToListAsync(cancellationToken);
                 task.TaskReminders = taskReminders;
 
                 var taskLinkedKsbs = await _ApprenticeProgressDataContext.TaskKSBs
                     .Where(x =>
                         x.TaskId == task.TaskId)
+                    .AsNoTracking()
+                    .AsSingleQuery()
                     .ToListAsync(cancellationToken);
                 task.TaskLinkedKsbs = taskLinkedKsbs;
             }
