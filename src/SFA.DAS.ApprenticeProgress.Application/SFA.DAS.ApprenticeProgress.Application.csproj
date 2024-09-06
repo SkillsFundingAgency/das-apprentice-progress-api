@@ -1,0 +1,59 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <TargetFramework>net8.0</TargetFramework>
+    <ProjectGuid>9817A4FE-9D15-4C14-B798-D5717E70CCC1</ProjectGuid>
+  </PropertyGroup>
+  <ItemGroup>
+    <PackageReference Include="MediatR" Version="12.3.0" />
+    <PackageReference Include="FluentValidation.AspNetCore" Version="11.1.1" />
+    <PackageReference Include="Microsoft.Azure.Services.AppAuthentication" Version="1.6.2" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="8.0.7" />
+    <PackageReference Include="Newtonsoft.Json" Version="13.0.1" />
+    <PackageReference Include="Polly" Version="7.2.3" />
+    <PackageReference Include="Azure.Identity" Version="1.12.0" />
+    <PackageReference Include="Microsoft.Identity.Client" Version="4.63.0" />
+    <PackageReference Include="System.Formats.Asn1" Version="8.0.1" />
+    <PackageReference Include="System.Text.RegularExpressions" Version="4.3.1" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\SFA.DAS.ApprenticeProgress.Domain\SFA.DAS.ApprenticeProgress.Domain.csproj" />
+    <ProjectReference Include="..\SFA.DAS.ApprenticeProgress.Data\SFA.DAS.ApprenticeProgress.Data.csproj" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Remove="Tasks\" />
+    <None Remove="Tasks\Queries\GetTaskCategory\" />
+    <None Remove="Tasks\Queries\GetTaskByApprenticeshipIdAndTaskId\" />
+    <None Remove="Tasks\Commands\" />
+    <None Remove="Tasks\Commands\AddTaskByApprenticeshipId\" />
+    <None Remove="Tasks\Commands\AddTaskCategory\" />
+    <None Remove="Tasks\Commands\DeleteTaskCategory\" />
+    <None Remove="Tasks\Commands\RemoveTaskByApprenticeshipIdAndTaskId\" />
+    <None Remove="Tasks\Commands\UpdateTaskByApprenticeshipIdAndTaskId\" />
+    <None Remove="Ksbs\" />
+    <None Remove="Tasks\Queries\GetTasksByApprenticeshipId\" />
+    <None Remove="Tasks\Commands\UpdateTaskStatus\" />
+    <None Remove="Ksbs\Commands\AddOrUpdateKsbProgress\" />
+    <None Remove="Ksbs\Commands\RemoveTaskToKsbProgress\" />
+    <None Remove="Ksbs\Queries\GetKsbsByApprenticeshipIdAndGuidList\" />
+    <None Remove="Ksbs\Queries\GetKsbsProgressForTask\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Tasks\" />
+    <Folder Include="Tasks\Queries\GetTaskCategory\" />
+    <Folder Include="Tasks\Queries\GetTaskByApprenticeshipIdAndTaskId\" />
+    <Folder Include="Tasks\Commands\" />
+    <Folder Include="Tasks\Commands\AddTaskByApprenticeshipId\" />
+    <Folder Include="Tasks\Commands\AddTaskCategory\" />
+    <Folder Include="Tasks\Commands\DeleteTaskCategory\" />
+    <Folder Include="Tasks\Commands\RemoveTaskByApprenticeshipIdAndTaskId\" />
+    <Folder Include="Tasks\Commands\UpdateTaskByApprenticeshipIdAndTaskId\" />
+    <Folder Include="Ksbs\" />
+    <Folder Include="Tasks\Queries\GetTasksByApprenticeshipId\" />
+    <Folder Include="Tasks\Commands\UpdateTaskStatus\" />
+    <Folder Include="Ksbs\Commands\AddOrUpdateKsbProgress\" />
+    <Folder Include="Ksbs\Commands\RemoveTaskToKsbProgress\" />
+    <Folder Include="Ksbs\Queries\GetKsbsByApprenticeshipIdAndGuidList\" />
+    <Folder Include="Ksbs\Queries\GetKsbsProgressForTask\" />
+  </ItemGroup>
+</Project>
+
