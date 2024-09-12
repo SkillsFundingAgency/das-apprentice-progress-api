@@ -85,7 +85,7 @@
         "resourceNamePrefix": "[toLower(concat('das-', parameters('resourceEnvironmentName'),'-', parameters('serviceName')))]",
         "resourceGroupName": "[concat(variables('resourceNamePrefix'), '-rg')]",
         "databaseName": "[concat(variables('resourceNamePrefix'), '-db')]",
-        "apiAppServiceName": "[concat(variables('resourceNamePrefix'), '-as')]",
+        "apiAppServiceName": "[concat(variables('resourceNamePrefix'), 'api-as')]",
         "configNames": "SFA.DAS.ApprenticeProgress.Api"
     },
     "resources": [
