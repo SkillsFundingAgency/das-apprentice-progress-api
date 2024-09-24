@@ -1,4 +1,5 @@
-﻿using System.Linq;
+﻿using System;
+using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 using MediatR;
@@ -28,6 +29,11 @@ namespace SFA.DAS.ApprenticeProgress.Application.Commands
 
             if (task != null)
             {
+                if(request.Status == 1 && task.CompletionDateTime <= task.CreatedDateTime)
+                {
+                    task.CompletionDateTime = DateTime.Now;
+                }
+               
                 task.Status = (Domain.Entities.Task.TaskStatus)request.Status;
                 _ApprenticeProgressDataContext.SaveChanges();
             }
