@@ -22,6 +22,7 @@ using SFA.DAS.ApprenticeProgress.Application.Queries;
 using SFA.DAS.ApprenticeProgress.Data;
 using SFA.DAS.ApprenticeProgress.Domain.Configuration;
 using SFA.DAS.Configuration.AzureTableStorage;
+using SFA.DAS.FindAnApprenticeship.Api.AppStart;
 
 namespace SFA.DAS.ApprenticeProgress.Api
 {
@@ -109,7 +110,7 @@ namespace SFA.DAS.ApprenticeProgress.Api
                     options.JsonSerializerOptions.Converters.Add(new JsonStringEnumConverter());
                 });
 
-            services.AddApplicationInsightsTelemetry(_configuration["APPINSIGHTS_INSTRUMENTATIONKEY"]);
+            services.AddOpenTelemetryRegistration(_configuration["<KeyGoesHere>"]);
 
             services.AddSwaggerGen(c =>
             {
