@@ -1,3 +1,4 @@
+using System.Diagnostics.CodeAnalysis;
 using Microsoft.Azure.WebJobs;
 using Microsoft.Extensions.Logging;
 using SFA.DAS.ApprenticeProgress.Functions.Api;
@@ -6,6 +7,7 @@ using SFA.DAS.PushNotifications.Messages.Commands;
 
 namespace SFA.DAS.ApprenticeProgress.Functions
 {
+    [ExcludeFromCodeCoverage]
     public class SendTaskReminderFunction
     {
         private readonly IApprenticeProgressApi _api;
