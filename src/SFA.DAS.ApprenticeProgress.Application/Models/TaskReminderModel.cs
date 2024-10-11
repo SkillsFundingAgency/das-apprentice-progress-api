@@ -5,7 +5,7 @@ namespace SFA.DAS.ApprenticeProgress.Application.Models
 {
     public class TaskReminderModel
     {
-        public int TaskId { get; set; }
+        public int TaskId { get; set; } 
         public long ApprenticeshipId { get; set; }
         public DateTime? DueDate { get; set; }
         public string Title { get; set; }

@@ -5,17 +5,17 @@ namespace SFA.DAS.ApprenticeProgress.Functions.Api
     [ExcludeFromCodeCoverage]
     public class TaskReminderModel
     {
-        public int TaskId { get; set; }
-        public long ApprenticeshipId { get; set; }
-        public DateTime? DueDate { get; set; }
-        public string Title { get; set; }
-        public int? ApprenticeshipCategoryId { get; set; }
-        public string Note { get; set; }
-        public DateTime? CompletionDateTime { get; set; }
-        public DateTime? CreatedDateTime { get; set; }
-        public int? ReminderValue { get; set; }
-        public ReminderUnit? ReminderUnit { get; set; }
-        public ReminderStatus? ReminderStatus { get; set; }
+        public int? TaskId { get; set; } = null!;
+        public long? ApprenticeshipId { get; set; } = null!;
+        public DateTime? DueDate { get; set; } = null!;
+        public string Title { get; set; } = null!;
+        public int? ApprenticeshipCategoryId { get; set; } = null!;
+        public string Note { get; set; } = null!;
+        public DateTime? CompletionDateTime { get; set; } = null!;
+        public DateTime? CreatedDateTime { get; set; } = null!;
+        public int? ReminderValue { get; set; } = null!;
+        public ReminderUnit? ReminderUnit { get; set; } = null!;
+        public ReminderStatus? ReminderStatus { get; set; } = null!;
     }
 
     [Flags]
