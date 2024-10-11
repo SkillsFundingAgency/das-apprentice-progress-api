@@ -1,8 +1,10 @@
 ﻿using Microsoft.Extensions.Configuration;
 using System;
+using System.Diagnostics.CodeAnalysis;
 
 namespace SFA.DAS.ApprenticeProgress.Functions.Infrastructure;
 
+[ExcludeFromCodeCoverage]
 public static class ConfigurationExtensions
 {
     public static bool IsAcceptanceTest(this IConfiguration config)

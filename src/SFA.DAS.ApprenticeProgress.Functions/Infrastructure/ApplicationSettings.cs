@@ -1,7 +1,9 @@
-﻿using SFA.DAS.Http.Configuration;
+﻿using System.Diagnostics.CodeAnalysis;
+using SFA.DAS.Http.Configuration;
 
 namespace SFA.DAS.ApprenticeProgress.Functions.Infrastructure
 {
+    [ExcludeFromCodeCoverage]
     public class ApplicationSettings
     {
         public ApprenticeProgressApiOptions ApprenticeProgressApi { get; set; } = null!;
