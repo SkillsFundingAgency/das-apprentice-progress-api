@@ -17,7 +17,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SFA.DAS.ApprenticeProgress.
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SFA.DAS.ApprenticeProgress.Data", "SFA.DAS.ApprenticeProgress.Data\SFA.DAS.ApprenticeProgress.Data.csproj", "{A644BCD7-58DE-49BB-93C9-6D9439A2D051}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SFA.DAS.ApprenticeProgress.Api.UnitTests", "SFA.DAS.ApprenticeProgress.Api.UnitTests\SFA.DAS.ApprenticeProgress.Api.UnitTests.csproj", "{E3F8475D-D248-4CD1-9E7F-A613DDD2D7B6}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SFA.DAS.ApprenticeProgress.Functions.UnitTests", "SFA.DAS.ApprenticeProgress.Functions.UnitTests\SFA.DAS.ApprenticeProgress.Functions.UnitTests.csproj", "{E3F8475D-D248-4CD1-9E7F-A613DDD2D7B6}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SFA.DAS.ApprenticeProgress.Data.UnitTests", "SFA.DAS.ApprenticeProgress.Data.UnitTests\SFA.DAS.ApprenticeProgress.Data.UnitTests.csproj", "{0CA16441-4C8B-4FC3-BD23-08F25F491336}"
 EndProject

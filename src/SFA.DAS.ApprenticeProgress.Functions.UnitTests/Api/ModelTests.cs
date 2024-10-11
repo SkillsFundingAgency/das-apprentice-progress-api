@@ -9,7 +9,7 @@ namespace SFA.DAS.ApprenticeProgress.Functions.UnitTests
         [Test]
         public void ApprenticeTask_test()
         {
-            var sut = new ApprenticeTask
+            var sut = new TaskReminderModel
             {
                 TaskId = 1,
                 ApprenticeshipId = 1,
@@ -19,7 +19,9 @@ namespace SFA.DAS.ApprenticeProgress.Functions.UnitTests
                 Note = "note",
                 CompletionDateTime = new DateTime(2019, 05, 09),
                 CreatedDateTime = new DateTime(2019, 05, 09),
-                Status = ApprenticeTask.TaskStatus.Done
+                ReminderStatus = ReminderStatus.NotSent,
+                ReminderValue = 1,
+                ReminderUnit = ReminderUnit.Days
             };
 
             Assert.AreEqual(1, sut.TaskId);
@@ -30,24 +32,11 @@ namespace SFA.DAS.ApprenticeProgress.Functions.UnitTests
             Assert.AreEqual("note", sut.Note);
             Assert.AreEqual(new DateTime(2019, 05, 09), sut.CompletionDateTime);
             Assert.AreEqual(new DateTime(2019, 05, 09), sut.CreatedDateTime);
-            Assert.AreEqual(ApprenticeTask.TaskStatus.Done, sut.Status);
-        }
-
-        [Test]
-        public void TaskReminder_test()
-        {
-            var sut = new TaskReminder
-            {
-                TaskId = 1,
-                ReminderValue = 1,
-                ReminderUnit = ReminderUnit.Days,
-                ReminderStatus = ReminderStatus.Sent
-            };
-
-            Assert.AreEqual(1, sut.TaskId);
+            Assert.AreEqual(ReminderStatus.NotSent, sut.ReminderStatus);
             Assert.AreEqual(1, sut.ReminderValue);
             Assert.AreEqual(ReminderUnit.Days, sut.ReminderUnit);
-            Assert.AreEqual(ReminderStatus.Sent, sut.ReminderStatus);
         }
+
+
     }
 }
