@@ -9,7 +9,6 @@ using SFA.DAS.ApprenticeProgress.Functions.Infrastructure;
 using SFA.DAS.ApprenticeProgress.Functions.Services;
 using SFA.DAS.Http.Configuration;
 using SFA.DAS.NServiceBus.Configuration;
-using SFA.DAS.NServiceBus.Extensions;
 using SFA.DAS.PushNotifications.Messages.Commands;
 
 [assembly: FunctionsStartup(typeof(SFA.DAS.ApprenticeProgress.Functions.Startup))]
@@ -44,14 +43,14 @@ namespace SFA.DAS.ApprenticeProgress.Functions
                 var configuration = new ServiceBusTriggeredEndpointConfiguration(QueueNames.PushNotificationsQueue);
 
                 //var configuration = ServiceBusEndpointFactory.CreateSingleQueueConfiguration(QueueNames.PushNotificationsQueue, appConfiguration, useManagedIdentity);
-                configuration.AdvancedConfiguration.UseNewtonsoftJsonSerializer();
+                //configuration.AdvancedConfiguration.UseNewtonsoftJsonSerializer();
                 configuration.AdvancedConfiguration.EnableInstallers();
                 configuration.Transport.Routing().RouteToEndpoint(typeof(ProcessMessageCommand), QueueNames.PushNotificationsQueue);
 
                 var endpointConfiguration = new EndpointConfiguration(QueueNames.PushNotificationsQueue)
                     .UseErrorQueue($"{QueueNames.PushNotificationsQueue}-errors")
-                    .UseInstallers()
-                    .UseNewtonsoftJsonSerializer();
+                    .UseInstallers();
+                   // .UseNewtonsoftJsonSerializer();
 
                 if (!string.IsNullOrEmpty(Configuration["NServiceBusConnectionString"]))
                 {
@@ -59,6 +58,7 @@ namespace SFA.DAS.ApprenticeProgress.Functions
                 }
 
                 endpointConfiguration.SendOnly();
+                endpointConfiguration.UseSerialization<NewtonsoftJsonSerializer>();
 
                 if (Configuration["NServiceBusConnectionString"].Equals("UseLearningEndpoint=true", StringComparison.CurrentCultureIgnoreCase))
                 {
@@ -68,10 +68,7 @@ namespace SFA.DAS.ApprenticeProgress.Functions
                 {
                     var transport = endpointConfiguration.UseTransport<AzureServiceBusTransport>();
                     transport.ConnectionString(Configuration["NServiceBusConnectionString"]);
-                    transport.AddRouting(routeSettings =>
-                    {
-                        routeSettings.RouteToEndpoint(typeof(ProcessMessageCommand), QueueNames.PushNotificationsQueue);
-                    });
+                    transport.Routing().RouteToEndpoint(typeof(ProcessMessageCommand), QueueNames.PushNotificationsQueue);
                 }
 
                 var endpoint = Endpoint.Start(endpointConfiguration).GetAwaiter().GetResult();

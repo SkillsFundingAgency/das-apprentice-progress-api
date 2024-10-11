@@ -31,13 +31,20 @@ namespace SFA.DAS.ApprenticeProgress.Functions
 
                 var taskReminders = await _api.GetTaskReminders();
 
-                foreach (var reminder in taskReminders.TaskReminders)
+                if (taskReminders.TaskReminders.Count > 0)
                 {
-                    await _messageService.SendMessage(new ProcessMessageCommand { NotificationBody = "the message body", NotificationTitle = "the notification title" });
-                    log.LogInformation("Got reminder and sent to service bus");
+                    foreach (var reminder in taskReminders.TaskReminders)
+                    {
+                        await _messageService.SendMessage(new ProcessMessageCommand { NotificationBody = "the message body", NotificationTitle = "the notification title" });
+                        log.LogInformation("Got reminder and sent to service bus");
 
-                    await _api.UpdateTaskReminders(reminder.TaskId, 1);
-                    log.LogInformation("Updated reminder status via API");
+                        await _api.UpdateTaskReminders(reminder.TaskId, 1);
+                        log.LogInformation("Updated reminder status via API");
+                    }
+                }
+                else
+                {
+                    log.LogInformation("No reminders found");
                 }
             }
             catch (Exception e)
