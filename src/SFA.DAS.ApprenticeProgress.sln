@@ -17,7 +17,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SFA.DAS.ApprenticeProgress.
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SFA.DAS.ApprenticeProgress.Data", "SFA.DAS.ApprenticeProgress.Data\SFA.DAS.ApprenticeProgress.Data.csproj", "{A644BCD7-58DE-49BB-93C9-6D9439A2D051}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SFA.DAS.ApprenticeProgress.Api.UnitTests", "SFA.DAS.ApprenticeProgress.Api.UnitTests\SFA.DAS.ApprenticeProgress.Api.UnitTests.csproj", "{E3F8475D-D248-4CD1-9E7F-A613DDD2D7B6}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SFA.DAS.ApprenticeProgress.Functions.UnitTests", "SFA.DAS.ApprenticeProgress.Functions.UnitTests\SFA.DAS.ApprenticeProgress.Functions.UnitTests.csproj", "{E3F8475D-D248-4CD1-9E7F-A613DDD2D7B6}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SFA.DAS.ApprenticeProgress.Data.UnitTests", "SFA.DAS.ApprenticeProgress.Data.UnitTests\SFA.DAS.ApprenticeProgress.Data.UnitTests.csproj", "{0CA16441-4C8B-4FC3-BD23-08F25F491336}"
 EndProject
@@ -27,6 +27,10 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 	EndProjectSection
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SFA.DAS.ApprenticeProgress.Domain.UnitTests", "SFA.DAS.ApprenticeProgress.Domain.UnitTests\SFA.DAS.ApprenticeProgress.Domain.UnitTests.csproj", "{067BF3D1-9582-4CDD-8DDD-8EB4BC4899EC}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SFA.DAS.ApprenticeProgress.Functions", "SFA.DAS.ApprenticeProgress.Functions\SFA.DAS.ApprenticeProgress.Functions.csproj", "{EE428F5F-84D3-49EC-9C0E-592ADA323266}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SFA.DAS.PushNotifications.Messages", "SFA.DAS.PushNotifications.Messages\SFA.DAS.PushNotifications.Messages.csproj", "{9647AC16-1111-4D1C-8284-7D77DF28C21D}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -76,6 +80,13 @@ Global
 		{067BF3D1-9582-4CDD-8DDD-8EB4BC4899EC}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{067BF3D1-9582-4CDD-8DDD-8EB4BC4899EC}.Release|Any CPU.Build.0 = Release|Any CPU
 		{067BF3D1-9582-4CDD-8DDD-8EB4BC4899EC}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{EE428F5F-84D3-49EC-9C0E-592ADA323266}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{EE428F5F-84D3-49EC-9C0E-592ADA323266}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{EE428F5F-84D3-49EC-9C0E-592ADA323266}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9647AC16-1111-4D1C-8284-7D77DF28C21D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9647AC16-1111-4D1C-8284-7D77DF28C21D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9647AC16-1111-4D1C-8284-7D77DF28C21D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9647AC16-1111-4D1C-8284-7D77DF28C21D}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
