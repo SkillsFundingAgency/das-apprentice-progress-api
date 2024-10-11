@@ -39,18 +39,14 @@ namespace SFA.DAS.ApprenticeProgress.Functions
 
             builder.UseNServiceBus((IConfiguration appConfiguration) =>
             {
-
                 var configuration = new ServiceBusTriggeredEndpointConfiguration(QueueNames.PushNotificationsQueue);
 
-                //var configuration = ServiceBusEndpointFactory.CreateSingleQueueConfiguration(QueueNames.PushNotificationsQueue, appConfiguration, useManagedIdentity);
-                //configuration.AdvancedConfiguration.UseNewtonsoftJsonSerializer();
                 configuration.AdvancedConfiguration.EnableInstallers();
                 configuration.Transport.Routing().RouteToEndpoint(typeof(ProcessMessageCommand), QueueNames.PushNotificationsQueue);
 
                 var endpointConfiguration = new EndpointConfiguration(QueueNames.PushNotificationsQueue)
                     .UseErrorQueue($"{QueueNames.PushNotificationsQueue}-errors")
                     .UseInstallers();
-                   // .UseNewtonsoftJsonSerializer();
 
                 if (!string.IsNullOrEmpty(Configuration["NServiceBusConnectionString"]))
                 {

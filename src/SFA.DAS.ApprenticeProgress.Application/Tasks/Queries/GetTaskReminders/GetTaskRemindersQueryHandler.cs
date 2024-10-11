@@ -23,13 +23,11 @@ namespace SFA.DAS.ApprenticeProgress.Application.Queries
 
         public async Task<GetTaskRemindersResult> Handle(GetTaskRemindersQuery request, CancellationToken cancellationToken)
         {
-
             List<TaskReminderModel> reminders = new List<TaskReminderModel>();
 
             var taskReminders = await _ApprenticeProgressDataContext.TaskReminder
                 .Where(x =>
                      x.Status == Domain.Entities.ReminderStatus.NotSent
-                     // TODO AND IN BETWEEN UPCOMING MINUTE OF THE TASK DUE TIME
                      )
                 .AsNoTracking()
                 .AsSingleQuery()
