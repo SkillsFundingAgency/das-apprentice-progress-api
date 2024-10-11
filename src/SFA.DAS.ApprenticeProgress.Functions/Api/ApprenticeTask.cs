@@ -1,5 +1,8 @@
-﻿namespace SFA.DAS.ApprenticeProgress.Functions.Api
+﻿using System.Diagnostics.CodeAnalysis;
+
+namespace SFA.DAS.ApprenticeProgress.Functions.Api
 {
+    [ExcludeFromCodeCoverage]
     public class ApprenticeTask
     {
         public int TaskId { get; set; }
