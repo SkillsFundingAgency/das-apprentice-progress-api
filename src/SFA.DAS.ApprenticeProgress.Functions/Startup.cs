@@ -8,7 +8,6 @@ using SFA.DAS.ApprenticeProgress.Functions.Api;
 using SFA.DAS.ApprenticeProgress.Functions.Infrastructure;
 using SFA.DAS.ApprenticeProgress.Functions.Services;
 using SFA.DAS.Http.Configuration;
-using SFA.DAS.NServiceBus.AzureFunction.Extensions;
 using SFA.DAS.NServiceBus.Configuration;
 using SFA.DAS.NServiceBus.Extensions;
 using SFA.DAS.PushNotifications.Messages.Commands;
@@ -41,7 +40,10 @@ namespace SFA.DAS.ApprenticeProgress.Functions
 
             builder.UseNServiceBus((IConfiguration appConfiguration) =>
             {
-                var configuration = ServiceBusEndpointFactory.CreateSingleQueueConfiguration(QueueNames.PushNotificationsQueue, appConfiguration, useManagedIdentity);
+
+                var configuration = new ServiceBusTriggeredEndpointConfiguration(QueueNames.PushNotificationsQueue);
+
+                //var configuration = ServiceBusEndpointFactory.CreateSingleQueueConfiguration(QueueNames.PushNotificationsQueue, appConfiguration, useManagedIdentity);
                 configuration.AdvancedConfiguration.UseNewtonsoftJsonSerializer();
                 configuration.AdvancedConfiguration.EnableInstallers();
                 configuration.Transport.Routing().RouteToEndpoint(typeof(ProcessMessageCommand), QueueNames.PushNotificationsQueue);
