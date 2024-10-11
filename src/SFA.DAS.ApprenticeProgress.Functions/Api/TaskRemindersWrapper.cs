@@ -2,6 +2,6 @@
 {
     public class TaskRemindersWrapper
     {
-        public List<TaskReminder> TaskReminders { get; set; } = new List<TaskReminder>();
+        public List<TaskReminderModel> TaskReminders { get; set; } = new List<TaskReminderModel>();
     }
 }
