@@ -3,7 +3,7 @@
 namespace SFA.DAS.ApprenticeProgress.Functions.Api
 {
     [ExcludeFromCodeCoverage]
-    public class TaskReminder
+    public class TaskReminderModel
     {
         public int TaskId { get; set; }
         public long ApprenticeshipId { get; set; }
