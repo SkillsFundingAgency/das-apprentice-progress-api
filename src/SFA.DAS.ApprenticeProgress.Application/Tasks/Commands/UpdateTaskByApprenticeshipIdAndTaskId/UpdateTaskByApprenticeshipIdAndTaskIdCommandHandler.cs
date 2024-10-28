@@ -129,14 +129,14 @@ namespace SFA.DAS.ApprenticeProgress.Application.Commands
             // add reminder
             if (task != null)
             {
-                if (request.ReminderUnit != null && request.ReminderValue != null)
+                if (request.ReminderValue != null)
                 {
                     var taskReminder = new Domain.Entities.TaskReminder
                     {
                         TaskId = (int)task.TaskId,
-                        ReminderUnit = (Domain.Entities.ReminderUnit)request.ReminderUnit,
+                        ReminderUnit = Domain.Entities.ReminderUnit.Minutes,
                         ReminderValue = request.ReminderValue,
-                        Status = (Domain.Entities.ReminderStatus?)(int)request.ReminderStatus
+                        Status = Domain.Entities.ReminderStatus.NotSent
                     };
 
                     _ApprenticeProgressDataContext.Add(taskReminder);

@@ -9,7 +9,7 @@ using SFA.DAS.ApprenticeProgress.Api.Controllers;
 using SFA.DAS.Testing.AutoFixture;
 using static SFA.DAS.ApprenticeProgress.Api.Controllers.KsbController;
 
-namespace SFA.DAS.ApprenticeApp.UnitTests
+namespace SFA.DAS.ApprenticeProgress.UnitTests
 {
     public class KsbControllerTests
     {

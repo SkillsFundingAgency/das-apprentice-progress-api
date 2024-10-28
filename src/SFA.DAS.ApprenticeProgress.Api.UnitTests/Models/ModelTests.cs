@@ -3,7 +3,7 @@ using NUnit.Framework;
 using SFA.DAS.ApprenticeProgress.Application.Models;
 using static SFA.DAS.ApprenticeProgress.Api.Controllers.TaskController;
 
-namespace SFA.DAS.ApprenticeApp.UnitTests
+namespace SFA.DAS.ApprenticeProgress.UnitTests
 {
     public class ModelTests
     {
@@ -56,6 +56,38 @@ namespace SFA.DAS.ApprenticeApp.UnitTests
             Assert.AreEqual("type", sut.FileType);
             Assert.AreEqual("name", sut.FileName);
             Assert.AreEqual("contents", sut.FileContents);
+        }
+
+
+        [Test]
+        public void TaskReminderModelTest()
+        {
+            var sut = new TaskReminderModel
+            {
+                TaskId = 1,
+                ApprenticeshipId= 1,
+                DueDate = new DateTime(2019, 05, 09),
+                Title = "title",
+                ApprenticeshipCategoryId = 1,
+                Note = "note",
+                CompletionDateTime = new DateTime(2019, 05, 09),
+                CreatedDateTime = new DateTime(2019, 05, 09),
+                ReminderValue = 1,
+                ReminderUnit = Domain.Entities.ReminderUnit.Days,
+                ReminderStatus = Domain.Entities.ReminderStatus.Sent
+            };
+
+            Assert.AreEqual(1, sut.TaskId);
+            Assert.AreEqual(1, sut.ApprenticeshipId);
+            Assert.AreEqual(new DateTime(2019, 05, 09), sut.DueDate);
+            Assert.AreEqual("title", sut.Title);
+            Assert.AreEqual(1, sut.ApprenticeshipCategoryId);
+            Assert.AreEqual("note", sut.Note);
+            Assert.AreEqual(new DateTime(2019, 05, 09), sut.CompletionDateTime);
+            Assert.AreEqual(new DateTime(2019, 05, 09), sut.CreatedDateTime);
+            Assert.AreEqual(1, sut.ReminderValue);
+            Assert.AreEqual(Domain.Entities.ReminderUnit.Days, sut.ReminderUnit);
+            Assert.AreEqual(Domain.Entities.ReminderStatus.Sent, sut.ReminderStatus);
         }
     }
 }
