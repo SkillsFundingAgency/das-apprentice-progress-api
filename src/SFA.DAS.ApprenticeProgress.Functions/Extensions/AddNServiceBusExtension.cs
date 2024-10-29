@@ -38,7 +38,7 @@ internal static class AddNServiceBusExtension
         if (configuration["EnvironmentName"] == "LOCAL")
         {
             var transport = endpointConfiguration.UseTransport<AzureServiceBusTransport>();
-            transport.Routing().RouteToEndpoint(typeof(ProcessMessageCommand), EndpointName);
+            transport.Routing().RouteToEndpoint(typeof(SendPushNotificationCommand), EndpointName);
             var connectionString = nServiceBusConfiguration.NServiceBusConnectionString;
             transport.ConnectionString(connectionString);
             startServiceBusEndpoint = true;
@@ -67,6 +67,6 @@ public static class RoutingSettingsExtensions
 
     public static void AddRouting(this RoutingSettings routingSettings)
     {
-        routingSettings.RouteToEndpoint(typeof(ProcessMessageCommand), EndpointName);
+        routingSettings.RouteToEndpoint(typeof(SendPushNotificationCommand), EndpointName);
     }
 }

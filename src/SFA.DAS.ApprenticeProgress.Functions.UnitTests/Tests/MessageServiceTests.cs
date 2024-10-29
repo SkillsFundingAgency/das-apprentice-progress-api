@@ -16,7 +16,7 @@ namespace SFA.DAS.ApprenticeProgress.Functions.UnitTests
             [Frozen] Mock<IMessageSession> mockMessageSession,
             MessageService service)
         {
-            ProcessMessageCommand message = new() { Body = "body", Title = "title" };
+            SendPushNotificationCommand message = new() { Body = "body", Title = "title" };
 
             await service.SendMessage(message);
 
