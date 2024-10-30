@@ -53,6 +53,9 @@
       "sharedSQLServerName": {
         "type": "string"
       },
+      "subnetObject": {
+        "type": "object"
+      },
       "elasticPoolName": {
         "type": "string",
         "defaultValue": ""
