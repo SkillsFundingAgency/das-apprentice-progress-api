@@ -47,6 +47,9 @@
       "sharedBackEndSubnetResourceId": {
           "type": "string"
       },
+      "sharedStorageAccountConnectionString": {
+        "type": "securestring"
+      },
       "sharedKeyVaultName": {
           "type": "string"
       },
