@@ -89,7 +89,7 @@
       "databaseName": "[concat(variables('resourceNamePrefix'), '-db')]",
       "apiAppServiceName": "[concat(variables('resourceNamePrefix'), 'api-as')]",
       "configNames": "SFA.DAS.ApprenticeProgress.Api",
-      "functionAppconfigNames": "SFA.DAS.ApprenticeProgress.Jobs"
+      "functionAppconfigNames": "SFA.DAS.ApprenticeProgress.Functions"
     },
     "resources": [
       {
@@ -299,7 +299,7 @@
                   },
                   {
                     "name": "ConfigNames",
-                    "value": "[variables('configNames')]"
+                    "value": "[variables('functionAppconfigNames')]"
                   },
                   {
                     "name": "Version",
