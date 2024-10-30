@@ -1,6 +1,4 @@
-﻿using System;
-using System.Diagnostics.CodeAnalysis;
-using System.Security.Principal;
+﻿using System.Diagnostics.CodeAnalysis;
 using NServiceBus;
 
 namespace SFA.DAS.PushNotifications.Messages.Commands
