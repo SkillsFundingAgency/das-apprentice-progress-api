@@ -23,7 +23,7 @@ namespace SFA.DAS.FindAnApprenticeship.Api.AppStart
                 // This service will collect and send telemetry data to Azure Monitor.
                 services.AddOpenTelemetry().UseAzureMonitor(options =>
                 {
-                    options.ConnectionString = "<KeyGoesHere>";
+                    options.ConnectionString = appInsightsConnectionString;
                 });
                 // Configure metrics
 
