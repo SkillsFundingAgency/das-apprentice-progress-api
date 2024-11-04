@@ -11,6 +11,7 @@ namespace SFA.DAS.ApprenticeProgress.Functions.Api.Response
         public DateTime? DueDate { get; set; } = null!;
         public string Title { get; set; } = null!;
         public int? ApprenticeshipCategoryId { get; set; } = null!;
+        public Guid? ApprenticeAccountId { get; set; } = null!;
         public string Note { get; set; } = null!;
         public DateTime? CompletionDateTime { get; set; } = null!;
         public DateTime? CreatedDateTime { get; set; } = null!;

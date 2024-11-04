@@ -54,6 +54,7 @@ namespace SFA.DAS.ApprenticeProgress.Application.Queries
                     {
                         TaskId = task.TaskId,
                         ApprenticeshipId = task.ApprenticeshipId,
+                        ApprenticeAccountId = task.ApprenticeAccountId,
                         DueDate = task.DueDate,
                         Title = task.Title,
                         ApprenticeshipCategoryId = task.ApprenticeshipCategoryId,

@@ -74,6 +74,7 @@ namespace SFA.DAS.ApprenticeProgress.Api.Controllers
             await _mediator.Send(new AddTaskByApprenticeshipIdCommand
             {
                 ApprenticeshipId = apprenticeshipIdentifier,
+                ApprenticeAccountId = request.ApprenticeAccountId,
                 DueDate = request.DueDate.Value,
                 Title = request.Title,
                 ApprenticeshipCategoryId = request.ApprenticeshipCategoryId,
@@ -95,6 +96,7 @@ namespace SFA.DAS.ApprenticeProgress.Api.Controllers
             public long ApprenticeshipId { get; set; }
             public int? TaskId { get; set; }
             public DateTime? DueDate { get; set; }
+            public Guid ApprenticeAccountId { get; set; }
             public string Title { get; set; }
             public int? ApprenticeshipCategoryId { get; set; }
             public string Note { get; set; }
