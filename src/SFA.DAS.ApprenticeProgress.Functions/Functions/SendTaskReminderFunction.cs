@@ -3,7 +3,6 @@ using System.Diagnostics.CodeAnalysis;
 using System.Threading;
 using System.Threading.Tasks;
 using Microsoft.Azure.Functions.Worker;
-using Microsoft.Azure.WebJobs;
 using Microsoft.Extensions.Logging;
 using SFA.DAS.ApprenticeProgress.Functions.Api.Clients;
 using SFA.DAS.ApprenticeProgress.Functions.Services;
@@ -42,7 +41,7 @@ namespace SFA.DAS.ApprenticeProgress.Functions
                 {
                     foreach (var reminder in taskReminders.TaskReminders)
                     {
-                        await _messageService.SendMessage(new SendPushNotificationCommand { ApprenticeAccountIdentifier = reminder.ApprenticeshipId , Body = "the message body", Title = "the notification title" });
+                        await _messageService.SendMessage(new SendPushNotificationCommand { ApprenticeAccountIdentifier = reminder.ApprenticeshipId , Body = reminder.Note, Title = reminder.Title });
                         _logger.LogInformation("Got reminder and sent to service bus");
 
                         await _api.UpdateTaskReminders(reminder.TaskId.Value, 1);

@@ -43,7 +43,7 @@ namespace SFA.DAS.ApprenticeProgress.Application.Queries
                 var timeToCheckFrom = DateTime.UtcNow;
                 var timeToCheckTo = DateTime.UtcNow.AddMinutes(1);
 
-                // debug
+                // debug -- TODO tidy previous task reminders 
                 timeToCheckFrom = DateTime.UtcNow.AddDays(-1);
                 timeToCheckTo = DateTime.UtcNow.AddDays(1);
                 // end debug
@@ -65,7 +65,6 @@ namespace SFA.DAS.ApprenticeProgress.Application.Queries
                         ReminderStatus = reminder.Status
                     });
                 }
-
             }
 
             var result = new GetTaskRemindersResult
@@ -74,7 +73,6 @@ namespace SFA.DAS.ApprenticeProgress.Application.Queries
             };
 
             return result;
-
         }
     }
 }

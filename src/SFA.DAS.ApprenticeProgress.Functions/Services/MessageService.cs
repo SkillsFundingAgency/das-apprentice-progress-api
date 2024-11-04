@@ -1,5 +1,4 @@
-﻿
-using System;
+﻿using System;
 using System.Threading.Tasks;
 using NServiceBus;
 using SFA.DAS.PushNotifications.Messages.Commands;
