@@ -48,12 +48,12 @@ namespace SFA.DAS.ApprenticeProgress.Api
 #endif
 
                 config.AddAzureTableStorage(options =>
-                    {
-                        options.ConfigurationKeys = configuration["ConfigNames"].Split(",");
-                        options.StorageConnectionString = configuration["ConfigurationStorageConnectionString"];
-                        options.EnvironmentName = configuration["EnvironmentName"];
-                        options.PreFixConfigurationKeys = false;
-                    }
+                {
+                    options.ConfigurationKeys = configuration["ConfigNames"].Split(",");
+                    options.StorageConnectionString = configuration["ConfigurationStorageConnectionString"];
+                    options.EnvironmentName = configuration["EnvironmentName"];
+                    options.PreFixConfigurationKeys = false;
+                }
                 );
             }
 
@@ -110,7 +110,9 @@ namespace SFA.DAS.ApprenticeProgress.Api
                     options.JsonSerializerOptions.Converters.Add(new JsonStringEnumConverter());
                 });
 
-            services.AddOpenTelemetryRegistration(_configuration["<KeyGoesHere>"]);
+            services.AddApplicationInsightsTelemetry(_configuration["APPINSIGHTS_INSTRUMENTATIONKEY"]);
+
+            services.AddOpenTelemetryRegistration(_configuration["APPINSIGHTS_INSTRUMENTATIONKEY"]);
 
             services.AddSwaggerGen(c =>
             {
@@ -118,7 +120,7 @@ namespace SFA.DAS.ApprenticeProgress.Api
                 c.SwaggerDoc("operations", new OpenApiInfo { Title = "ApprenticeProgressApi operations" });
                 c.OperationFilter<SwaggerVersionHeaderFilter>();
             });
-            
+
             services.AddApiVersioning(opt => {
                 opt.ApiVersionReader = new HeaderApiVersionReader("X-Version");
             });
@@ -133,7 +135,7 @@ namespace SFA.DAS.ApprenticeProgress.Api
                 c.SwaggerEndpoint("/swagger/operations/swagger.json", "Operations v1");
                 c.RoutePrefix = string.Empty;
             });
-            
+
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
