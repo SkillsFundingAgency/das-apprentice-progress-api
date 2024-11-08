@@ -54,8 +54,9 @@ namespace SFA.DAS.ApprenticeProgress.Functions
                 }
             }
             catch (Exception e)
-            {
-                _logger.LogError(e, "SendTaskReminderEvent Job has failed");
+            { 
+                string errorMsg = "SendTaskReminderEvent Job has failed - " + e.Message;
+                _logger.LogError(e, errorMsg);
             }
         }
     }
