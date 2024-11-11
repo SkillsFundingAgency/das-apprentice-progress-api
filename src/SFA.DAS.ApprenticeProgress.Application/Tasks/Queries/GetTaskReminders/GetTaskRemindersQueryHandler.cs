@@ -45,7 +45,7 @@ namespace SFA.DAS.ApprenticeProgress.Application.Queries
 
                 // debug -- TODO tidy previous task reminders 
                 timeToCheckFrom = DateTime.UtcNow.AddDays(-1);
-                timeToCheckTo = DateTime.UtcNow.AddDays(1);
+                // timeToCheckTo = DateTime.UtcNow.AddDays(1);
                 // end debug
 
                 if (timeToCheckFrom <= reminderTime && timeToCheckTo > reminderTime)
