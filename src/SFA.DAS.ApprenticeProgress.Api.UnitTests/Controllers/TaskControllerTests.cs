@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.Threading.Tasks;
 using AutoFixture.NUnit3;
 using FluentAssertions;
@@ -250,5 +250,35 @@ namespace SFA.DAS.ApprenticeProgress.UnitTests
             result.Should().BeOfType(typeof(OkResult));
         }
 
+        [Test, MoqAutoData]
+        public async Task GetTaskRemindersByApprenticeshipId_NoApprenticeship(
+            [Greedy] TaskController controller)
+        {
+            var httpContext = new DefaultHttpContext();
+
+            controller.ControllerContext = new ControllerContext
+            {
+                HttpContext = httpContext
+            };
+
+            var result = await controller.GetTaskRemindersByApprenticeshipId(0);
+            result.Should().BeOfType(typeof(NotFoundResult));
+        }
+
+        [Test, MoqAutoData]
+        public async Task GetTaskRemindersByApprenticeshipId(
+           [Greedy] TaskController controller)
+        {
+            var httpContext = new DefaultHttpContext();
+            var apprenticeshipIdentifier = 1;
+
+            controller.ControllerContext = new ControllerContext
+            {
+                HttpContext = httpContext
+            };
+
+            var result = await controller.GetTaskRemindersByApprenticeshipId(apprenticeshipIdentifier);
+            result.Should().BeOfType(typeof(OkResult));
+        }
     }
 }
