@@ -24,11 +24,7 @@ namespace SFA.DAS.ApprenticeProgress.Application.Queries
             List<TaskReminderModel> reminders = new List<TaskReminderModel>();
 
             var taskReminders = await _ApprenticeProgressDataContext.TaskReminder
-                .Where(x =>
-                     x.Status == Domain.Entities.ReminderStatus.NotSent
-                     &&
-                     x.ReminderValue >= 0
-                     )
+                .Where(x => x.Status == Domain.Entities.ReminderStatus.NotSent)
                 .AsNoTracking()
                 .AsSingleQuery()
                 .ToListAsync(cancellationToken);
@@ -40,13 +36,8 @@ namespace SFA.DAS.ApprenticeProgress.Application.Queries
                 var minuteBeforeDueDate = reminder.ReminderValue.Value;
                 var reminderTime = task.DueDate.GetValueOrDefault().AddMinutes(-minuteBeforeDueDate);
 
-                var timeToCheckFrom = DateTime.UtcNow;
+                var timeToCheckFrom = DateTime.UtcNow.AddDays(-1);
                 var timeToCheckTo = DateTime.UtcNow.AddMinutes(1);
-
-                // debug -- TODO tidy previous task reminders 
-                timeToCheckFrom = DateTime.UtcNow.AddDays(-1);
-                // timeToCheckTo = DateTime.UtcNow.AddDays(1);
-                // end debug
 
                 if (timeToCheckFrom <= reminderTime && timeToCheckTo > reminderTime)
                 {
