@@ -1,13 +1,12 @@
 ﻿using System;
 using System.Diagnostics.CodeAnalysis;
-using NServiceBus;
 
 namespace SFA.DAS.PushNotifications.Messages.Commands
 {
     [ExcludeFromCodeCoverage]
-    public class SendPushNotificationCommand : IMessage
+    public class SendPushNotificationCommand
     {
-        public Guid ApprenticeAccountIdentifier { get; set; }
+        public Guid? ApprenticeAccountIdentifier { get; set; } = null!;
         public string Title { get; set; } = null!;
         public string Body { get; set; } = null!;
     }

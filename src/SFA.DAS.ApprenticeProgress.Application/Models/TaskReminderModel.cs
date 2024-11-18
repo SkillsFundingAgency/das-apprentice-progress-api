@@ -7,7 +7,7 @@ namespace SFA.DAS.ApprenticeProgress.Application.Models
     {
         public int TaskId { get; set; }
         public long ApprenticeshipId { get; set; }
-        public Guid ApprenticeAccountId { get; set; }
+        public Guid? ApprenticeAccountId { get; set; }
         public DateTime? DueDate { get; set; }
         public string Title { get; set; }
         public int? ApprenticeshipCategoryId { get; set; }
