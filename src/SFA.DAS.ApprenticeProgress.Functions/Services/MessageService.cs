@@ -34,7 +34,7 @@ public class MessageService : IMessageService
         catch (Exception ex)
         {
             string errorMessage = "Failed to send message: " + ex.Message;
-            _logger.LogWarning(ex, errorMessage);
+            _logger.LogError(ex, errorMessage);
             throw;
         }
     }
