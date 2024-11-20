@@ -111,10 +111,7 @@
       },
       "SharedServiceBusFqdn": {
         "type": "string"
-      },
-      "serviceBusConnectionString": {
-        "type": "securestring"
-    }
+      }
   },
   "variables": {
       "deploymentUrlBase": "https://raw.githubusercontent.com/SkillsFundingAgency/das-platform-building-blocks/master/templates/",
@@ -480,10 +477,6 @@
                               {
                                   "name": "AzureWebJobsServiceBus__fullyQualifiedNamespace",
                                   "value": "[parameters('SharedServiceBusFqdn')]"
-                              },
-                              {
-                                "name": "AzureWebJobsServiceBus",
-                                "value": "[parameters('serviceBusConnectionString')]"
                               }
                           ]
                       }
