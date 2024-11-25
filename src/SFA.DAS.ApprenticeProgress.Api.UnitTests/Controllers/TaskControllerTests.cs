@@ -9,7 +9,7 @@ using SFA.DAS.ApprenticeProgress.Api.Controllers;
 using SFA.DAS.Testing.AutoFixture;
 using static SFA.DAS.ApprenticeProgress.Api.Controllers.TaskController;
 
-namespace SFA.DAS.ApprenticeApp.UnitTests
+namespace SFA.DAS.ApprenticeProgress.UnitTests
 {
     public class TaskControllerTests
     {
@@ -217,5 +217,38 @@ namespace SFA.DAS.ApprenticeApp.UnitTests
             var result = await controller.RemoveTaskByApprenticeshipIdAndTaskId(apprenticeshipIdentifier, taskId);
             result.Should().BeOfType(typeof(OkResult));
         }
+
+        [Test, MoqAutoData]
+        public async Task GetTaskReminders_test(
+               [Greedy] TaskController controller)
+        {
+            var httpContext = new DefaultHttpContext();
+
+            controller.ControllerContext = new ControllerContext
+            {
+                HttpContext = httpContext
+            };
+
+            var result = await controller.GetTaskReminders();
+            result.Should().BeOfType(typeof(NotFoundResult));
+        }
+
+        [Test, MoqAutoData]
+        public async Task UpdateTaskReminders_test(
+               [Greedy] TaskController controller)
+        {
+            var httpContext = new DefaultHttpContext();
+            int taskId = 1;
+            int statusId = 1;
+
+            controller.ControllerContext = new ControllerContext
+            {
+                HttpContext = httpContext
+            };
+
+            var result = await controller.UpdateTaskReminders(taskId, statusId);
+            result.Should().BeOfType(typeof(OkResult));
+        }
+
     }
 }

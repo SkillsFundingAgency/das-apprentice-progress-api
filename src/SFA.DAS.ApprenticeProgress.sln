@@ -17,8 +17,6 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SFA.DAS.ApprenticeProgress.
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SFA.DAS.ApprenticeProgress.Data", "SFA.DAS.ApprenticeProgress.Data\SFA.DAS.ApprenticeProgress.Data.csproj", "{A644BCD7-58DE-49BB-93C9-6D9439A2D051}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SFA.DAS.ApprenticeProgress.Api.UnitTests", "SFA.DAS.ApprenticeProgress.Api.UnitTests\SFA.DAS.ApprenticeProgress.Api.UnitTests.csproj", "{E3F8475D-D248-4CD1-9E7F-A613DDD2D7B6}"
-EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SFA.DAS.ApprenticeProgress.Data.UnitTests", "SFA.DAS.ApprenticeProgress.Data.UnitTests\SFA.DAS.ApprenticeProgress.Data.UnitTests.csproj", "{0CA16441-4C8B-4FC3-BD23-08F25F491336}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{1BAB424D-A7C3-4C20-9E53-817EA2A929DE}"
@@ -27,6 +25,14 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 	EndProjectSection
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SFA.DAS.ApprenticeProgress.Domain.UnitTests", "SFA.DAS.ApprenticeProgress.Domain.UnitTests\SFA.DAS.ApprenticeProgress.Domain.UnitTests.csproj", "{067BF3D1-9582-4CDD-8DDD-8EB4BC4899EC}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SFA.DAS.ApprenticeProgress.Functions", "SFA.DAS.ApprenticeProgress.Functions\SFA.DAS.ApprenticeProgress.Functions.csproj", "{EE428F5F-84D3-49EC-9C0E-592ADA323266}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SFA.DAS.PushNotifications.Messages", "SFA.DAS.PushNotifications.Messages\SFA.DAS.PushNotifications.Messages.csproj", "{9647AC16-1111-4D1C-8284-7D77DF28C21D}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SFA.DAS.ApprenticeProgress.Api.UnitTests", "SFA.DAS.ApprenticeProgress.Api.UnitTests\SFA.DAS.ApprenticeProgress.Api.UnitTests.csproj", "{E3F8475D-D248-4CD1-9E7F-A613DDD2D7B6}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SFA.DAS.ApprenticeProgress.Functions.UnitTests", "SFA.DAS.ApprenticeProgress.Functions.UnitTests\SFA.DAS.ApprenticeProgress.Functions.UnitTests.csproj", "{E3F8475D-D248-4CD1-9E7F-A613DDD2D7B7}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -60,10 +66,6 @@ Global
 		{A644BCD7-58DE-49BB-93C9-6D9439A2D051}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{A644BCD7-58DE-49BB-93C9-6D9439A2D051}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{A644BCD7-58DE-49BB-93C9-6D9439A2D051}.Release|Any CPU.Build.0 = Release|Any CPU
-		{E3F8475D-D248-4CD1-9E7F-A613DDD2D7B6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{E3F8475D-D248-4CD1-9E7F-A613DDD2D7B6}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{E3F8475D-D248-4CD1-9E7F-A613DDD2D7B6}.Release|Any CPU.Build.0 = Release|Any CPU
-		{E3F8475D-D248-4CD1-9E7F-A613DDD2D7B6}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{0CA16441-4C8B-4FC3-BD23-08F25F491336}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{0CA16441-4C8B-4FC3-BD23-08F25F491336}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{0CA16441-4C8B-4FC3-BD23-08F25F491336}.Release|Any CPU.Build.0 = Release|Any CPU
@@ -76,16 +78,32 @@ Global
 		{067BF3D1-9582-4CDD-8DDD-8EB4BC4899EC}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{067BF3D1-9582-4CDD-8DDD-8EB4BC4899EC}.Release|Any CPU.Build.0 = Release|Any CPU
 		{067BF3D1-9582-4CDD-8DDD-8EB4BC4899EC}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{EE428F5F-84D3-49EC-9C0E-592ADA323266}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{EE428F5F-84D3-49EC-9C0E-592ADA323266}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{EE428F5F-84D3-49EC-9C0E-592ADA323266}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9647AC16-1111-4D1C-8284-7D77DF28C21D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9647AC16-1111-4D1C-8284-7D77DF28C21D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9647AC16-1111-4D1C-8284-7D77DF28C21D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9647AC16-1111-4D1C-8284-7D77DF28C21D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E3F8475D-D248-4CD1-9E7F-A613DDD2D7B6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E3F8475D-D248-4CD1-9E7F-A613DDD2D7B6}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E3F8475D-D248-4CD1-9E7F-A613DDD2D7B6}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E3F8475D-D248-4CD1-9E7F-A613DDD2D7B6}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E3F8475D-D248-4CD1-9E7F-A613DDD2D7B7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E3F8475D-D248-4CD1-9E7F-A613DDD2D7B7}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E3F8475D-D248-4CD1-9E7F-A613DDD2D7B7}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E3F8475D-D248-4CD1-9E7F-A613DDD2D7B7}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
 		{DE319EE7-8743-4193-A1C5-84698557307E} = {2D5BA2D4-5473-4661-B8DA-16F7C31BD5BD}
-		{E3F8475D-D248-4CD1-9E7F-A613DDD2D7B6} = {2D5BA2D4-5473-4661-B8DA-16F7C31BD5BD}
 		{0CA16441-4C8B-4FC3-BD23-08F25F491336} = {2D5BA2D4-5473-4661-B8DA-16F7C31BD5BD}
 		{29EF260E-F154-4EEE-8312-4AEDFC35BF7A} = {2D5BA2D4-5473-4661-B8DA-16F7C31BD5BD}
 		{067BF3D1-9582-4CDD-8DDD-8EB4BC4899EC} = {2D5BA2D4-5473-4661-B8DA-16F7C31BD5BD}
+		{E3F8475D-D248-4CD1-9E7F-A613DDD2D7B6} = {2D5BA2D4-5473-4661-B8DA-16F7C31BD5BD}
+		{E3F8475D-D248-4CD1-9E7F-A613DDD2D7B7} = {2D5BA2D4-5473-4661-B8DA-16F7C31BD5BD}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {F2696654-8E1B-47D0-8283-6D38B7D18F98}
