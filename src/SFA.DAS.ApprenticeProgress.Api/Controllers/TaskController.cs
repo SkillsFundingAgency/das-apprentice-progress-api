@@ -163,5 +163,35 @@ namespace SFA.DAS.ApprenticeProgress.Api.Controllers
 
             return Ok();
         }
+
+        /// <summary>
+        /// For use with progress worker to yield reminders that are due this minute
+        /// </summary>
+        /// <returns></returns>
+        [HttpGet("gettaskreminders")]
+        public async Task<IActionResult> GetTaskReminders()
+        {
+            var result = await _mediator.Send(new GetTaskRemindersQuery {  });
+            if (result == null) return NotFound();
+            return Ok(result);
+        }
+
+        /// <summary>
+        /// For use with progress worker to update task reminders with a specified status
+        /// </summary>
+        /// <param name="taskId"></param>
+        /// <param name="statusId"></param>
+        /// <returns></returns>
+        [HttpPost("updatetaskreminders")]
+        public async Task<IActionResult> UpdateTaskReminders(int taskId, int statusId)
+        {
+            await _mediator.Send(new UpdateTaskRemindersCommand
+            {
+                TaskId = taskId,
+                StatusId = statusId
+            });
+
+            return Ok();
+        }
     }
 }
