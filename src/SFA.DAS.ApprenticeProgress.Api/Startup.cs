@@ -112,7 +112,7 @@ namespace SFA.DAS.ApprenticeProgress.Api
 
             services.AddApplicationInsightsTelemetry(_configuration["APPINSIGHTS_INSTRUMENTATIONKEY"]);
 
-            services.AddOpenTelemetryRegistration(_configuration["APPINSIGHTS_INSTRUMENTATIONKEY"]);
+            services.AddOpenTelemetryRegistration(_configuration["appInsightsConnectionString"]);
 
             services.AddSwaggerGen(c =>
             {
