@@ -35,7 +35,6 @@ public class MessageService : IMessageService
         {
             string errorMessage = "Failed to send message: " + ex.Message;
             _logger.LogError(ex, errorMessage);
-            throw;
         }
     }
 }
