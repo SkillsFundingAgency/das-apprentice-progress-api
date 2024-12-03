@@ -105,6 +105,9 @@
       "logAnalyticsWorkspaceName": {
           "type": "string"
       },
+      "serviceBusConnectionString": {
+          "type": "securestring"
+      },
       "utcValue": {
           "type": "string",
           "defaultValue": "[utcNow()]"
@@ -435,6 +438,9 @@
                   "subnetResourceId": {
                       "value": "[reference(concat(parameters('subnetObject').name, '-', parameters('utcValue'))).outputs.SubnetResourceId.value]"
                   },
+                  "netFrameworkVersion": {
+                      "value": "v8.0"
+                  },
                   "functionAppAppSettings": {
                       "value": {
                           "array": [
@@ -473,6 +479,10 @@
                               {
                                   "name": "WEBSITE_RUN_FROM_PACKAGE",
                                   "value": "1"
+                              },
+                              {
+                                    "name": "NServiceBusConnectionString",
+                                    "value": "[parameters('serviceBusConnectionString')]"
                               },
                               {
                                   "name": "AzureWebJobsServiceBus__fullyQualifiedNamespace",

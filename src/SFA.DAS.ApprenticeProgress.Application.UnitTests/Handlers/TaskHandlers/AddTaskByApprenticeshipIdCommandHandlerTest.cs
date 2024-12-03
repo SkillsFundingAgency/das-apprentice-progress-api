@@ -23,6 +23,7 @@ namespace SFA.DAS.ApprenticeProgress.Application.UnitTests.DataFixture
             {
                 TaskId = 1,
                 ApprenticeshipId = 1,
+                ApprenticeAccountId = new Guid(),
                 DueDate = new DateTime(2019, 05, 09),
                 Title = "title",
                 ApprenticeshipCategoryId = 0,

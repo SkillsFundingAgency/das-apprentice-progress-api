@@ -1,6 +1,6 @@
-﻿using Microsoft.Extensions.DependencyInjection;
+﻿using System.Diagnostics.CodeAnalysis;
+using Microsoft.Extensions.DependencyInjection;
 using SFA.DAS.ApprenticeProgress.Functions.Services;
-using System.Diagnostics.CodeAnalysis;
 
 namespace SFA.DAS.ApprenticeProgress.Functions.Extensions;
 

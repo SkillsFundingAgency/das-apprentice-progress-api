@@ -1,6 +1,7 @@
 ﻿using System.Linq;
 using System.Threading;
 using AutoFixture;
+using Microsoft.EntityFrameworkCore;
 using NUnit.Framework;
 using SFA.DAS.ApprenticeProgress.Application.Commands;
 using SFA.DAS.ApprenticeProgress.Application.Queries;

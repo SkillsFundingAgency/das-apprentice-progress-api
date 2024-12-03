@@ -26,6 +26,7 @@ namespace SFA.DAS.ApprenticeProgress.Application.Commands
             var task = new Domain.Entities.Task
             {
                 ApprenticeshipId = request.ApprenticeshipId,
+                ApprenticeAccountId = request.ApprenticeAccountId,
                 DueDate = request.DueDate,
                 Title = request.Title,
                 Note = request.Note,

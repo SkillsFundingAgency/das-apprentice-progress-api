@@ -11,7 +11,9 @@ namespace SFA.DAS.ApprenticeProgress.Application.UnitTests.DataFixture
         public void BaseSetup()
         {
             var options = new DbContextOptionsBuilder<ApprenticeProgressDataContext>()
+
                 .UseInMemoryDatabase($"SFA.DAS.ApprenticeProgress.Database_{DateTime.UtcNow.ToFileTimeUtc()}")
+                .EnableSensitiveDataLogging()
                 .Options;
 
             DbContext = new ApprenticeProgressDataContext(options);
