@@ -42,10 +42,7 @@ namespace SFA.DAS.ApprenticeProgress.Functions
                 {
                     foreach (var reminder in taskReminders.TaskReminders)
                     {
-                        string dateValue = reminder.DueDate.HasValue? reminder.DueDate.Value.ToString("f") : "";
-                        string msgTitle = "Task due " + dateValue;
-                        
-                        await _messageService.SendMessage(new SendPushNotificationCommand { ApprenticeAccountIdentifier = reminder.ApprenticeAccountId , Body = reminder.Title, Title = msgTitle });
+                        await _messageService.SendMessage(new SendPushNotificationCommand { ApprenticeAccountIdentifier = reminder.ApprenticeAccountId , Body = reminder.Title, Title = reminder.DueDate.ToString() });
                         _logger.LogInformation("Got reminder and sent to service bus");
 
                         await _api.UpdateTaskReminders(reminder.TaskId.Value, 1);
