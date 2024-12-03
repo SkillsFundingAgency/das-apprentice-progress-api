@@ -39,7 +39,7 @@ internal static class AddNServiceBusExtension
         {
             var transport = endpointConfiguration.UseTransport<AzureServiceBusTransport>();
             transport.Routing().RouteToEndpoint(typeof(SendPushNotificationCommand), EndpointName);
-            var connectionString = configuration["NServiceBusConnectionString"];
+            var connectionString = nServiceBusConfiguration.NServiceBusConnectionString;
             transport.ConnectionString(connectionString);
             startServiceBusEndpoint = true;
         }
