@@ -1,11 +1,11 @@
-﻿using Microsoft.Extensions.Configuration;
+﻿using System.Diagnostics.CodeAnalysis;
+using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using RestEase.HttpClientFactory;
+using SFA.DAS.Api.Common.Infrastructure;
 using SFA.DAS.ApprenticeProgress.Functions.Api.Clients;
 using SFA.DAS.ApprenticeProgress.Functions.Authentication;
 using SFA.DAS.ApprenticeProgress.Functions.Configuration;
-using SFA.DAS.Api.Common.Infrastructure;
-using System.Diagnostics.CodeAnalysis;
 
 namespace SFA.DAS.ApprenticeProgress.Functions.HttpClientConfiguration
 {

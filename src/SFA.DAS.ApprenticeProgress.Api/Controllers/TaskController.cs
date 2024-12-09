@@ -74,6 +74,7 @@ namespace SFA.DAS.ApprenticeProgress.Api.Controllers
             await _mediator.Send(new AddTaskByApprenticeshipIdCommand
             {
                 ApprenticeshipId = apprenticeshipIdentifier,
+                ApprenticeAccountId = request.ApprenticeAccountId,
                 DueDate = request.DueDate.Value,
                 Title = request.Title,
                 ApprenticeshipCategoryId = request.ApprenticeshipCategoryId,
@@ -95,6 +96,7 @@ namespace SFA.DAS.ApprenticeProgress.Api.Controllers
             public long ApprenticeshipId { get; set; }
             public int? TaskId { get; set; }
             public DateTime? DueDate { get; set; }
+            public Guid ApprenticeAccountId { get; set; }
             public string Title { get; set; }
             public int? ApprenticeshipCategoryId { get; set; }
             public string Note { get; set; }
@@ -164,10 +166,6 @@ namespace SFA.DAS.ApprenticeProgress.Api.Controllers
             return Ok();
         }
 
-        /// <summary>
-        /// For use with progress worker to yield reminders that are due this minute
-        /// </summary>
-        /// <returns></returns>
         [HttpGet("gettaskreminders")]
         public async Task<IActionResult> GetTaskReminders()
         {
@@ -176,12 +174,6 @@ namespace SFA.DAS.ApprenticeProgress.Api.Controllers
             return Ok(result);
         }
 
-        /// <summary>
-        /// For use with progress worker to update task reminders with a specified status
-        /// </summary>
-        /// <param name="taskId"></param>
-        /// <param name="statusId"></param>
-        /// <returns></returns>
         [HttpPost("updatetaskreminders")]
         public async Task<IActionResult> UpdateTaskReminders(int taskId, int statusId)
         {
