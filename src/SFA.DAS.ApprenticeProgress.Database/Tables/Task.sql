@@ -1,7 +1,7 @@
 ﻿CREATE TABLE [dbo].[Task](
     [TaskId] [int] IDENTITY(1,1) NOT NULL,
     [ApprenticeshipId] [bigint] NOT NULL,
-    [ApprenticeAccountId] UNIQUEIDENTIFIER NOT NULL DEFAULT 'FD0DAF58-AF19-440D-B52F-7E1D47267D3B',
+    [ApprenticeAccountId] [uniqueidentifier] NULL,
     [DueDate] [datetime2](7) NULL,
     [Title] [nvarchar](255) NULL,
     [ApprenticeshipCategoryId] [int] NULL,
