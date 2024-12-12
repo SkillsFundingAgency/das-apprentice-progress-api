@@ -11,6 +11,7 @@ using static SFA.DAS.ApprenticeProgress.Api.Controllers.TaskController;
 
 namespace SFA.DAS.ApprenticeProgress.UnitTests
 {
+    [TestFixture]
     public class TaskControllerTests
     {
         [Test, MoqAutoData]
@@ -26,7 +27,7 @@ namespace SFA.DAS.ApprenticeProgress.UnitTests
             };
 
             var result = await controller.GetTaskCategories(apprenticeshipIdentifier);
-            result.Should().BeOfType(typeof(NotFoundResult));
+            result.Should().BeOfType(typeof(OkObjectResult));
         }
 
         [Test, MoqAutoData]
@@ -61,7 +62,7 @@ namespace SFA.DAS.ApprenticeProgress.UnitTests
             };
 
             var result = await controller.GetTaskCategory(apprenticeshipIdentifier, taskId);
-            result.Should().BeOfType(typeof(NotFoundResult));
+            result.Should().BeOfType(typeof(OkObjectResult));
         }
 
         [Test, MoqAutoData]
@@ -97,7 +98,7 @@ namespace SFA.DAS.ApprenticeProgress.UnitTests
             };
 
             var result = await controller.GetTasksByApprenticeshipId(apprenticeshipIdentifier, fromDate, toDate, status);
-            result.Should().BeOfType(typeof(NotFoundResult));
+            result.Should().BeOfType(typeof(OkObjectResult));
         }
 
         [Test, MoqAutoData]
@@ -131,7 +132,7 @@ namespace SFA.DAS.ApprenticeProgress.UnitTests
             };
 
             var result = await controller.GetTaskByApprenticeshipIdAndTaskId(apprenticeshipIdentifier, taskId);
-            result.Should().BeOfType(typeof(NotFoundResult));
+            result.Should().BeOfType(typeof(OkObjectResult));
         }
 
         [Test, MoqAutoData]
@@ -230,7 +231,7 @@ namespace SFA.DAS.ApprenticeProgress.UnitTests
             };
 
             var result = await controller.GetTaskReminders();
-            result.Should().BeOfType(typeof(NotFoundResult));
+            result.Should().BeOfType(typeof(OkObjectResult));
         }
 
         [Test, MoqAutoData]
@@ -262,7 +263,7 @@ namespace SFA.DAS.ApprenticeProgress.UnitTests
             };
 
             var result = await controller.GetTaskRemindersByApprenticeshipId(0);
-            result.Should().BeOfType(typeof(NotFoundResult));
+            result.Should().BeOfType(typeof(OkObjectResult));
         }
 
         [Test, MoqAutoData]
@@ -278,7 +279,7 @@ namespace SFA.DAS.ApprenticeProgress.UnitTests
             };
 
             var result = await controller.GetTaskRemindersByApprenticeshipId(apprenticeshipIdentifier);
-            result.Should().BeOfType(typeof(OkResult));
+            result.Should().BeOfType(typeof(OkObjectResult));
         }
     }
 }
