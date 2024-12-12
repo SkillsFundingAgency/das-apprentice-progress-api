@@ -175,7 +175,6 @@ namespace SFA.DAS.ApprenticeProgress.Api.Controllers
             return Ok(result);
         }
 
-        [HttpPost("updatetaskreminders")]
         [HttpPost("updatetaskreminders/tasks/{taskId}/status/{statusId}")]
         public async Task<IActionResult> UpdateTaskReminders(int taskId, int statusId)
         {
