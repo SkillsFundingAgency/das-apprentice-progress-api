@@ -10,7 +10,7 @@ using SFA.DAS.ApprenticeProgress.Data;
 namespace SFA.DAS.ApprenticeProgress.Application.Tasks.Queries
 {
     public class GetTaskRemindersByApprenticeshipIdHandler : IRequestHandler<GetTaskRemindersByApprenticeshipIdQuery, GetTaskRemindersByApprenticeshipIdResult>
-    { 
+    {
         private readonly ApprenticeProgressDataContext _ApprenticeProgressDataContext;
 
         public GetTaskRemindersByApprenticeshipIdHandler(ApprenticeProgressDataContext ApprenticeProgressDataContext)
@@ -23,20 +23,15 @@ namespace SFA.DAS.ApprenticeProgress.Application.Tasks.Queries
             List<TaskReminderModel> reminders = new List<TaskReminderModel>();
 
             var tasks = await _ApprenticeProgressDataContext.Task
-                .Where(task => task.ApprenticeshipId == request.ApprenticeshipId)
-                .Join(_ApprenticeProgressDataContext.TaskReminder,
-                    task => task.TaskId,
-                    reminder => reminder.TaskId,
-                    (task, reminder) => new { task, reminder })
-                .Where(r => r.reminder.Status == Domain.Entities.ReminderStatus.NotSent)
+                .Where(task => task.ApprenticeshipId == request.ApprenticeshipId && task.Status == Domain.Entities.Task.TaskStatus.Todo)
+                .Join(_ApprenticeProgressDataContext.TaskReminder, task => task.TaskId, reminder => reminder.TaskId, (task, reminder) => new { task, reminder })
+                .Where(r => r.reminder.Status != Domain.Entities.ReminderStatus.Dismissed)
                 .AsNoTracking()
                 .AsSingleQuery()
                 .ToListAsync(cancellationToken);
 
-            foreach(var task in tasks)
+            foreach (var task in tasks)
             {
-                
-
                 TaskReminderModel taskReminderModel = new TaskReminderModel();
                 taskReminderModel.TaskId = task.task.TaskId;
                 taskReminderModel.ApprenticeshipId = request.ApprenticeshipId;
@@ -56,5 +51,4 @@ namespace SFA.DAS.ApprenticeProgress.Application.Tasks.Queries
             return result;
         }
     }
-    
 }
