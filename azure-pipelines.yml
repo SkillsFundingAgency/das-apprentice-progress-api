@@ -145,6 +145,7 @@ stages:
          SolutionBaseName: $(SolutionBaseName)
          ServiceConnection: SFA-DIG-Prod-ARM
          OverrideBlockOnPossibleDataLoss: ${{ parameters.OverrideBlockOnPossibleDataLoss  }}
+         AppRoleAssignmentsServiceConnection: das-app-role-assignments-FCS
 
   - stage: Deploy_MO
     dependsOn: Build
@@ -159,3 +160,4 @@ stages:
          SolutionBaseName: $(SolutionBaseName)
          ServiceConnection: SFA-ASM-ModelOffice-ARM
          OverrideBlockOnPossibleDataLoss: ${{ parameters.OverrideBlockOnPossibleDataLoss  }}
+         AppRoleAssignmentsServiceConnection: das-app-role-assignments-FCS
