@@ -176,6 +176,7 @@ namespace SFA.DAS.ApprenticeProgress.Api.Controllers
         }
 
         [HttpPost("updatetaskreminders")]
+        [HttpPost("updatetaskreminders/tasks/{taskId}/status/{statusId}")]
         public async Task<IActionResult> UpdateTaskReminders(int taskId, int statusId)
         {
             await _mediator.Send(new UpdateTaskRemindersCommand

@@ -28,6 +28,7 @@ namespace SFA.DAS.ApprenticeProgress.Application.Tasks.Queries
                     task => task.TaskId,
                     reminder => reminder.TaskId,
                     (task, reminder) => new { task, reminder })
+                .Where(r => r.reminder.Status == Domain.Entities.ReminderStatus.NotSent)
                 .AsNoTracking()
                 .AsSingleQuery()
                 .ToListAsync(cancellationToken);
