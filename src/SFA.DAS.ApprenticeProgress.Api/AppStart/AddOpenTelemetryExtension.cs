@@ -7,13 +7,10 @@ namespace SFA.DAS.FindAnApprenticeship.Api.AppStart
     {
         public static void AddOpenTelemetryRegistration(this IServiceCollection services, string APPLICATIONINSIGHTS_CONNECTION_STRING)
         {
-            if (!string.IsNullOrEmpty(APPLICATIONINSIGHTS_CONNECTION_STRING))
-            {
-                services.AddOpenTelemetry().UseAzureMonitor(options =>
-                {
-                    options.ConnectionString = APPLICATIONINSIGHTS_CONNECTION_STRING;
-                });
-            }
+           services.AddOpenTelemetry().UseAzureMonitor(options =>
+           {
+             options.ConnectionString = APPLICATIONINSIGHTS_CONNECTION_STRING;
+           });
         }
     }
 }
