@@ -1,7 +1,7 @@
-﻿using Microsoft.Extensions.Configuration;
-using SFA.DAS.Configuration.AzureTableStorage;
-using System.Diagnostics.CodeAnalysis;
+﻿using System.Diagnostics.CodeAnalysis;
 using System.IO;
+using Microsoft.Extensions.Configuration;
+using SFA.DAS.Configuration.AzureTableStorage;
 
 namespace SFA.DAS.ApprenticeProgress.Functions.Extensions;
 

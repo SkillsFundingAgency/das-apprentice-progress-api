@@ -3,8 +3,8 @@ using System.Diagnostics.CodeAnalysis;
 using System.Threading;
 using System.Threading.Tasks;
 using Microsoft.Azure.Functions.Worker;
-using Microsoft.Azure.WebJobs;
 using Microsoft.Extensions.Logging;
+using Microsoft.VisualBasic;
 using SFA.DAS.ApprenticeProgress.Functions.Api.Clients;
 using SFA.DAS.ApprenticeProgress.Functions.Services;
 using SFA.DAS.PushNotifications.Messages.Commands;
@@ -42,7 +42,10 @@ namespace SFA.DAS.ApprenticeProgress.Functions
                 {
                     foreach (var reminder in taskReminders.TaskReminders)
                     {
-                        await _messageService.SendMessage(new SendPushNotificationCommand { ApprenticeAccountIdentifier = reminder.ApprenticeshipId , Body = "the message body", Title = "the notification title" });
+                        string dateValue = reminder.DueDate.HasValue ? reminder.DueDate.Value.ToString("f") : "";
+                        string msgTitle = "Task due " + dateValue;
+
+                        await _messageService.SendMessage(new SendPushNotificationCommand { ApprenticeAccountIdentifier = reminder.ApprenticeAccountId, Body = reminder.Title, Title = msgTitle });
                         _logger.LogInformation("Got reminder and sent to service bus");
 
                         await _api.UpdateTaskReminders(reminder.TaskId.Value, 1);
@@ -55,8 +58,9 @@ namespace SFA.DAS.ApprenticeProgress.Functions
                 }
             }
             catch (Exception e)
-            {
-                _logger.LogError(e, "SendTaskReminderEvent Job has failed");
+            { 
+                string errorMsg = "SendTaskReminderEvent Job has failed - " + e.Message;
+                _logger.LogError(e, errorMsg);
             }
         }
     }
