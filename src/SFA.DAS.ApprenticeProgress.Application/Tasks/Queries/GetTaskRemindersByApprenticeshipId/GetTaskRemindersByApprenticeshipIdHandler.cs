@@ -1,9 +1,11 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.VisualBasic;
 using SFA.DAS.ApprenticeProgress.Application.Models;
 using SFA.DAS.ApprenticeProgress.Data;
 
@@ -25,7 +27,7 @@ namespace SFA.DAS.ApprenticeProgress.Application.Tasks.Queries
             var tasks = await _ApprenticeProgressDataContext.Task
                 .Where(task => task.ApprenticeshipId == request.ApprenticeshipId && task.Status == Domain.Entities.Task.TaskStatus.Todo)
                 .Join(_ApprenticeProgressDataContext.TaskReminder, task => task.TaskId, reminder => reminder.TaskId, (task, reminder) => new { task, reminder })
-                .Where(r => r.reminder.Status != Domain.Entities.ReminderStatus.Dismissed)
+                .Where(r => r.reminder.Status == Domain.Entities.ReminderStatus.Sent)
                 .AsNoTracking()
                 .AsSingleQuery()
                 .ToListAsync(cancellationToken);
