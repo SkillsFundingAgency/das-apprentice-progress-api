@@ -33,8 +33,6 @@ namespace SFA.DAS.ApprenticeProgress.Api.AppStart
                 context.Response.Headers.Add("X-Xss-Protection", "1");
                 context.Response.Headers.Add("X-Permitted-Cross-Domain-Policies", "none");
                 context.Response.Headers.Add("Referrer-Policy", "strict-origin-when-cross-origin");
-                context.Response.Headers.Add("Content-Security-Policy", "default-src 'self'; img-src 'self' *.googletagmanager.com *.google-analytics.com; script-src 'self' 'unsafe-inline' 'unsafe-eval' *.googletagmanager.com *.google-analytics.com *.googleapis.com; font-src 'self' data:; connect-src 'self' 'unsafe-inline' *.googletagmanager.com *.google-analytics.com;");
-
                 await next();
             });
 
