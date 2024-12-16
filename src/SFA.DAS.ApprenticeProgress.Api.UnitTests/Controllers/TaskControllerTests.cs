@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.Threading.Tasks;
 using AutoFixture.NUnit3;
 using FluentAssertions;
@@ -11,6 +11,7 @@ using static SFA.DAS.ApprenticeProgress.Api.Controllers.TaskController;
 
 namespace SFA.DAS.ApprenticeProgress.UnitTests
 {
+    [TestFixture]
     public class TaskControllerTests
     {
         [Test, MoqAutoData]
@@ -26,7 +27,7 @@ namespace SFA.DAS.ApprenticeProgress.UnitTests
             };
 
             var result = await controller.GetTaskCategories(apprenticeshipIdentifier);
-            result.Should().BeOfType(typeof(NotFoundResult));
+            result.Should().BeOfType(typeof(OkObjectResult));
         }
 
         [Test, MoqAutoData]
@@ -61,7 +62,7 @@ namespace SFA.DAS.ApprenticeProgress.UnitTests
             };
 
             var result = await controller.GetTaskCategory(apprenticeshipIdentifier, taskId);
-            result.Should().BeOfType(typeof(NotFoundResult));
+            result.Should().BeOfType(typeof(OkObjectResult));
         }
 
         [Test, MoqAutoData]
@@ -97,7 +98,7 @@ namespace SFA.DAS.ApprenticeProgress.UnitTests
             };
 
             var result = await controller.GetTasksByApprenticeshipId(apprenticeshipIdentifier, fromDate, toDate, status);
-            result.Should().BeOfType(typeof(NotFoundResult));
+            result.Should().BeOfType(typeof(OkObjectResult));
         }
 
         [Test, MoqAutoData]
@@ -131,7 +132,7 @@ namespace SFA.DAS.ApprenticeProgress.UnitTests
             };
 
             var result = await controller.GetTaskByApprenticeshipIdAndTaskId(apprenticeshipIdentifier, taskId);
-            result.Should().BeOfType(typeof(NotFoundResult));
+            result.Should().BeOfType(typeof(OkObjectResult));
         }
 
         [Test, MoqAutoData]
@@ -230,7 +231,7 @@ namespace SFA.DAS.ApprenticeProgress.UnitTests
             };
 
             var result = await controller.GetTaskReminders();
-            result.Should().BeOfType(typeof(NotFoundResult));
+            result.Should().BeOfType(typeof(OkObjectResult));
         }
 
         [Test, MoqAutoData]
@@ -250,5 +251,35 @@ namespace SFA.DAS.ApprenticeProgress.UnitTests
             result.Should().BeOfType(typeof(OkResult));
         }
 
+        [Test, MoqAutoData]
+        public async Task GetTaskRemindersByApprenticeshipId_NoApprenticeship(
+            [Greedy] TaskController controller)
+        {
+            var httpContext = new DefaultHttpContext();
+
+            controller.ControllerContext = new ControllerContext
+            {
+                HttpContext = httpContext
+            };
+
+            var result = await controller.GetTaskRemindersByApprenticeshipId(0);
+            result.Should().BeOfType(typeof(OkObjectResult));
+        }
+
+        [Test, MoqAutoData]
+        public async Task GetTaskRemindersByApprenticeshipId(
+           [Greedy] TaskController controller)
+        {
+            var httpContext = new DefaultHttpContext();
+            var apprenticeshipIdentifier = 1;
+
+            controller.ControllerContext = new ControllerContext
+            {
+                HttpContext = httpContext
+            };
+
+            var result = await controller.GetTaskRemindersByApprenticeshipId(apprenticeshipIdentifier);
+            result.Should().BeOfType(typeof(OkObjectResult));
+        }
     }
 }

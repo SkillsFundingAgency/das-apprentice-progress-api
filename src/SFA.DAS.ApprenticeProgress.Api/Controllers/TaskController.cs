@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Mvc;
 using SFA.DAS.ApprenticeProgress.Application.Commands;
 using SFA.DAS.ApprenticeProgress.Application.Models;
 using SFA.DAS.ApprenticeProgress.Application.Queries;
+using SFA.DAS.ApprenticeProgress.Application.Tasks.Queries;
 
 namespace SFA.DAS.ApprenticeProgress.Api.Controllers
 {
@@ -174,7 +175,7 @@ namespace SFA.DAS.ApprenticeProgress.Api.Controllers
             return Ok(result);
         }
 
-        [HttpPost("updatetaskreminders")]
+        [HttpPost("updatetaskreminders/tasks/{taskId}/status/{statusId}")]
         public async Task<IActionResult> UpdateTaskReminders(int taskId, int statusId)
         {
             await _mediator.Send(new UpdateTaskRemindersCommand
@@ -184,6 +185,17 @@ namespace SFA.DAS.ApprenticeProgress.Api.Controllers
             });
 
             return Ok();
+        }
+
+        [HttpGet("{apprenticeshipIdentifier}/taskreminders")]
+        public async Task<IActionResult> GetTaskRemindersByApprenticeshipId(long apprenticeshipIdentifier)
+        {
+            var result = await _mediator.Send(new GetTaskRemindersByApprenticeshipIdQuery 
+            { 
+                ApprenticeshipId = apprenticeshipIdentifier 
+            });
+            if (result == null) return NotFound();
+            return Ok(result);
         }
     }
 }
