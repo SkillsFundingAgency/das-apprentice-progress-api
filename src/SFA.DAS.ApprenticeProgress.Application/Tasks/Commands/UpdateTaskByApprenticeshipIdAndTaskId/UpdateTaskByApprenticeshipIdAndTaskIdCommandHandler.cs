@@ -94,12 +94,10 @@ namespace SFA.DAS.ApprenticeProgress.Application.Commands
                 }
             }
 
-           
-
             // get the ksb first
             if (task != null)
             {
-                if (request.KsbsLinked != null)
+                if (request.KsbsLinked != null && request.KsbsLinked[0] != null)
                 {
                     foreach (var ksb in request.KsbsLinked)
                     {
