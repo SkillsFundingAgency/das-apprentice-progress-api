@@ -9,7 +9,7 @@ namespace SFA.DAS.ApprenticeProgress.Functions.Api.Clients
         [Get("/apprenticeships/gettaskreminders/")]
         Task<TaskRemindersWrapper> GetTaskReminders();
 
-        [Post("/apprenticeships/updatetaskreminders/")]
-        Task UpdateTaskReminders(int taskId, int statusId);
+        [Post("/apprenticeships/updatetaskreminders/tasks/{taskId}/status/{statusId}")]
+        Task UpdateTaskReminders([Path] int taskId, [Path] int statusId);
     }
 }

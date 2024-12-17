@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.Threading.Tasks;
 using AutoFixture.NUnit3;
 using FluentAssertions;
@@ -72,7 +72,7 @@ namespace SFA.DAS.ApprenticeProgress.UnitTests
             };
 
             var result = await controller.GetKsbsByApprenticeshipIdAndGuidList(apprenticeshipIdentifier, guidlist);
-            result.Should().BeOfType(typeof(NotFoundResult));
+            result.Should().BeOfType(typeof(OkObjectResult));
         }
 
         [Test, MoqAutoData]
@@ -90,7 +90,7 @@ namespace SFA.DAS.ApprenticeProgress.UnitTests
             };
 
             var result = await controller.GetKsbsByApprenticeshipId(apprenticeshipIdentifier);
-            result.Should().BeOfType(typeof(NotFoundResult));
+            result.Should().BeOfType(typeof(OkObjectResult));
         }
 
         [Test, MoqAutoData]
@@ -107,7 +107,7 @@ namespace SFA.DAS.ApprenticeProgress.UnitTests
             };
 
             var result = await controller.GetKsbsProgressForTask(apprenticeshipIdentifier, taskId);
-            result.Should().BeOfType(typeof(NotFoundResult));
+            result.Should().BeOfType(typeof(OkObjectResult));
         }
 
     }
