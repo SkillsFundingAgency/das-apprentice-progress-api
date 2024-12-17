@@ -95,11 +95,9 @@ namespace SFA.DAS.ApprenticeProgress.Application.Commands
             }
 
             // get the ksb first
-            if (task != null)
+            if (task != null && request.KsbsLinked != null && request.KsbsLinked[0] != null)
             {
-                if (request.KsbsLinked != null && request.KsbsLinked[0] != null)
-                {
-                    foreach (var ksb in request.KsbsLinked)
+                foreach (var ksb in request.KsbsLinked)
                     {
                         var ksbkey = new Guid(ksb);
 
@@ -121,7 +119,6 @@ namespace SFA.DAS.ApprenticeProgress.Application.Commands
                             _ApprenticeProgressDataContext.SaveChanges();
                         }
                     }
-                }
             }
 
             // add reminder
