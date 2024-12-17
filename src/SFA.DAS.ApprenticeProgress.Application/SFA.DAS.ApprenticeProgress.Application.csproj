@@ -40,7 +40,6 @@
     <None Remove="Tasks\Commands\UpdateTaskReminders\" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Tasks\" />
     <Folder Include="Tasks\Queries\GetTaskCategory\" />
     <Folder Include="Tasks\Queries\GetTaskByApprenticeshipIdAndTaskId\" />
     <Folder Include="Tasks\Commands\" />
