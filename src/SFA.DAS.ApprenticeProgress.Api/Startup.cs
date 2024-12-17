@@ -22,6 +22,7 @@ using SFA.DAS.ApprenticeProgress.Application.Queries;
 using SFA.DAS.ApprenticeProgress.Data;
 using SFA.DAS.ApprenticeProgress.Domain.Configuration;
 using SFA.DAS.Configuration.AzureTableStorage;
+using SFA.DAS.FindAnApprenticeship.Api.AppStart;
 
 namespace SFA.DAS.ApprenticeProgress.Api
 {
@@ -47,12 +48,12 @@ namespace SFA.DAS.ApprenticeProgress.Api
 #endif
 
                 config.AddAzureTableStorage(options =>
-                    {
-                        options.ConfigurationKeys = configuration["ConfigNames"].Split(",");
-                        options.StorageConnectionString = configuration["ConfigurationStorageConnectionString"];
-                        options.EnvironmentName = configuration["EnvironmentName"];
-                        options.PreFixConfigurationKeys = false;
-                    }
+                {
+                    options.ConfigurationKeys = configuration["ConfigNames"].Split(",");
+                    options.StorageConnectionString = configuration["ConfigurationStorageConnectionString"];
+                    options.EnvironmentName = configuration["EnvironmentName"];
+                    options.PreFixConfigurationKeys = false;
+                }
                 );
             }
 
@@ -111,13 +112,15 @@ namespace SFA.DAS.ApprenticeProgress.Api
 
             services.AddApplicationInsightsTelemetry(_configuration["APPINSIGHTS_INSTRUMENTATIONKEY"]);
 
+            services.AddOpenTelemetryRegistration(_configuration["APPLICATIONINSIGHTS_CONNECTION_STRING"]);
+
             services.AddSwaggerGen(c =>
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "ApprenticeProgressApi", Version = "v1" });
                 c.SwaggerDoc("operations", new OpenApiInfo { Title = "ApprenticeProgressApi operations" });
                 c.OperationFilter<SwaggerVersionHeaderFilter>();
             });
-            
+
             services.AddApiVersioning(opt => {
                 opt.ApiVersionReader = new HeaderApiVersionReader("X-Version");
             });
@@ -132,7 +135,7 @@ namespace SFA.DAS.ApprenticeProgress.Api
                 c.SwaggerEndpoint("/swagger/operations/swagger.json", "Operations v1");
                 c.RoutePrefix = string.Empty;
             });
-            
+
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
