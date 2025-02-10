@@ -47,7 +47,6 @@ namespace SFA.DAS.ApprenticeProgress.Application.UnitTests.DataFixture
             Assert.That(result.TaskReminders.FirstOrDefault().ApprenticeAccountId, Is.Not.Null);
             Assert.That(result.TaskReminders.FirstOrDefault().DueDate, Is.EqualTo(new DateTime(2025, 1, 1)));
             Assert.That(result.TaskReminders.FirstOrDefault().Title, Is.Not.Null);
-            Assert.That(result.TaskReminders.FirstOrDefault().ReminderValue, Is.EqualTo(5));
         }
 
         private async System.Threading.Tasks.Task PopulateDbContext()

@@ -5,7 +5,7 @@ using Microsoft.EntityFrameworkCore.Metadata.Builders;
 namespace SFA.DAS.ApprenticeProgress.Data.Configuration
 {
     [ExcludeFromCodeCoverage]
-    public class KSBProgress : IEntityTypeConfiguration<Domain.Entities.KSBProgress>
+    public class KSBProgressConfiguration : IEntityTypeConfiguration<Domain.Entities.KSBProgress>
     {
         public void Configure(EntityTypeBuilder<Domain.Entities.KSBProgress> builder)
         {
@@ -13,6 +13,8 @@ namespace SFA.DAS.ApprenticeProgress.Data.Configuration
             builder.HasKey(x=>x.KSBProgressId);
             builder.Property(x => x.KSBProgressId).HasColumnName("KSBProgressId").HasColumnType("int").IsRequired();
             builder.HasIndex(x => x.KSBProgressId).IsUnique();
+            
+
         }
     }
 }

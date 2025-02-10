@@ -5,7 +5,7 @@ using Microsoft.EntityFrameworkCore.Metadata.Builders;
 namespace SFA.DAS.ApprenticeProgress.Data.Configuration
 {
     [ExcludeFromCodeCoverage]
-    public class KSBProgressStatusHistory : IEntityTypeConfiguration<Domain.Entities.KSBProgressStatusHistory>
+    public class KSBProgressStatusHistoryConfiguration : IEntityTypeConfiguration<Domain.Entities.KSBProgressStatusHistory>
     {
         public void Configure(EntityTypeBuilder<Domain.Entities.KSBProgressStatusHistory> builder)
         {

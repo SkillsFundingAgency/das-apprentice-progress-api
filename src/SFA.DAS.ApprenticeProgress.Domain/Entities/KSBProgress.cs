@@ -1,13 +1,14 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations.Schema;
+using System.ComponentModel.DataAnnotations;
 
 namespace SFA.DAS.ApprenticeProgress.Domain.Entities
 {
     public class KSBProgress
     {
-        public long ApprenticeshipId { get; set; }
         public int? KSBProgressId { get; set; }
+        public long ApprenticeshipId { get; set; }
         public KSBProgressType? KSBProgressType { get; set; }
         public Guid KSBId { get; set; }
         public string KSBKey { get; set; }

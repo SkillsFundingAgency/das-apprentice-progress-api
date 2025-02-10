@@ -6,7 +6,9 @@ namespace SFA.DAS.ApprenticeProgress.Domain.Entities
 {
     public class Task
     {
+        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int TaskId { get; set; }
+        
         public long ApprenticeshipId { get; set; }
         public Guid ApprenticeAccountId { get; set; }
         public DateTime? DueDate { get; set; }
@@ -26,14 +28,9 @@ namespace SFA.DAS.ApprenticeProgress.Domain.Entities
 
         [NotMapped]
         public List<ApprenticeshipCategory> ApprenticeshipCategory { get; set; }
-
-        [NotMapped]
-        public List<TaskFile> TaskFiles { get; set; }
-
-        [NotMapped]
-        public List<TaskReminder> TaskReminders { get; set; }
-
-        [NotMapped]
-        public List<TaskKSBs> TaskLinkedKsbs { get; set; }
+        
+        public virtual List<TaskFile> TaskFiles { get; set; }
+        public virtual List<TaskReminder> TaskReminders { get; set; }
+        public virtual List<TaskKSBs> TaskLinkedKsbs { get; set; }
     }
 }
