@@ -6,6 +6,7 @@ using MediatR;
 using Microsoft.EntityFrameworkCore;
 
 using SFA.DAS.ApprenticeProgress.Data;
+using SFA.DAS.ApprenticeProgress.Domain.Entities;
 
 namespace SFA.DAS.ApprenticeProgress.Application.Queries
 {
@@ -17,15 +18,15 @@ namespace SFA.DAS.ApprenticeProgress.Application.Queries
         {
             _ApprenticeProgressDataContext = ApprenticeProgressDataContext;
         }
-
+        
         public async Task<GetTasksByApprenticeshipIdResult> Handle(GetTasksByApprenticeshipIdQuery request, CancellationToken cancellationToken)
         {
             var status = (Domain.Entities.Task.TaskStatus)request.Status;
+        
             var query = _ApprenticeProgressDataContext.Task
                 .Where(x => x.ApprenticeshipId == request.ApprenticeshipId && x.Status == status)
                 .AsNoTracking();
 
-            // Apply date filter based on status
             query = status switch {
                 Domain.Entities.Task.TaskStatus.Todo => 
                     query.Where(x => x.DueDate >= request.FromDate && x.DueDate <= request.ToDate),
@@ -34,13 +35,37 @@ namespace SFA.DAS.ApprenticeProgress.Application.Queries
                 _ => query
             };
 
+            // Get tasks with relationships
             var tasks = await query
-               // .Include(t => t.ApprenticeshipCategory)
                 .Include(t => t.TaskFiles)
                 .Include(t => t.TaskReminders)
                 .Include(t => t.TaskLinkedKsbs)
-                .AsSplitQuery() // Better for queries with multiple collection includes
+                .AsSplitQuery()
                 .ToListAsync(cancellationToken);
+
+            // Optimized category handling
+            if (tasks.Count > 0)
+            {
+                // Get distinct category IDs from retrieved tasks
+                var categoryIds = tasks
+                    .Select(t => t.ApprenticeshipCategoryId)
+                    .Distinct()
+                    .ToList();
+
+                // Batch fetch required categories
+                var categoryDict = await _ApprenticeProgressDataContext.ApprenticeshipCategory
+                    .Where(x => categoryIds.Contains(x.CategoryId))
+                    .AsNoTracking()
+                    .ToDictionaryAsync(x => x.CategoryId, cancellationToken);
+
+                // Map categories in memory
+                foreach (var task in tasks)
+                {
+                    task.ApprenticeshipCategory = categoryDict.TryGetValue((int)task.ApprenticeshipCategoryId, out var category) 
+                        ? new List<ApprenticeshipCategory> { category } 
+                        : new List<ApprenticeshipCategory>();
+                }
+            }
 
             return new GetTasksByApprenticeshipIdResult { Tasks = tasks };
         }

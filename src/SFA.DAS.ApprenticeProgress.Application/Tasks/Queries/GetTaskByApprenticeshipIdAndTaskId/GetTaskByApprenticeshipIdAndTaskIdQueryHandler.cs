@@ -20,7 +20,6 @@ namespace SFA.DAS.ApprenticeProgress.Application.Queries
         public async Task<GetTaskByApprenticeshipIdAndTaskIdResult> Handle(GetTaskByApprenticeshipIdAndTaskIdQuery request, CancellationToken cancellationToken)
         {
            var task = await _ApprenticeProgressDataContext.Task
-              // .Include(t => t.ApprenticeshipCategory)
                .Include(t => t.TaskFiles)
                .Include(t => t.TaskReminders)
                .Include(t => t.TaskLinkedKsbs)
@@ -30,12 +29,19 @@ namespace SFA.DAS.ApprenticeProgress.Application.Queries
                .AsNoTracking()
                .FirstOrDefaultAsync(cancellationToken);
            
+           task.ApprenticeshipCategory = await _ApprenticeProgressDataContext.ApprenticeshipCategory
+               .Where(x => x.CategoryId == task.ApprenticeshipCategoryId)
+               .ToListAsync(cancellationToken);
+           
            var result = new GetTaskByApprenticeshipIdAndTaskIdResult
            {
                Tasks = new List<Domain.Entities.Task>(){ task }
            };
 
             return result;
-        }
+        } 
+      
+      
+      
     }
 }
