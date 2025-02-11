@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 using System.Text;
 using System.Threading;
@@ -10,6 +11,7 @@ using SFA.DAS.ApprenticeProgress.Data;
 
 namespace SFA.DAS.ApprenticeProgress.Application.Commands
 {
+    [ExcludeFromCodeCoverage]
     public class AddTaskByApprenticeshipIdCommandHandler : IRequestHandler<AddTaskByApprenticeshipIdCommand, Unit>
     {
         private readonly ApprenticeProgressDataContext _ApprenticeProgressDataContext;

@@ -1,4 +1,5 @@
-﻿using System.Linq;
+﻿using System.Diagnostics.CodeAnalysis;
+using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 using MediatR;
@@ -8,6 +9,7 @@ using SFA.DAS.ApprenticeProgress.Data;
 
 namespace SFA.DAS.ApprenticeProgress.Application.Queries
 {
+    [ExcludeFromCodeCoverage]
     public class GetKsbsByApprenticeshipIdQueryHandler : IRequestHandler<GetKsbsByApprenticeshipIdQuery, GetKsbsByApprenticeshipIdResult>
     {
         private readonly ApprenticeProgressDataContext _ApprenticeProgressDataContext;
