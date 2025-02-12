@@ -40,8 +40,5 @@ namespace SFA.DAS.ApprenticeProgress.Application.Queries
 
             return result;
         } 
-      
-      
-      
     }
 }

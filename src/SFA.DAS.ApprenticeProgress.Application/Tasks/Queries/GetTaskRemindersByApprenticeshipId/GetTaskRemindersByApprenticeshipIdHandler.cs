@@ -17,47 +17,33 @@ namespace SFA.DAS.ApprenticeProgress.Application.Tasks.Queries
         {
             _ApprenticeProgressDataContext = ApprenticeProgressDataContext;
         }
-
+        
         public async Task<GetTaskRemindersByApprenticeshipIdResult> Handle(GetTaskRemindersByApprenticeshipIdQuery request, CancellationToken cancellationToken)
         {
-            List<TaskReminderModel> reminders = new List<TaskReminderModel>();
-
-            var tasks = await _ApprenticeProgressDataContext.Task
-                .Include(t => t.TaskReminders)
-                .Where(task => task.ApprenticeshipId == request.ApprenticeshipId && task.Status == Domain.Entities.Task.TaskStatus.Todo)
-                .Join(_ApprenticeProgressDataContext.TaskReminder, task => task.TaskId, reminder => reminder.TaskId, (task, reminder) => new { task, reminder })
-                .Where(r => r.reminder.Status == Domain.Entities.ReminderStatus.Sent)
-                .AsNoTracking()
-                .AsSingleQuery()
-                .ToListAsync(cancellationToken);
-            
-         
-            
-
-            if (tasks.Count > 0)
+            var query = _ApprenticeProgressDataContext.Task
+            .Include(t => t.TaskReminders)
+            .Where(t => t.ApprenticeshipId == request.ApprenticeshipId && t.Status == Domain.Entities.Task.TaskStatus.Todo)
+            .SelectMany(t => t.TaskReminders
+            .Where(r => r.Status == Domain.Entities.ReminderStatus.Sent)
+            .Select(r => new TaskReminderModel
             {
-                foreach (var task in tasks)
-                {
-                    
-                    TaskReminderModel taskReminderModel = new TaskReminderModel();
-                    taskReminderModel.TaskId = task.task.TaskId;
-                    taskReminderModel.ApprenticeshipId = request.ApprenticeshipId;
-                    taskReminderModel.ApprenticeAccountId = task.task.ApprenticeAccountId;
-                    taskReminderModel.DueDate = task.task.DueDate;
-                    taskReminderModel.ApprenticeshipCategoryId = 1;
-                    taskReminderModel.Title = task.task.Title;
-                    taskReminderModel.ReminderValue = task.reminder.ReminderValue;
-                    taskReminderModel.ReminderStatus = task.reminder.Status;
-                    reminders.Add(taskReminderModel);
-                }
-            }
-            
-            var result = new GetTaskRemindersByApprenticeshipIdResult
+                TaskId = t.TaskId,
+                ApprenticeshipId = t.ApprenticeshipId,
+                ApprenticeAccountId = t.ApprenticeAccountId,
+                DueDate = t.DueDate,
+                Title = t.Title,
+                ReminderValue = r.ReminderValue,
+                ReminderStatus = r.Status,
+                ApprenticeshipCategoryId = 1
+            }))
+            .AsNoTracking();
+
+            var reminders = await query.ToListAsync(cancellationToken);
+
+            return new GetTaskRemindersByApprenticeshipIdResult
             {
                 TaskReminders = reminders
             };
-
-            return result;
-        }
+        } 
     }
 }

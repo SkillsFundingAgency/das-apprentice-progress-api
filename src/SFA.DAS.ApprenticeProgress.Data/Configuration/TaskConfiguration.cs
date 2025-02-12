@@ -10,29 +10,23 @@ namespace SFA.DAS.ApprenticeProgress.Data.Configuration
     {
         public void Configure(EntityTypeBuilder<Domain.Entities.Task> builder)
         {
-            
             builder.ToTable("Task");
 
             builder.HasKey(x => x.TaskId);
-            
-           // builder.HasMany(t => t.ApprenticeshipCategory)
-           //     .WithOne()
-           //     .HasForeignKey(f => f.CategoryId);
 
-            
-               builder.HasMany(t => t.TaskFiles)
-                   .WithOne()
+            builder.HasMany(t => t.TaskFiles)
+                .WithOne()
                 .HasForeignKey(f => f.TaskId);
 
-               builder.HasMany(t => t.TaskReminders)
-                   .WithOne()
-               .HasForeignKey(f => f.TaskId);      
+            builder.HasMany(t => t.TaskReminders)
+                .WithOne()
+                .HasForeignKey(f => f.TaskId);      
 
-               builder.HasMany(t => t.TaskLinkedKsbs)
-                   .WithOne()
+            builder.HasMany(t => t.TaskLinkedKsbs)
+                .WithOne()
                 .HasForeignKey(f => f.TaskId);                      
 
-                builder.HasIndex(x => x.ApprenticeshipId).IsUnique();
+            builder.HasIndex(x => x.ApprenticeshipId).IsUnique();
         }
     }
 }
