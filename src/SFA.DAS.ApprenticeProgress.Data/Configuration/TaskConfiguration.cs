@@ -1,7 +1,6 @@
 ﻿using System.Diagnostics.CodeAnalysis;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
-using SFA.DAS.ApprenticeProgress.Domain.Entities;
 
 namespace SFA.DAS.ApprenticeProgress.Data.Configuration
 {
