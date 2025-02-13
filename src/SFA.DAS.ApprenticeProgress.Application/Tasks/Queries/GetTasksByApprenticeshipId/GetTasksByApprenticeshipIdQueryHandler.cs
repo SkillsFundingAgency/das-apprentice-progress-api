@@ -4,7 +4,6 @@ using System.Threading;
 using System.Threading.Tasks;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
-
 using SFA.DAS.ApprenticeProgress.Data;
 using SFA.DAS.ApprenticeProgress.Domain.Entities;
 
@@ -43,7 +42,7 @@ namespace SFA.DAS.ApprenticeProgress.Application.Queries
                 .AsSplitQuery()
                 .ToListAsync(cancellationToken);
 
-            // Optimized category handling
+            // Optimised category handling
             if (tasks.Count > 0)
             {
                 // Get distinct category IDs from retrieved tasks

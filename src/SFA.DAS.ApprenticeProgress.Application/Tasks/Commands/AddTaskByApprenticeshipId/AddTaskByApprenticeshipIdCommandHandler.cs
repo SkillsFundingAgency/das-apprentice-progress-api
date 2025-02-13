@@ -45,55 +45,54 @@ namespace SFA.DAS.ApprenticeProgress.Application.Commands
             
             var taskId = (int)task.TaskId;
 
-            var bulkOperations = new List<Task>();
-
-            // Process files in bulk
-            if (request.Files?.Count > 0)
+            if (taskId > 0)
             {
-                var taskFiles = request.Files.Select(file => new Domain.Entities.TaskFile
+                var bulkOperations = new List<Task>();
+
+                // Process files in bulk
+                if (request.Files?.Count > 0)
                 {
-                    TaskId = taskId,
-                    FileType = file.FileType,
-                    FileName = file.FileName,
-                    FileContents = Encoding.ASCII.GetBytes(file.FileContents)
-                }).ToList();
-
-                _ApprenticeProgressDataContext.AddRange(taskFiles);
-            }
-
-            // Process KSBs with a single query
-            if (request.KsbsLinked != null && request.KsbsLinked[0] != null)
-            {
-                var ksbIds = request.KsbsLinked.Select(k => new Guid(k)).ToList();
-                var ksbProgressItems = await _ApprenticeProgressDataContext.KSBProgress
-                    .Where(x => ksbIds.Contains(x.KSBId) && x.ApprenticeshipId == request.ApprenticeshipId)
-                    .ToListAsync(cancellationToken);
-
-                var validKsbs = ksbProgressItems
-                    .Where(k => ksbIds.Contains(k.KSBId))
-                    .Select(k => new Domain.Entities.TaskKSBs
+                    var taskFiles = request.Files.Select(file => new Domain.Entities.TaskFile
                     {
                         TaskId = taskId,
-                        KSBProgressId = k.KSBProgressId
-                    });
+                        FileType = file.FileType,
+                        FileName = file.FileName,
+                        FileContents = Encoding.ASCII.GetBytes(file.FileContents)
+                    }).ToList();
 
-                _ApprenticeProgressDataContext.AddRange(validKsbs);
-            }
+                    _ApprenticeProgressDataContext.AddRange(taskFiles);
+                }
 
-            // Add reminder if needed
-            if (request.ReminderValue != null)
-            {
-                _ApprenticeProgressDataContext.Add(new Domain.Entities.TaskReminder
+                // Process KSBs with a single query
+                if (request.KsbsLinked != null && request.KsbsLinked[0] != null)
                 {
-                    TaskId = taskId,
-                    ReminderUnit = Domain.Entities.ReminderUnit.Minutes,
-                    ReminderValue = request.ReminderValue,
-                    Status = Domain.Entities.ReminderStatus.NotSent
-                });
-            }
+                    var ksbIds = request.KsbsLinked.Select(k => new Guid(k)).ToList();
+                    var ksbProgressItems = await _ApprenticeProgressDataContext.KSBProgress
+                        .Where(x => ksbIds.Contains(x.KSBId) && x.ApprenticeshipId == request.ApprenticeshipId)
+                        .ToListAsync(cancellationToken);
 
-            // Execute all remaining operations in a single transaction
-            await _ApprenticeProgressDataContext.SaveChangesAsync(cancellationToken);
+                    var validKsbs = ksbProgressItems
+                        .Where(k => ksbIds.Contains(k.KSBId))
+                        .Select(k => new Domain.Entities.TaskKSBs { TaskId = taskId, KSBProgressId = k.KSBProgressId });
+
+                    _ApprenticeProgressDataContext.AddRange(validKsbs);
+                }
+
+                // Add reminder if needed
+                if (request.ReminderValue != null)
+                {
+                    _ApprenticeProgressDataContext.Add(new Domain.Entities.TaskReminder
+                    {
+                        TaskId = taskId,
+                        ReminderUnit = Domain.Entities.ReminderUnit.Minutes,
+                        ReminderValue = request.ReminderValue,
+                        Status = Domain.Entities.ReminderStatus.NotSent
+                    });
+                }
+
+                // Execute all remaining operations in a single transaction
+                await _ApprenticeProgressDataContext.SaveChangesAsync(cancellationToken);
+            }
 
             return Unit.Value;
         }
