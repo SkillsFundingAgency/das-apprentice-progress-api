@@ -13,15 +13,11 @@ namespace SFA.DAS.ApprenticeProgress.Application.Queries
         public GetKsbStatusesQueryHandler(ApprenticeProgressDataContext ApprenticeProgressDataContext)
         {
             _ApprenticeProgressDataContext = ApprenticeProgressDataContext;
-            
         }
 
         public async Task<GetKsbStatusesResult> Handle(GetKsbStatusesQuery request, CancellationToken cancellationToken)
         {
             var categories = await _ApprenticeProgressDataContext.ApprenticeshipCategory
-                //.Where(x =>
-              //      x.ApprenticeshipId == request.ApprenticeshipId)
-                .AsNoTracking()
                 .AsSingleQuery()
                 .ToListAsync(cancellationToken);
 

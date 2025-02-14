@@ -84,23 +84,7 @@ namespace SFA.DAS.ApprenticeProgress.Domain.UnitTests
             Assert.AreEqual(new DateTime(2019, 05, 09), sut.CreatedDateTime);
             Assert.AreEqual(Task.TaskStatus.Done, sut.Status);
         }
-
-        [Test]
-        public void TaskCategory_Entity_Test()
-        {
-            var sut = new TaskCategory
-            {
-                TaskId = 1,
-                CategoryId = 2,
-                ApprenticeshipCategory = new ApprenticeshipCategory() { CategoryId = 1, Title = "title"}
-            };
-
-            Assert.AreEqual(1, sut.TaskId);
-            Assert.AreEqual(2, sut.CategoryId);
-            Assert.AreEqual("title", sut.ApprenticeshipCategory.Title);
-            Assert.AreEqual(1, sut.ApprenticeshipCategory.CategoryId);
-        }
-
+        
         [Test]
         public void TaskFile_Entity_Test()
         {

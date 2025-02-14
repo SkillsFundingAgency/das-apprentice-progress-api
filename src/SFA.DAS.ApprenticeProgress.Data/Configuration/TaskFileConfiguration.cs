@@ -5,7 +5,7 @@ using Microsoft.EntityFrameworkCore.Metadata.Builders;
 namespace SFA.DAS.ApprenticeProgress.Data.Configuration
 {
     [ExcludeFromCodeCoverage]
-    public class TaskFile : IEntityTypeConfiguration<Domain.Entities.TaskFile>
+    public class TaskFileConfiguration : IEntityTypeConfiguration<Domain.Entities.TaskFile>
     {
         public void Configure(EntityTypeBuilder<Domain.Entities.TaskFile> builder)
         {

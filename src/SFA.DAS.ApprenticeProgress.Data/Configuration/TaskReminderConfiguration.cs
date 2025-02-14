@@ -5,7 +5,7 @@ using Microsoft.EntityFrameworkCore.Metadata.Builders;
 namespace SFA.DAS.ApprenticeProgress.Data.Configuration
 {
     [ExcludeFromCodeCoverage]
-    public class TaskReminder : IEntityTypeConfiguration<Domain.Entities.TaskReminder>
+    public class TaskReminderConfiguration : IEntityTypeConfiguration<Domain.Entities.TaskReminder>
     {
         public void Configure(EntityTypeBuilder<Domain.Entities.TaskReminder> builder)
         {

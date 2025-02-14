@@ -6,8 +6,5 @@ namespace SFA.DAS.ApprenticeProgress.Domain.Entities
     {
         public int TaskId  { get; set; }
         public int? CategoryId { get; set; }
-
-        [NotMapped]
-        public virtual ApprenticeshipCategory ApprenticeshipCategory { get; set; }
     }
 }

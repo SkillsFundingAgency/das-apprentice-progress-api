@@ -19,7 +19,6 @@ namespace SFA.DAS.ApprenticeProgress.Application.Queries
 
         public async Task<GetKsbsProgressForTaskResult> Handle(GetKsbsProgressForTaskQuery request, CancellationToken cancellationToken)
         {
-
             var ksbJoins
                = await _ApprenticeProgressDataContext.TaskKSBs
                 .Where(x =>

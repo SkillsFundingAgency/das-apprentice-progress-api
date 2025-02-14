@@ -79,14 +79,14 @@ namespace SFA.DAS.ApprenticeProgress.Data
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            modelBuilder.ApplyConfiguration(new ApprenticeshipCategory());
-            modelBuilder.ApplyConfiguration(new KSBProgress());
-            modelBuilder.ApplyConfiguration(new KSBProgressStatusHistory());
-            modelBuilder.ApplyConfiguration(new Task());
-            modelBuilder.ApplyConfiguration(new TaskCategory());
-            modelBuilder.ApplyConfiguration(new TaskFile());
-            modelBuilder.ApplyConfiguration(new TaskKSBs());
-            modelBuilder.ApplyConfiguration(new TaskReminder());
+            modelBuilder.ApplyConfiguration(new ApprenticeshipCategoryConfiguration());
+            modelBuilder.ApplyConfiguration(new KSBProgressConfiguration());
+            modelBuilder.ApplyConfiguration(new KSBProgressStatusHistoryConfiguration());
+            modelBuilder.ApplyConfiguration(new TaskConfiguration());
+            modelBuilder.ApplyConfiguration(new TaskCategoryConfiguration());
+            modelBuilder.ApplyConfiguration(new TaskFileConfiguration());
+            modelBuilder.ApplyConfiguration(new TaskKSBsConfiguration());
+            modelBuilder.ApplyConfiguration(new TaskReminderConfiguration());
 
             base.OnModelCreating(modelBuilder);
         }

@@ -4,8 +4,8 @@ using System.Threading;
 using System.Threading.Tasks;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
-
 using SFA.DAS.ApprenticeProgress.Data;
+using SFA.DAS.ApprenticeProgress.Domain.Entities;
 
 namespace SFA.DAS.ApprenticeProgress.Application.Queries
 {
@@ -17,84 +17,56 @@ namespace SFA.DAS.ApprenticeProgress.Application.Queries
         {
             _ApprenticeProgressDataContext = ApprenticeProgressDataContext;
         }
-
+        
         public async Task<GetTasksByApprenticeshipIdResult> Handle(GetTasksByApprenticeshipIdQuery request, CancellationToken cancellationToken)
         {
-            var tasks = new List<Domain.Entities.Task>();
+            var status = (Domain.Entities.Task.TaskStatus)request.Status;
+        
+            var query = _ApprenticeProgressDataContext.Task
+                .Where(x => x.ApprenticeshipId == request.ApprenticeshipId && x.Status == status)
+                .AsNoTracking();
 
-            if ((Domain.Entities.Task.TaskStatus)(int)request.Status == Domain.Entities.Task.TaskStatus.Todo)
-            {
-                tasks = await _ApprenticeProgressDataContext.Task
-                    .Where(x =>
-                        x.ApprenticeshipId == request.ApprenticeshipId
-                        &&
-                        x.DueDate >= request.FromDate
-                        &&
-                        x.DueDate <= request.ToDate
-                        &&
-                        x.Status == (Domain.Entities.Task.TaskStatus)(int)request.Status)
-                    .AsNoTracking()
-                    .AsSingleQuery()
-                    .ToListAsync(cancellationToken);
-            }
-
-            if ((Domain.Entities.Task.TaskStatus)(int)request.Status == Domain.Entities.Task.TaskStatus.Done)
-            {
-                tasks = await _ApprenticeProgressDataContext.Task
-                    .Where(x =>
-                        x.ApprenticeshipId == request.ApprenticeshipId
-                        &&
-                        x.CompletionDateTime >= request.FromDate
-                        &&
-                        x.CompletionDateTime <= request.ToDate
-                        &&
-                        x.Status == (Domain.Entities.Task.TaskStatus)(int)request.Status)
-                    .AsNoTracking()
-                    .AsSingleQuery()
-                    .ToListAsync(cancellationToken);
-            }
-
-            foreach (var task in tasks)
-            {
-                var taskCategories = await _ApprenticeProgressDataContext.ApprenticeshipCategory
-                .Where(x =>
-                    x.CategoryId == task.ApprenticeshipCategoryId)
-                    .AsNoTracking()
-                    .AsSingleQuery()
-                .ToListAsync(cancellationToken);
-                task.ApprenticeshipCategory = taskCategories;
-
-                var taskFiles = await _ApprenticeProgressDataContext.TaskFile
-                    .Where(x =>
-                        x.TaskId == task.TaskId)
-                    .AsNoTracking()
-                    .AsSingleQuery()
-                    .ToListAsync(cancellationToken);
-                task.TaskFiles = taskFiles;
-
-                var taskReminders = await _ApprenticeProgressDataContext.TaskReminder
-                    .Where(x =>
-                        x.TaskId == task.TaskId)
-                    .AsNoTracking()
-                    .AsSingleQuery()
-                    .ToListAsync(cancellationToken);
-                task.TaskReminders = taskReminders;
-
-                var taskLinkedKsbs = await _ApprenticeProgressDataContext.TaskKSBs
-                    .Where(x =>
-                        x.TaskId == task.TaskId)
-                    .AsNoTracking()
-                    .AsSingleQuery()
-                    .ToListAsync(cancellationToken);
-                task.TaskLinkedKsbs = taskLinkedKsbs;
-            }
-
-            var result = new GetTasksByApprenticeshipIdResult
-            {
-                Tasks = tasks
+            query = status switch {
+                Domain.Entities.Task.TaskStatus.Todo => 
+                    query.Where(x => x.DueDate >= request.FromDate && x.DueDate <= request.ToDate),
+                Domain.Entities.Task.TaskStatus.Done => 
+                    query.Where(x => x.CompletionDateTime >= request.FromDate && x.CompletionDateTime <= request.ToDate),
+                _ => query
             };
 
-            return result;
+            // Get tasks with relationships
+            var tasks = await query
+                .Include(t => t.TaskFiles)
+                .Include(t => t.TaskReminders)
+                .Include(t => t.TaskLinkedKsbs)
+                .AsSplitQuery()
+                .ToListAsync(cancellationToken);
+
+            // Optimised category handling
+            if (tasks.Count > 0)
+            {
+                // Get distinct category IDs from retrieved tasks
+                var categoryIds = tasks
+                    .Select(t => t.ApprenticeshipCategoryId)
+                    .Distinct()
+                    .ToList();
+
+                // Batch fetch required categories
+                var categoryDict = await _ApprenticeProgressDataContext.ApprenticeshipCategory
+                    .Where(x => categoryIds.Contains(x.CategoryId))
+                    .AsNoTracking()
+                    .ToDictionaryAsync(x => x.CategoryId, cancellationToken);
+
+                // Map categories in memory
+                foreach (var task in tasks)
+                {
+                    task.ApprenticeshipCategory = categoryDict.TryGetValue((int)task.ApprenticeshipCategoryId, out var category) 
+                        ? new List<ApprenticeshipCategory> { category } 
+                        : new List<ApprenticeshipCategory>();
+                }
+            }
+
+            return new GetTasksByApprenticeshipIdResult { Tasks = tasks };
         }
     }
 }
