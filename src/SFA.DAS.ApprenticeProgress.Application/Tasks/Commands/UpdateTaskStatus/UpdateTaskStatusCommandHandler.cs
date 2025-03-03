@@ -35,7 +35,7 @@ namespace SFA.DAS.ApprenticeProgress.Application.Commands
                 }
                
                 task.Status = (Domain.Entities.Task.TaskStatus)request.Status;
-                _ApprenticeProgressDataContext.SaveChanges();
+                await _ApprenticeProgressDataContext.SaveChangesAsync();
             }
 
             return await Task.FromResult(Unit.Value);
