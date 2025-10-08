@@ -37,9 +37,9 @@ namespace SFA.DAS.ApprenticeProgress.Application.Queries
                 var reminderTime = task.DueDate.GetValueOrDefault().AddMinutes(-minuteBeforeDueDate);
 
                 var timeToCheckFrom = DateTime.UtcNow.AddDays(-1);
-                var timeToCheckTo = DateTime.UtcNow.AddMinutes(1);
-
-                if (timeToCheckFrom <= reminderTime && timeToCheckTo > reminderTime)
+                var timeToCheckTo = TimeZoneInfo.ConvertTimeFromUtc(DateTime.UtcNow.AddMinutes(1), TimeZoneInfo.Local);
+                
+                if (timeToCheckFrom <= reminderTime && timeToCheckTo >= reminderTime)
                 {
                     reminders.Add(new TaskReminderModel()
                     {
