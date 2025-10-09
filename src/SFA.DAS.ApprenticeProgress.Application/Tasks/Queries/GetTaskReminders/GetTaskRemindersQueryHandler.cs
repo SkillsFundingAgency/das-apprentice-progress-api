@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
@@ -10,6 +11,7 @@ using SFA.DAS.ApprenticeProgress.Data;
 
 namespace SFA.DAS.ApprenticeProgress.Application.Queries
 {
+    [ExcludeFromCodeCoverage]
     public class GetTaskRemindersQueryHandler : IRequestHandler<GetTaskRemindersQuery, GetTaskRemindersResult>
     {
         private readonly ApprenticeProgressDataContext _ApprenticeProgressDataContext;
@@ -39,7 +41,7 @@ namespace SFA.DAS.ApprenticeProgress.Application.Queries
                 var timeToCheckFrom = DateTime.UtcNow.AddDays(-1);
                 var timeToCheckTo = TimeZoneInfo.ConvertTimeFromUtc(DateTime.UtcNow.AddMinutes(1), TimeZoneInfo.Local);
                 
-                if (timeToCheckFrom <= reminderTime && timeToCheckTo >= reminderTime)
+                if (timeToCheckFrom <= reminderTime && timeToCheckTo > reminderTime)
                 {
                     reminders.Add(new TaskReminderModel()
                     {
