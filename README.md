@@ -48,7 +48,6 @@ ApprenticeProgress API has no external dependenices.
 * Web API
 * SQL Server
 * Entity Framework
-* NLog
 * Azure Table Storage
 * NUnit
 * Moq
