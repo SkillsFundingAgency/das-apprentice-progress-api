@@ -13,12 +13,15 @@ namespace SFA.DAS.ApprenticeProgress.Functions.Extensions;
 [ExcludeFromCodeCoverage]
 internal static class AddNServiceBusExtension
 {
-    public const string EndpointName = "SFA.DAS.PushNotifications";
+    public const string EndpointName = "SFA.DAS.LearnerNotifications.LearnerNotificationService";
+    //public const string EndpointName = "SFA.DAS.PushNotifications";
     public static void AddNServiceBus(this IServiceCollection services, IConfiguration configuration)
     {
+        //NServiceBusConfiguration nServiceBusConfiguration = new();
+        //configuration.GetSection(nameof(NServiceBusConfiguration)).Bind(nServiceBusConfiguration);
 
-        NServiceBusConfiguration nServiceBusConfiguration = new();
-        configuration.GetSection(nameof(NServiceBusConfiguration)).Bind(nServiceBusConfiguration);
+        var connectionString = configuration["NServiceBusConnectionString"];
+        var license = configuration["NServiceBusLicense"];
 
         var endpointConfiguration = new EndpointConfiguration(EndpointName)
                 .UseErrorQueue($"{EndpointName}-errors")
@@ -26,9 +29,9 @@ internal static class AddNServiceBusExtension
                 .UseMessageConventions()
                 .UseNewtonsoftJsonSerializer();
 
-        if (!string.IsNullOrEmpty(nServiceBusConfiguration.NServiceBusLicense))
+        if (!string.IsNullOrEmpty(license))
         {
-            endpointConfiguration.UseLicense(nServiceBusConfiguration.NServiceBusLicense);
+            endpointConfiguration.UseLicense(license);
         }
 
         endpointConfiguration.SendOnly();
@@ -38,19 +41,23 @@ internal static class AddNServiceBusExtension
         if (configuration["EnvironmentName"] == "LOCAL")
         {
             var transport = endpointConfiguration.UseTransport<AzureServiceBusTransport>();
-            transport.Routing().RouteToEndpoint(typeof(SendPushNotificationCommand), EndpointName);
-            var connectionString = nServiceBusConfiguration.NServiceBusConnectionString;
+            transport.UseWebSockets();
+            transport.Routing().RouteToEndpoint(typeof(SendNotificationCommand), EndpointName);
+            //transport.Routing().RouteToEndpoint(typeof(SendPushNotificationCommand), EndpointName);
+            //var connectionString = nServiceBusConfiguration.NServiceBusConnectionString;            
             transport.ConnectionString(connectionString);
             startServiceBusEndpoint = true;
         }
         else
         {
-            endpointConfiguration.UseAzureServiceBusTransport(nServiceBusConfiguration.NServiceBusConnectionString, s => s.AddRouting());
+            endpointConfiguration.UseAzureServiceBusTransport(connectionString, s => s.AddRouting());
             startServiceBusEndpoint = true;
         }
 
         if (startServiceBusEndpoint)
         {
+            var test = connectionString;
+
             var endpointInstance = Endpoint.Start(endpointConfiguration).GetAwaiter().GetResult();
 
             services
@@ -63,10 +70,12 @@ internal static class AddNServiceBusExtension
 [ExcludeFromCodeCoverage]
 public static class RoutingSettingsExtensions
 {
-    public const string EndpointName = "SFA.DAS.PushNotifications";
+    public const string EndpointName = "SFA.DAS.LearnerNotifications.LearnerNotificationService";
+    //public const string EndpointName = "SFA.DAS.PushNotifications";
 
     public static void AddRouting(this RoutingSettings routingSettings)
     {
-        routingSettings.RouteToEndpoint(typeof(SendPushNotificationCommand), EndpointName);
+        //routingSettings.RouteToEndpoint(typeof(SendPushNotificationCommand), EndpointName);
+        routingSettings.RouteToEndpoint(typeof(SendNotificationCommand), EndpointName);
     }
 }
