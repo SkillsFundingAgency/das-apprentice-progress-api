@@ -8,7 +8,7 @@ namespace SFA.DAS.ApprenticeProgress.Functions.Services;
 
 public interface IMessageService
 {
-    Task SendMessage(SendPushNotificationCommand message);
+    Task SendMessage(SendNotificationCommand message);
 }
 
 public class MessageService : IMessageService
@@ -25,7 +25,7 @@ public class MessageService : IMessageService
         _logger = logger;
     }
 
-    public async Task SendMessage(SendPushNotificationCommand message)
+    public async Task SendMessage(SendNotificationCommand message)
     {
         try
         {

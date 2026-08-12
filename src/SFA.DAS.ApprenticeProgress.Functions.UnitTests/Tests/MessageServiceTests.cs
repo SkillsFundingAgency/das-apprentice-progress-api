@@ -19,7 +19,7 @@ namespace SFA.DAS.ApprenticeProgress.Functions.UnitTests
             [Frozen] Mock<IMessageSession> mockMessageSession,
             MessageService service)
         {
-            SendPushNotificationCommand message = new() { Body = "body", Title = "title" };
+            SendNotificationCommand message = new() { Body = "body", Heading = "heading" };
 
             await service.SendMessage(message);
 
@@ -32,7 +32,7 @@ namespace SFA.DAS.ApprenticeProgress.Functions.UnitTests
            [Frozen] Mock<IMessageSession> mockMessageSession,
            MessageService service)
         {
-            SendPushNotificationCommand message = new() { Body = "body", Title = "title" };
+            SendNotificationCommand message = new() { Body = "body", Heading = "heading" };
 
             mockMessageSession.Setup(a => a.Send(message, It.IsAny<SendOptions>()))
                 .ThrowsAsync(new System.Exception("Test"));
