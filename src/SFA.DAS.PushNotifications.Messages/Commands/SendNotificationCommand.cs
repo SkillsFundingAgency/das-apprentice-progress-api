@@ -1,7 +1,9 @@
 ﻿using System;
+using System.Diagnostics.CodeAnalysis;
 
 namespace SFA.DAS.PushNotifications.Messages.Commands
 {
+    [ExcludeFromCodeCoverage]
     public class SendNotificationCommand
     {
         public Guid CorrelationId { get; set; }
