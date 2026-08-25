@@ -19,6 +19,7 @@ namespace SFA.DAS.ApprenticeProgress.Data
         DbSet<Domain.Entities.TaskFile> TaskFile { get; set; }
         DbSet<Domain.Entities.TaskKSBs> TaskKSBs { get; set; }
         DbSet<Domain.Entities.TaskReminder> TaskReminder { get; set; }
+        DbSet<Domain.Entities.ApprenticeshipProgress> ApprenticeshipProgress { get; set; }
 
         int SaveChanges();
     }
@@ -35,7 +36,10 @@ namespace SFA.DAS.ApprenticeProgress.Data
         public virtual DbSet<Domain.Entities.TaskCategory> TaskCategory { get; set; }
         public virtual DbSet<Domain.Entities.TaskFile> TaskFile { get; set; }
         public virtual DbSet<Domain.Entities.TaskKSBs> TaskKSBs { get; set; }
-        public virtual DbSet<Domain.Entities.TaskReminder> TaskReminder { get; set; }
+        public virtual DbSet<Domain.Entities.TaskReminder> TaskReminder { get; set; }        
+        public virtual DbSet<Domain.Entities.ApprenticeshipProgress> ApprenticeshipProgress { get; set; }
+        public virtual DbSet<Domain.Entities.ProgressNotification> ProgressNotification { get; set; }
+        public virtual DbSet<Domain.Entities.ApprenticeshipProgressNotification> ApprenticeshipProgressNotification { get; set; }
 
         private readonly ApprenticeProgressConfiguration _configuration;
         private readonly AzureServiceTokenProvider _azureServiceTokenProvider;
@@ -87,6 +91,9 @@ namespace SFA.DAS.ApprenticeProgress.Data
             modelBuilder.ApplyConfiguration(new TaskFileConfiguration());
             modelBuilder.ApplyConfiguration(new TaskKSBsConfiguration());
             modelBuilder.ApplyConfiguration(new TaskReminderConfiguration());
+            modelBuilder.ApplyConfiguration(new ApprenticeshipProgressConfiguration());
+            modelBuilder.ApplyConfiguration(new ProgressNotificationConfiguration());
+            modelBuilder.ApplyConfiguration(new ApprenticeshipProgressNotificationConfiguration());
 
             base.OnModelCreating(modelBuilder);
         }
