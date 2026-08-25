@@ -20,7 +20,7 @@ namespace SFA.DAS.ApprenticeProgress.Application.Notifications.Queries.GetProgre
         {
             var notification = await _ApprenticeProgressDataContext.ProgressNotification
                 .Where(noti => noti.Id == request.NotificationId)
-                .FirstOrDefaultAsync();
+                .FirstOrDefaultAsync(cancellationToken);
 
             var result = new GetProgressNotificationsByIdResult
             {
