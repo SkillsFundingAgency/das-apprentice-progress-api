@@ -23,7 +23,7 @@ namespace SFA.DAS.ApprenticeProgress.Application.Notifications.Queries.GetProgre
                 .Include(x => x.ApprenticeshipProgress)
                 .Include(x => x.ProgressNotification)
                 .Where(x => x.IsEnabled == true)
-                .ToListAsync();
+                .ToListAsync(cancellationToken);
 
             var result = new GetProgressNotificationsToCheckResult
             {

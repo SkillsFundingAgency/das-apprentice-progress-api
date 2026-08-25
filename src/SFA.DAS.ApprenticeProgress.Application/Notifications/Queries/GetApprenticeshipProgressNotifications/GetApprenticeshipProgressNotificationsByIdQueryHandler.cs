@@ -27,7 +27,7 @@ namespace SFA.DAS.ApprenticeProgress.Application.Notifications.Queries.GetAppren
 
             var apprenticeshipProgressNotifications = await _ApprenticeProgressDataContext.ApprenticeshipProgressNotification
                 .Where(notification => notification.ApprenticeProgressId == apprenticeshipProgress.Id)
-                .ToListAsync();
+                .ToListAsync(cancellationToken);
 
             var result = new GetApprenticeshipProgressNotificationsByIdResult
             {
