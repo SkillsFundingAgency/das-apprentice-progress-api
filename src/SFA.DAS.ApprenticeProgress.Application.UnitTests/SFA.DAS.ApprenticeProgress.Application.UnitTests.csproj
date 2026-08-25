@@ -49,7 +49,6 @@
     <None Remove="Handlers\TaskHandlers\" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Handlers\" />
     <Folder Include="Handlers\KsbHandlers\" />
     <Folder Include="Handlers\TaskHandlers\" />
   </ItemGroup>
