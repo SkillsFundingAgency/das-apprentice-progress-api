@@ -1,5 +1,6 @@
 ﻿using System;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Diagnostics;
 using NUnit.Framework;
 using SFA.DAS.ApprenticeProgress.Data;
 
@@ -13,6 +14,8 @@ namespace SFA.DAS.ApprenticeProgress.Application.UnitTests.DataFixture
             var options = new DbContextOptionsBuilder<ApprenticeProgressDataContext>()
 
                 .UseInMemoryDatabase($"SFA.DAS.ApprenticeProgress.Database_{DateTime.UtcNow.ToFileTimeUtc()}")
+                .ConfigureWarnings(x =>
+                    x.Ignore(InMemoryEventId.TransactionIgnoredWarning))
                 .EnableSensitiveDataLogging()
                 .Options;
 
