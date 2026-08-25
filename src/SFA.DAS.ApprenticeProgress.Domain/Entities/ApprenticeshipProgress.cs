@@ -1,8 +1,10 @@
 ﻿using System;
 using System.ComponentModel.DataAnnotations.Schema;
+using System.Diagnostics.CodeAnalysis;
 
 namespace SFA.DAS.ApprenticeProgress.Domain.Entities
 {
+    [ExcludeFromCodeCoverage]
     public class ApprenticeshipProgress
     {
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
