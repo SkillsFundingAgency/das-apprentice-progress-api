@@ -31,7 +31,7 @@ namespace SFA.DAS.ApprenticeProgress.Application.Notifications.Commands.AddAppre
             _ApprenticeProgressDataContext.Add(apprenticeshipProgress);
             await _ApprenticeProgressDataContext.SaveChangesAsync(cancellationToken);
 
-            var notifications = await _ApprenticeProgressDataContext.ProgressNotification.Where(n => n.IsEnabled).ToListAsync();
+            var notifications = await _ApprenticeProgressDataContext.ProgressNotification.Where(n => n.IsEnabled).ToListAsync(cancellationToken);
 
             foreach(var notification in notifications)
             {
