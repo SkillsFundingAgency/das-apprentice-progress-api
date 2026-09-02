@@ -1,9 +1,7 @@
 ﻿using System;
-using System.Diagnostics.CodeAnalysis;
 using System.Threading.Tasks;
 using Microsoft.Azure.Functions.Worker;
 using Microsoft.Extensions.Logging;
-using SFA.DAS.ApprenticeProgress.Application.Interfaces;
 using SFA.DAS.ApprenticeProgress.Functions.Api.Clients;
 using SFA.DAS.ApprenticeProgress.Functions.Services;
 using SFA.DAS.PushNotifications.Messages.Commands;
@@ -15,14 +13,12 @@ public class SendProgressNotificationsFunction
     private readonly ILogger _logger;
     private readonly IApprenticeProgressApiClient _api;
     private readonly IMessageService _messageService;
-    private readonly IContentfulService _contentfulService;
 
-    public SendProgressNotificationsFunction(ILoggerFactory loggerFactory, IApprenticeProgressApiClient api, IMessageService messageService, IContentfulService contentfulService)
+    public SendProgressNotificationsFunction(ILoggerFactory loggerFactory, IApprenticeProgressApiClient api, IMessageService messageService)
     {
         _logger = loggerFactory.CreateLogger<SendProgressNotificationsFunction>();
         _api = api;
-        _messageService = messageService;
-        _contentfulService = contentfulService;
+        _messageService = messageService;      
     }
 
     [Function("SendProgressNotificationsFunction")]
@@ -30,13 +26,6 @@ public class SendProgressNotificationsFunction
     {
         try
         {
-            var entryId = "1Xn9hSw5ieLULxM9EPq3FV";
-            var content = await _contentfulService.GetContentAsync(entryId);
-
-            _logger.LogInformation(
-                "Contentful Title: {Header}",
-                content.Header);
-
             _logger.LogInformation("Getting Notifications");
             var notifications = await _api.GetProgressNotificationsToCheck();
 
