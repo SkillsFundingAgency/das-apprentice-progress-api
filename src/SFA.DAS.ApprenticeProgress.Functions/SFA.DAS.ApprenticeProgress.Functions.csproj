@@ -41,6 +41,7 @@
     <Using Include="System.Threading.ExecutionContext" Alias="ExecutionContext" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\SFA.DAS.ApprenticeProgress.Application\SFA.DAS.ApprenticeProgress.Application.csproj" />
     <ProjectReference Include="..\SFA.DAS.ApprenticeProgress.Data\SFA.DAS.ApprenticeProgress.Data.csproj" />    
     <ProjectReference Include="..\SFA.DAS.PushNotifications.Messages\SFA.DAS.PushNotifications.Messages.csproj">
       <GlobalPropertiesToRemove></GlobalPropertiesToRemove>
