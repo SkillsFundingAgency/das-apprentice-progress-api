@@ -1,8 +1,9 @@
-using Microsoft.Extensions.DependencyInjection;
+﻿using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using SFA.DAS.ApprenticeProgress.Functions.Configuration;
 using SFA.DAS.ApprenticeProgress.Functions.Extensions;
 using SFA.DAS.ApprenticeProgress.Functions.HttpClientConfiguration;
+using SFA.DAS.ApprenticeProgress.Infrastructure;
 
 var host = new HostBuilder()
     .ConfigureFunctionsWorkerDefaults()
@@ -18,6 +19,7 @@ var host = new HostBuilder()
             .Configure<ApplicationConfiguration>(context.Configuration.GetSection(nameof(ApplicationConfiguration)))
             .ConfigureHttpClients(context.Configuration)
             .AddApplicationRegistrations()
+            .AddInfrastructure()
             .AddNServiceBus(context.Configuration);
     })
     .Build();
