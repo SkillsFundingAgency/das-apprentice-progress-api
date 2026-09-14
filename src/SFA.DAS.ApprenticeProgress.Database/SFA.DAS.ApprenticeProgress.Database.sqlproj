@@ -68,5 +68,8 @@
     <Build Include="Tables\TaskFile.sql" />
     <Build Include="Tables\TaskKSBs.sql" />
     <Build Include="Tables\TaskReminder.sql" />
-  </ItemGroup>
+    <Build Include="Tables\ApprenticeshipProgress.sql" />
+    <Build Include="Tables\ApprenticeshipProgressNotification.sql" />
+    <Build Include="Tables\ProgressNotification.sql" />
+  </ItemGroup>  
 </Project>
