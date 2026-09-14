@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Diagnostics.CodeAnalysis;
 using System.Threading.Tasks;
 using Microsoft.Azure.Functions.Worker;
 using Microsoft.Extensions.Logging;
@@ -8,6 +9,7 @@ using SFA.DAS.PushNotifications.Messages.Commands;
 
 namespace SFA.DAS.ApprenticeProgress.Functions.Functions;
 
+[ExcludeFromCodeCoverage]
 public class SendProgressNotificationsFunction
 {
     private readonly ILogger _logger;
