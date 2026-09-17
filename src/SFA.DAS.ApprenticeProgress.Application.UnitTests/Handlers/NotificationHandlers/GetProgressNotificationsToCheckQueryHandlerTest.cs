@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Linq;
 using System.Threading;
 using NUnit.Framework;
 using SFA.DAS.ApprenticeProgress.Application.Notifications.Queries.GetProgressNotificationsToCheck;
@@ -18,14 +19,17 @@ namespace SFA.DAS.ApprenticeProgress.Application.UnitTests.Handlers.Notification
             var apprenticeshipProgress = new ApprenticeshipProgress
             {
                 ApprenticeAccountId = Guid.NewGuid(),
-                FirstLoggedIn = DateTime.Now,
+                FirstLoggedIn = DateTime.UtcNow.AddDays(-10),
                 IsEnabled = true
             };
 
             var progressNotification = new ProgressNotification
             {
                 Id = Guid.NewGuid(),
-                IsEnabled = true
+                IsEnabled = true,
+                ActivationPoint = ActivationPoint.FromStart,
+                DelayUnit = DelayUnit.Day,
+                Delay = "1"
             };
 
             await DbContext.ApprenticeshipProgress.AddAsync(apprenticeshipProgress);
@@ -54,7 +58,7 @@ namespace SFA.DAS.ApprenticeProgress.Application.UnitTests.Handlers.Notification
             Assert.That(result, Is.Not.Null);
             Assert.That(result.Notifications, Has.Count.EqualTo(1));
 
-            var returnedNotification = result.Notifications[0];
+            var returnedNotification = result.Notifications.Single();
 
             Assert.Multiple(() =>
             {
@@ -79,20 +83,26 @@ namespace SFA.DAS.ApprenticeProgress.Application.UnitTests.Handlers.Notification
             var apprenticeshipProgress = new ApprenticeshipProgress
             {
                 ApprenticeAccountId = Guid.NewGuid(),
-                FirstLoggedIn = DateTime.Now,
+                FirstLoggedIn = DateTime.UtcNow.AddDays(-10),
                 IsEnabled = true
             };
 
             var enabledProgressNotification = new ProgressNotification
             {
                 Id = Guid.NewGuid(),
-                IsEnabled = true
+                IsEnabled = true,
+                ActivationPoint = ActivationPoint.FromStart,
+                DelayUnit = DelayUnit.Day,
+                Delay = "1"
             };
 
             var disabledProgressNotification = new ProgressNotification
             {
                 Id = Guid.NewGuid(),
-                IsEnabled = true
+                IsEnabled = true,
+                ActivationPoint = ActivationPoint.FromStart,
+                DelayUnit = DelayUnit.Day,
+                Delay = "1"
             };
 
             await DbContext.ApprenticeshipProgress.AddAsync(apprenticeshipProgress);
@@ -134,7 +144,7 @@ namespace SFA.DAS.ApprenticeProgress.Application.UnitTests.Handlers.Notification
             // Assert
             Assert.That(result.Notifications, Has.Count.EqualTo(1));
 
-            var returnedNotification = result.Notifications[0];
+            var returnedNotification = result.Notifications.Single();
 
             Assert.Multiple(() =>
             {
@@ -155,14 +165,17 @@ namespace SFA.DAS.ApprenticeProgress.Application.UnitTests.Handlers.Notification
             var apprenticeshipProgress = new ApprenticeshipProgress
             {
                 ApprenticeAccountId = Guid.NewGuid(),
-                FirstLoggedIn = DateTime.Now,
+                FirstLoggedIn = DateTime.UtcNow.AddDays(-10),
                 IsEnabled = true
             };
 
             var progressNotification = new ProgressNotification
             {
                 Id = Guid.NewGuid(),
-                IsEnabled = true
+                IsEnabled = true,
+                ActivationPoint = ActivationPoint.FromStart,
+                DelayUnit = DelayUnit.Day,
+                Delay = "1"
             };
 
             await DbContext.ApprenticeshipProgress.AddAsync(apprenticeshipProgress);
@@ -188,7 +201,9 @@ namespace SFA.DAS.ApprenticeProgress.Application.UnitTests.Handlers.Notification
                 CancellationToken.None);
 
             // Assert
-            var returnedNotification = result.Notifications[0];
+            Assert.That(result.Notifications, Has.Count.EqualTo(1));
+
+            var returnedNotification = result.Notifications.Single();
 
             Assert.That(
                 returnedNotification.ApprenticeshipProgress,
@@ -213,14 +228,17 @@ namespace SFA.DAS.ApprenticeProgress.Application.UnitTests.Handlers.Notification
             var apprenticeshipProgress = new ApprenticeshipProgress
             {
                 ApprenticeAccountId = Guid.NewGuid(),
-                FirstLoggedIn = DateTime.Now,
+                FirstLoggedIn = DateTime.UtcNow.AddDays(-10),
                 IsEnabled = true
             };
 
             var progressNotification = new ProgressNotification
             {
                 Id = Guid.NewGuid(),
-                IsEnabled = true
+                IsEnabled = true,
+                ActivationPoint = ActivationPoint.FromStart,
+                DelayUnit = DelayUnit.Day,
+                Delay = "1"
             };
 
             await DbContext.ApprenticeshipProgress.AddAsync(apprenticeshipProgress);
@@ -246,7 +264,9 @@ namespace SFA.DAS.ApprenticeProgress.Application.UnitTests.Handlers.Notification
                 CancellationToken.None);
 
             // Assert
-            var returnedNotification = result.Notifications[0];
+            Assert.That(result.Notifications, Has.Count.EqualTo(1));
+
+            var returnedNotification = result.Notifications.Single();
 
             Assert.That(
                 returnedNotification.ProgressNotification,
