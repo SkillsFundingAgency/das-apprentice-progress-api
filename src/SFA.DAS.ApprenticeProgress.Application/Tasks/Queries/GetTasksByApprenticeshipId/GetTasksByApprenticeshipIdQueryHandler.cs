@@ -60,9 +60,12 @@ namespace SFA.DAS.ApprenticeProgress.Application.Queries
                 // Map categories in memory
                 foreach (var task in tasks)
                 {
-                    task.ApprenticeshipCategory = categoryDict.TryGetValue((int)task.ApprenticeshipCategoryId, out var category) 
-                        ? new List<ApprenticeshipCategory> { category } 
+                    if (task.ApprenticeshipCategoryId.HasValue)
+                    {
+                        task.ApprenticeshipCategory = categoryDict.TryGetValue((int)task.ApprenticeshipCategoryId, out var category)
+                        ? new List<ApprenticeshipCategory> { category }
                         : new List<ApprenticeshipCategory>();
+                    }                    
                 }
             }
 
