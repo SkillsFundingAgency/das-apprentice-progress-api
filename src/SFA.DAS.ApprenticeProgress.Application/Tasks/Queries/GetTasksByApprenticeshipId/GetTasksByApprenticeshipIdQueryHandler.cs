@@ -40,34 +40,7 @@ namespace SFA.DAS.ApprenticeProgress.Application.Queries
                 .Include(t => t.TaskReminders)
                 .Include(t => t.TaskLinkedKsbs)
                 .AsSplitQuery()
-                .ToListAsync(cancellationToken);
-
-            // Optimised category handling
-            if (tasks.Count > 0)
-            {
-                // Get distinct category IDs from retrieved tasks
-                var categoryIds = tasks
-                    .Select(t => t.ApprenticeshipCategoryId)
-                    .Distinct()
-                    .ToList();
-
-                // Batch fetch required categories
-                var categoryDict = await _ApprenticeProgressDataContext.ApprenticeshipCategory
-                    .Where(x => categoryIds.Contains(x.CategoryId))
-                    .AsNoTracking()
-                    .ToDictionaryAsync(x => x.CategoryId, cancellationToken);
-
-                // Map categories in memory
-                foreach (var task in tasks)
-                {
-                    if (task.ApprenticeshipCategoryId.HasValue)
-                    {
-                        task.ApprenticeshipCategory = categoryDict.TryGetValue((int)task.ApprenticeshipCategoryId, out var category)
-                        ? new List<ApprenticeshipCategory> { category }
-                        : new List<ApprenticeshipCategory>();
-                    }                    
-                }
-            }
+                .ToListAsync(cancellationToken);          
 
             return new GetTasksByApprenticeshipIdResult { Tasks = tasks };
         }
