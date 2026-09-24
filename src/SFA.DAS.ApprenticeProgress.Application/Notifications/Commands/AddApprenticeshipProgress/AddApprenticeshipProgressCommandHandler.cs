@@ -17,34 +17,46 @@ namespace SFA.DAS.ApprenticeProgress.Application.Notifications.Commands.AddAppre
             _ApprenticeProgressDataContext = ApprenticeProgressDataContext;
         }
 
-        public async Task<Unit> Handle(AddApprenticeshipProgressCommand request, CancellationToken cancellationToken)
+        public async Task<Unit> Handle(
+    AddApprenticeshipProgressCommand request,
+    CancellationToken cancellationToken)
         {
-            var apprenticeshipProgress = new Domain.Entities.ApprenticeshipProgress
+            var strategy =
+                _ApprenticeProgressDataContext.Database.CreateExecutionStrategy();
+
+            await strategy.ExecuteAsync(async () =>
             {
-                ApprenticeAccountId = request.ApprenticeIdentifier,
-                FirstLoggedIn = DateTime.Now,
-                IsEnabled = true,
-            };
+                await using var transaction = await _ApprenticeProgressDataContext.Database.BeginTransactionAsync(cancellationToken);
 
-            await using var transaction = await _ApprenticeProgressDataContext.Database.BeginTransactionAsync(cancellationToken);
+                var apprenticeshipProgress = new Domain.Entities.ApprenticeshipProgress
+                {
+                    ApprenticeAccountId = request.ApprenticeIdentifier,
+                    FirstLoggedIn = DateTime.Now,
+                    IsEnabled = true,
+                };
 
-            _ApprenticeProgressDataContext.Add(apprenticeshipProgress);
-            await _ApprenticeProgressDataContext.SaveChangesAsync(cancellationToken);
+                _ApprenticeProgressDataContext.Add(apprenticeshipProgress);
 
-            var notifications = await _ApprenticeProgressDataContext.ProgressNotification.Where(n => n.IsEnabled).ToListAsync(cancellationToken);
+                await _ApprenticeProgressDataContext.SaveChangesAsync(cancellationToken);
 
-            foreach(var notification in notifications)
-            {
-                _ApprenticeProgressDataContext.Add(new Domain.Entities.ApprenticeshipProgressNotification
-                {                    
-                    ApprenticeProgressId = apprenticeshipProgress.Id,
-                    NotificationId = notification.Id,
-                    IsEnabled = true
-                });
-            }
+                var notifications = await _ApprenticeProgressDataContext.ProgressNotification
+                        .Where(n => n.IsEnabled)
+                        .ToListAsync(cancellationToken);
 
-            await _ApprenticeProgressDataContext.SaveChangesAsync(cancellationToken);
-            await transaction.CommitAsync(cancellationToken);
+                foreach (var notification in notifications)
+                {
+                    _ApprenticeProgressDataContext.Add(new Domain.Entities.ApprenticeshipProgressNotification
+                        {
+                            ApprenticeProgressId = apprenticeshipProgress.Id,
+                            NotificationId = notification.Id,
+                            IsEnabled = true
+                        });
+                }
+
+                await _ApprenticeProgressDataContext.SaveChangesAsync(cancellationToken);
+
+                await transaction.CommitAsync(cancellationToken);
+            });
 
             return Unit.Value;
         }
