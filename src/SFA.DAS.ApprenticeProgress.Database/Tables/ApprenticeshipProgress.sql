@@ -1,6 +1,6 @@
 ﻿CREATE TABLE [dbo].[ApprenticeshipProgress]
 (
-    [Id] INT NOT NULL PRIMARY KEY,
+    [Id] INT IDENTITY(1,1) NOT NULL PRIMARY KEY,
     [ApprenticeAccountId] UNIQUEIDENTIFIER NOT NULL,
     [ApprenticeshipId] NCHAR(10) NULL,
     [FirstLoggedIn] DATETIME2 NOT NULL,
