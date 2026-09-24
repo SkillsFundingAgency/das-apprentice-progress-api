@@ -38,7 +38,7 @@ namespace SFA.DAS.ApprenticeProgress.Functions
             _logger.LogInformation("Testing Contentful connection");
 
             var content = await _contentfulService.GetContentAsync(
-                "1Xn9hSw5ieLULxM9EPq3FV");
+                "4I1Oy5doBciTMPfC9gGMPH");
 
             _logger.LogInformation(
                 "Successfully retrieved Contentful entry: {@Content}",
