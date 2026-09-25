@@ -33,9 +33,7 @@ namespace SFA.DAS.ApprenticeProgress.Application.Notifications.Commands.AddAppre
                 ApprenticeAccountId = request.ApprenticeIdentifier,
                 FirstLoggedIn = DateTime.Now,
                 IsEnabled = true,
-            };
-
-            await using var transaction = await _ApprenticeProgressDataContext.Database.BeginTransactionAsync(cancellationToken);
+            };            
 
             _ApprenticeProgressDataContext.Add(apprenticeshipProgress);
 
