@@ -55,11 +55,18 @@ namespace SFA.DAS.ApprenticeProgress.Functions
                 if (taskReminders.TaskReminders.Count > 0)
                 {
                     foreach (var reminder in taskReminders.TaskReminders)
-                    {
-                        string dateValue = reminder.DueDate.HasValue ? reminder.DueDate.Value.ToString("f") : "";
-                        string msgTitle = "Task due " + dateValue;
+                    {                        
+                        var notification = new SendNotificationCommand
+                        {
+                            CorrelationId = Guid.NewGuid(),
+                            LearnerAccountId = reminder.ApprenticeAccountId,
+                            Category = reminder.ApprenticeshipCategoryId.ToString(),
+                            Heading = reminder.Title,
+                            Body = reminder.Note,
+                            NotificationTime = DateTime.Now,                            
+                        };
 
-                        await _messageService.SendMessage(new SendPushNotificationCommand { ApprenticeAccountIdentifier = reminder.ApprenticeAccountId, Body = reminder.Title, Title = msgTitle });
+                        await _messageService.SendMessage(notification);                        
                         _logger.LogInformation("Got reminder and sent to service bus");
 
                         await _api.UpdateTaskReminders(reminder.TaskId.Value, 1);

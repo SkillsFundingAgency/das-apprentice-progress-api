@@ -1,4 +1,5 @@
-﻿using System.Threading.Tasks;
+﻿using System;
+using System.Threading.Tasks;
 using RestEase;
 using SFA.DAS.ApprenticeProgress.Functions.Api.Response;
 
@@ -11,5 +12,11 @@ namespace SFA.DAS.ApprenticeProgress.Functions.Api.Clients
 
         [Post("/apprenticeships/updatetaskreminders/tasks/{taskId}/status/{statusId}")]
         Task UpdateTaskReminders([Path] int taskId, [Path] int statusId);
+
+        [Get("/notifications/progress-notification-to-check")]
+        Task<GetProgressNotificationsWrapper> GetProgressNotificationsToCheck();
+
+        [Patch("/notifications/updateProgressNotificationStatus/{notificationId}/{apprenticeProgressId}")]
+        Task UpdateProgressNotificationStatus([Path] Guid notificationId, [Path] long apprenticeProgressId);
     }
 }
