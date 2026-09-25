@@ -1,5 +1,7 @@
 ﻿using System;
+using System.Data.SqlTypes;
 using System.Diagnostics.CodeAnalysis;
+using System.Runtime.Intrinsics.X86;
 
 namespace SFA.DAS.PushNotifications.Messages.Commands
 {

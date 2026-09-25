@@ -25,37 +25,37 @@ namespace SFA.DAS.ApprenticeProgress.Application.Notifications.Commands.AddAppre
                 _ApprenticeProgressDataContext.Database.CreateExecutionStrategy();
 
             await strategy.ExecuteAsync(async () =>
-            {
+        {
                 await using var transaction = await _ApprenticeProgressDataContext.Database.BeginTransactionAsync(cancellationToken);
 
-                var apprenticeshipProgress = new Domain.Entities.ApprenticeshipProgress
-                {
-                    ApprenticeAccountId = request.ApprenticeIdentifier,
-                    FirstLoggedIn = DateTime.Now,
-                    IsEnabled = true,
-                };
+            var apprenticeshipProgress = new Domain.Entities.ApprenticeshipProgress
+            {
+                ApprenticeAccountId = request.ApprenticeIdentifier,
+                FirstLoggedIn = DateTime.Now,
+                IsEnabled = true,
+            };            
 
-                _ApprenticeProgressDataContext.Add(apprenticeshipProgress);
+            _ApprenticeProgressDataContext.Add(apprenticeshipProgress);
 
-                await _ApprenticeProgressDataContext.SaveChangesAsync(cancellationToken);
+            await _ApprenticeProgressDataContext.SaveChangesAsync(cancellationToken);
 
                 var notifications = await _ApprenticeProgressDataContext.ProgressNotification
                         .Where(n => n.IsEnabled)
                         .ToListAsync(cancellationToken);
 
                 foreach (var notification in notifications)
-                {
-                    _ApprenticeProgressDataContext.Add(new Domain.Entities.ApprenticeshipProgressNotification
-                        {
-                            ApprenticeProgressId = apprenticeshipProgress.Id,
-                            NotificationId = notification.Id,
-                            IsEnabled = true
-                        });
-                }
+            {
+                _ApprenticeProgressDataContext.Add(new Domain.Entities.ApprenticeshipProgressNotification
+                {                    
+                    ApprenticeProgressId = apprenticeshipProgress.Id,
+                    NotificationId = notification.Id,
+                    IsEnabled = true
+                });
+            }
 
-                await _ApprenticeProgressDataContext.SaveChangesAsync(cancellationToken);
+            await _ApprenticeProgressDataContext.SaveChangesAsync(cancellationToken);
 
-                await transaction.CommitAsync(cancellationToken);
+            await transaction.CommitAsync(cancellationToken);
             });
 
             return Unit.Value;
