@@ -10,7 +10,7 @@ namespace SFA.DAS.ApprenticeProgress.Application.Models
     public class ContentfulNotification
     {
         public string Heading { get; set; }
-        //public Document Description { get; set; }
-        //public string Slug { get; set; }
+        public string Description { get; set; }
+        public string? Slug { get; set; }
     }
 }

@@ -34,20 +34,9 @@ namespace SFA.DAS.ApprenticeProgress.Functions
 
         [Function("SendTaskReminderEvent")]
         public async Task Run([TimerTrigger("0 */1 * * * *", RunOnStartup = true)] TimerInfo timer, CancellationToken cancellationToken)
-        {
-            _logger.LogInformation("Testing Contentful connection");
-
-            var content = await _contentfulService.GetContentAsync(
-                "4I1Oy5doBciTMPfC9gGMPH");
-
-            _logger.LogInformation(
-                "Successfully retrieved Contentful entry: {@Content}",
-                content);
-
+        {           
             try
             {
-
-
                 _logger.LogInformation("Getting Reminders");
 
                 var taskReminders = await _api.GetTaskReminders();

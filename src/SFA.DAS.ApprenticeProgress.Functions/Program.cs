@@ -4,11 +4,13 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using SFA.DAS.ApprenticeProgress.Application.Interfaces;
 using SFA.DAS.ApprenticeProgress.Data;
 using SFA.DAS.ApprenticeProgress.Functions.Configuration;
 using SFA.DAS.ApprenticeProgress.Functions.Extensions;
 using SFA.DAS.ApprenticeProgress.Functions.HttpClientConfiguration;
 using SFA.DAS.ApprenticeProgress.Infrastructure;
+using SFA.DAS.ApprenticeProgress.Infrastructure.Contentful;
 
 namespace SFA.DAS.ApprenticeProgress.Functions;
 
@@ -41,6 +43,7 @@ public static class Program
 
                 services.AddScoped<IApprenticeProgressDataContext>(sp =>
                     sp.GetRequiredService<ApprenticeProgressDataContext>());
+                services.AddScoped<IContentfulService, ContentfulService>();
             })
             .Build();
 

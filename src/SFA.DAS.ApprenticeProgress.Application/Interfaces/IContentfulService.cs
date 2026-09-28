@@ -9,6 +9,6 @@ namespace SFA.DAS.ApprenticeProgress.Application.Interfaces
 {
     public interface IContentfulService
     {
-        Task<ContentfulNotification> GetContentAsync(string entryId);
+        Task<ContentfulNotification> GetContentAsync(string notificationId);
     }
 }
