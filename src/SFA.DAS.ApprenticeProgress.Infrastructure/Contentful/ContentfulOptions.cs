@@ -1,9 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
+﻿using System.Diagnostics.CodeAnalysis;
 
 namespace SFA.DAS.ApprenticeProgress.Infrastructure.Contentful
 {
+    [ExcludeFromCodeCoverage]
     public class ContentfulOptions
     {
         public string SpaceId { get; set; } = string.Empty;

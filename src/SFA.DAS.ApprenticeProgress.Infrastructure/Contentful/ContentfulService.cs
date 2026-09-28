@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics.CodeAnalysis;
 using System.Text;
 using Contentful.Core;
 using SFA.DAS.ApprenticeProgress.Application.Interfaces;
@@ -7,6 +8,7 @@ using SFA.DAS.ApprenticeProgress.Application.Models;
 
 namespace SFA.DAS.ApprenticeProgress.Infrastructure.Contentful
 {
+    [ExcludeFromCodeCoverage]
     public class ContentfulService : IContentfulService
     {
         private readonly ContentfulClient _client;

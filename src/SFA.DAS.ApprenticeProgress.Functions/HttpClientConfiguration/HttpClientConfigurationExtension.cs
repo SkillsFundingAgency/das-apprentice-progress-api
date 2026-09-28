@@ -27,11 +27,7 @@ namespace SFA.DAS.ApprenticeProgress.Functions.HttpClientConfiguration
 
         private static void AddApprenticeProgressApiClient(IServiceCollection services, IConfiguration configuration)
         {
-            //var apiConfig = configuration.GetSection(nameof(ApplicationConfiguration)).Get<ApplicationConfiguration>().ApprenticeProgressApiConfiguration;
-
-            var apiConfig = configuration
-                .GetSection(nameof(ApprenticeProgressApiConfiguration))
-                .Get<ApprenticeProgressApiConfiguration>();
+            var apiConfig = configuration.GetSection(nameof(ApplicationConfiguration)).Get<ApplicationConfiguration>().ApprenticeProgressApiConfiguration;
 
             services.AddRestEaseClient<IApprenticeProgressApiClient>(apiConfig.Url)
                .AddHttpMessageHandler(() => new InnerApiAuthenticationHeaderHandler(new AzureClientCredentialHelper(), apiConfig.Identifier));

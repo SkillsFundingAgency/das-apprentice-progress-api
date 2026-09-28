@@ -7,7 +7,6 @@ using Microsoft.Extensions.Logging;
 using SFA.DAS.ApprenticeProgress.Functions.Api.Clients;
 using SFA.DAS.ApprenticeProgress.Functions.Services;
 using SFA.DAS.PushNotifications.Messages.Commands;
-using SFA.DAS.ApprenticeProgress.Application.Interfaces;
 
 namespace SFA.DAS.ApprenticeProgress.Functions
 {
@@ -17,24 +16,21 @@ namespace SFA.DAS.ApprenticeProgress.Functions
         private readonly IApprenticeProgressApiClient _api;
         private readonly IMessageService _messageService;
         private readonly ILogger<SendTaskReminderFunction> _logger;
-        private readonly IContentfulService _contentfulService;
 
         public SendTaskReminderFunction(
             IApprenticeProgressApiClient api,
             IMessageService messageService,
-            ILogger<SendTaskReminderFunction> logger,
-            IContentfulService contentfulService
+            ILogger<SendTaskReminderFunction> logger
             )
         {
             _api = api;
             _messageService = messageService;
             _logger = logger;
-            _contentfulService = contentfulService;
         }
 
         [Function("SendTaskReminderEvent")]
         public async Task Run([TimerTrigger("0 */1 * * * *", RunOnStartup = true)] TimerInfo timer, CancellationToken cancellationToken)
-        {           
+        {
             try
             {
                 _logger.LogInformation("Getting Reminders");
