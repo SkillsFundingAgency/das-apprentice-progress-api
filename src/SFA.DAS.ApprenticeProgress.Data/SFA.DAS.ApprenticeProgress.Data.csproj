@@ -1,6 +1,6 @@
 <Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
-    <TargetFramework>net8.0</TargetFramework>
+    <TargetFramework>net10.0</TargetFramework>
     <ProjectGuid>A644BCD7-58DE-49BB-93C9-6D9439A2D051</ProjectGuid>
   </PropertyGroup>
   <ItemGroup>
