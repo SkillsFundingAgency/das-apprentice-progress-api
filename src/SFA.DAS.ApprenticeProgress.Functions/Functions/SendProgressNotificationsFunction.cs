@@ -3,6 +3,7 @@ using System.Diagnostics.CodeAnalysis;
 using System.Threading.Tasks;
 using Microsoft.Azure.Functions.Worker;
 using Microsoft.Extensions.Logging;
+using NServiceBus;
 using SFA.DAS.ApprenticeProgress.Application.Interfaces;
 using SFA.DAS.ApprenticeProgress.Functions.Api.Clients;
 using SFA.DAS.ApprenticeProgress.Functions.Services;
@@ -40,42 +41,45 @@ public class SendProgressNotificationsFunction
             {
                 foreach (var notification in notifications.Notifications)
                 {
-                    try
+                    var notificationId =
+                        notification.ProgressNotification.NotificationId;
+
+                    var content =
+                        await _contentfulService.GetContentAsync(notificationId);
+
+                    if (content == null)
                     {
-                        var content = await _contentfulService.GetContentAsync(
-                            notification.ProgressNotification.NotificationId);
+                        _logger.LogWarning(
+                            "Content has not been configured in Contentful for NotificationId: {NotificationId}. Skipping notification.",
+                            notificationId);
 
-                        var genNoti = new SendNotificationCommand
-                        {
-                            CorrelationId = Guid.NewGuid(),
-                            LearnerAccountId = notification.ApprenticeshipProgress.ApprenticeAccountId,
-                            Category = notification.ProgressNotification.NotificationId,
-                            Heading = content.Heading,
-                            Body = content.Description,
-                            LinkUrl = content?.Slug,
-                        };
-
-                        await _messageService.SendMessage(genNoti);
-
-                        _logger.LogInformation(
-                            "Got notification for apprentice and sent to service bus");
-
-                        await _api.UpdateProgressNotificationStatus(
-                            notification.NotificationId,
-                            (long)notification.ApprenticeProgressId);
-
-                        _logger.LogInformation(
-                            "Updated notification status to sent for apprentice");
+                        continue;
                     }
-                    catch (Contentful.Core.Errors.ContentfulException ex)
+
+                    var genNoti = new SendNotificationCommand
                     {
-                        _logger.LogError(
-                            ex,
-                            "Contentful content not found for NotificationId: {NotificationId}. Stopping notification processing.",
-                            notification.ProgressNotification.NotificationId);
+                        CorrelationId = Guid.NewGuid(),
+                        LearnerAccountId =
+                            notification.ApprenticeshipProgress.ApprenticeAccountId,
+                        Category = notificationId,
+                        Heading = content.Heading,
+                        Body = content.Description,
+                        LinkUrl = content.Slug,
+                    };
 
-                        break;
-                    }
+                    await _messageService.SendMessage(genNoti);
+
+                    _logger.LogInformation(
+                        "Sent notification {NotificationId} to Service Bus",
+                        notificationId);
+
+                    await _api.UpdateProgressNotificationStatus(
+                        notification.NotificationId,
+                        (long)notification.ApprenticeProgressId);
+
+                    _logger.LogInformation(
+                        "Updated status for notification {NotificationId}",
+                        notificationId);
                 }
             }
             else

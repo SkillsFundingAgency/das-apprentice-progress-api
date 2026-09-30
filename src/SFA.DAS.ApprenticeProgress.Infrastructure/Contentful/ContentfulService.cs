@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Diagnostics.CodeAnalysis;
 using System.Text;
 using Contentful.Core;
+using Contentful.Core.Errors;
 using SFA.DAS.ApprenticeProgress.Application.Interfaces;
 using SFA.DAS.ApprenticeProgress.Application.Models;
 
@@ -22,13 +23,19 @@ namespace SFA.DAS.ApprenticeProgress.Infrastructure.Contentful
         {
             Console.WriteLine($"Requesting Contentful NotificationId: {notificationId}");
 
-            if (EntryIds.TryGetValue(notificationId, out var entryId))
+            if(!EntryIds.TryGetValue(notificationId, out var entryId))
+            {
+                return null;
+            }
+
+            try
             {
                 return await _client.GetEntry<ContentfulNotification>(entryId);
             }
-
-            throw new KeyNotFoundException(
-            $"No Contentful entry ID has been configured for notification '{notificationId}'.");
+            catch (ContentfulException)
+            {
+                return null;
+            }
         }
 
         private static readonly IReadOnlyDictionary<string, string> EntryIds =
