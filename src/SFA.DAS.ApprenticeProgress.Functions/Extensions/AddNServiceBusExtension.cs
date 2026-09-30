@@ -17,9 +17,10 @@ internal static class AddNServiceBusExtension
     //public const string EndpointName = "SFA.DAS.PushNotifications";
     public static void AddNServiceBus(this IServiceCollection services, IConfiguration configuration)
     {
-        //NServiceBusConfiguration nServiceBusConfiguration = new();
-        //configuration.GetSection(nameof(NServiceBusConfiguration)).Bind(nServiceBusConfiguration);
+        NServiceBusConfiguration nServiceBusConfiguration = new();
+        configuration.GetSection(nameof(NServiceBusConfiguration)).Bind(nServiceBusConfiguration);
 
+        //var connectionString = configuration["NServiceBusConfiguration:NServiceBusConnectionString"];
         var connectionString = configuration["NServiceBusConnectionString"];
         var license = configuration["NServiceBusLicense"];
 
@@ -43,8 +44,7 @@ internal static class AddNServiceBusExtension
             var transport = endpointConfiguration.UseTransport<AzureServiceBusTransport>();
             transport.UseWebSockets();
             transport.Routing().RouteToEndpoint(typeof(SendNotificationCommand), EndpointName);
-            //transport.Routing().RouteToEndpoint(typeof(SendPushNotificationCommand), EndpointName);
-            //var connectionString = nServiceBusConfiguration.NServiceBusConnectionString;            
+            transport.Routing().RouteToEndpoint(typeof(SendPushNotificationCommand), EndpointName);            
             transport.ConnectionString(connectionString);
             startServiceBusEndpoint = true;
         }
@@ -55,9 +55,7 @@ internal static class AddNServiceBusExtension
         }
 
         if (startServiceBusEndpoint)
-        {
-            var test = connectionString;
-
+        {            
             var endpointInstance = Endpoint.Start(endpointConfiguration).GetAwaiter().GetResult();
 
             services
