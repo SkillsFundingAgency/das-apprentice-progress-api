@@ -40,23 +40,42 @@ public class SendProgressNotificationsFunction
             {
                 foreach (var notification in notifications.Notifications)
                 {
-                    var content = await _contentfulService.GetContentAsync(notification.ProgressNotification.NotificationId);
-
-                    var genNoti = new SendNotificationCommand
+                    try
                     {
-                        CorrelationId = Guid.NewGuid(),
-                        LearnerAccountId = notification.ApprenticeshipProgress.ApprenticeAccountId,
-                        Category = notification.ProgressNotification.NotificationId,
-                        Heading = content.Heading,
-                        Body = content.Description,
-                        LinkUrl = content?.Slug,                                                
-                    };
+                        var content = await _contentfulService.GetContentAsync(
+                            notification.ProgressNotification.NotificationId);
 
-                    await _messageService.SendMessage(genNoti);
-                    _logger.LogInformation("Got Notifications for apprentice and sent to service bus");
+                        var genNoti = new SendNotificationCommand
+                        {
+                            CorrelationId = Guid.NewGuid(),
+                            LearnerAccountId = notification.ApprenticeshipProgress.ApprenticeAccountId,
+                            Category = notification.ProgressNotification.NotificationId,
+                            Heading = content.Heading,
+                            Body = content.Description,
+                            LinkUrl = content?.Slug,
+                        };
 
-                    await _api.UpdateProgressNotificationStatus(notification.NotificationId, (long)notification.ApprenticeProgressId);
-                    _logger.LogInformation("Updated notification status to sent for apprentice");
+                        await _messageService.SendMessage(genNoti);
+
+                        _logger.LogInformation(
+                            "Got notification for apprentice and sent to service bus");
+
+                        await _api.UpdateProgressNotificationStatus(
+                            notification.NotificationId,
+                            (long)notification.ApprenticeProgressId);
+
+                        _logger.LogInformation(
+                            "Updated notification status to sent for apprentice");
+                    }
+                    catch (Contentful.Core.Errors.ContentfulException ex)
+                    {
+                        _logger.LogError(
+                            ex,
+                            "Contentful content not found for NotificationId: {NotificationId}. Stopping notification processing.",
+                            notification.ProgressNotification.NotificationId);
+
+                        break;
+                    }
                 }
             }
             else
