@@ -65,6 +65,7 @@ public class SendProgressNotificationsFunction
                         Heading = content.Heading,
                         Body = content.Description,
                         LinkUrl = content.Slug,
+                        NotificationTime = DateTime.Now
                     };
 
                     await _messageService.SendMessage(genNoti);
