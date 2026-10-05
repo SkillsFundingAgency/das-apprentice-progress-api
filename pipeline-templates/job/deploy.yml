@@ -50,8 +50,8 @@ jobs:
               SharedStorageAccountConnectionString: $(SharedStorageAccountConnectionString)
               ServiceBusConnectionString: $(ServiceBusConnectionString)
               ApplicationInsightsConnectionString: $(ApplicationInsightsConnectionString)
-              ContentfulDeliveryApiKey: $(Contentful__DeliveryApiKey)
-              ContentfulSpaceId: $(Contentful__SpaceId)
+              ContentfulDeliveryApiKey: $(ContentfulDeliveryApiKey)
+              ContentfulSpaceId: $(ContentfulSpaceId)
         - template: azure-pipelines-templates/deploy/step/generate-config.yml@das-platform-building-blocks
           parameters:
             EnvironmentName: $(EnvironmentName)
