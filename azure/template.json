@@ -186,6 +186,15 @@
         "vnetRouteAllEnabled": {
             "type": "bool",
             "defaultValue": false
+        },
+        "Contentful__DeliveryApiKey": {
+            "type": "securestring"
+        },
+        "Contentful__SpaceId": {
+            "type": "securestring"
+        },
+        "Contentful__Environment": {
+            "type": "string"
         }
     },
     "variables": {
@@ -539,6 +548,18 @@
                                 {
                                     "name": "AzureWebJobsServiceBus__fullyQualifiedNamespace",
                                     "value": "[parameters('SharedServiceBusFqdn')]"
+                                },
+                                {
+                                    "name": "Contentful__DeliveryApiKey",
+                                    "value": "[parameters('Contentful__DeliveryApiKey')]"
+                                },
+                                {
+                                    "name": "Contentful__SpaceId",
+                                    "value": "[parameters('Contentful__SpaceId')]"
+                                },
+                                {
+                                    "name": "Contentful__Environment",
+                                    "value": "[parameters('Contentful__Environment')]"
                                 }
                             ]
                         }
