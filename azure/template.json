@@ -187,13 +187,13 @@
             "type": "bool",
             "defaultValue": false
         },
-        "Contentful__DeliveryApiKey": {
+        "contentfulDeliveryApiKey": {
             "type": "securestring"
         },
-        "Contentful__SpaceId": {
+        "contentfulSpaceId": {
             "type": "securestring"
         },
-        "Contentful__Environment": {
+        "contentfulEnvironment": {
             "type": "string"
         }
     },
@@ -551,15 +551,15 @@
                                 },
                                 {
                                     "name": "Contentful__DeliveryApiKey",
-                                    "value": "[parameters('Contentful__DeliveryApiKey')]"
+                                    "value": "[parameters('contentfulDeliveryApiKey')]"
                                 },
                                 {
                                     "name": "Contentful__SpaceId",
-                                    "value": "[parameters('Contentful__SpaceId')]"
+                                    "value": "[parameters('contentfulSpaceId')]"
                                 },
                                 {
                                     "name": "Contentful__Environment",
-                                    "value": "[parameters('Contentful__Environment')]"
+                                    "value": "[parameters('contentfulEnvironment')]"
                                 }
                             ]
                         }
