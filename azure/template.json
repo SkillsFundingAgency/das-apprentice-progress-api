@@ -182,6 +182,19 @@
         },
         "deployPrivateLinkedScopedResource": {
             "type": "bool"
+        },
+        "vnetRouteAllEnabled": {
+            "type": "bool",
+            "defaultValue": false
+        },
+        "contentfulDeliveryApiKey": {
+            "type": "securestring"
+        },
+        "contentfulSpaceId": {
+            "type": "securestring"
+        },
+        "contentfulEnvironment": {
+            "type": "string"
         }
     },
     "variables": {
@@ -302,6 +315,9 @@
                     },
                     "ipSecurityRestrictions": {
                         "value": "[parameters('backEndAccessRestrictions')]"
+                    },
+                    "vnetRouteAllEnabled": {
+                        "value": "[parameters('vnetRouteAllEnabled')]"
                     }
                 }
             },
@@ -532,6 +548,18 @@
                                 {
                                     "name": "AzureWebJobsServiceBus__fullyQualifiedNamespace",
                                     "value": "[parameters('SharedServiceBusFqdn')]"
+                                },
+                                {
+                                    "name": "Contentful__DeliveryApiKey",
+                                    "value": "[parameters('contentfulDeliveryApiKey')]"
+                                },
+                                {
+                                    "name": "Contentful__SpaceId",
+                                    "value": "[parameters('contentfulSpaceId')]"
+                                },
+                                {
+                                    "name": "Contentful__Environment",
+                                    "value": "[parameters('contentfulEnvironment')]"
                                 }
                             ]
                         }
