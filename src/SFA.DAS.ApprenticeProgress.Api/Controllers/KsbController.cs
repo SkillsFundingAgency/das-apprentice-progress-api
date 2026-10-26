@@ -1,4 +1,5 @@
 ﻿using System;
+using System.ComponentModel.DataAnnotations;
 using System.Threading.Tasks;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
@@ -41,6 +42,9 @@ namespace SFA.DAS.ApprenticeProgress.Api.Controllers
             public int? KSBProgressType { get; set; }
             public Guid? KSBId { get; set; }
             public string KsbKey { get; set; }
+
+            [StringLength(1000)]
+            [RegularExpression(@"^[^<>]*$", ErrorMessage = "Note must not contain '<' or '>'.")]
             public string Note { get; set; }
             public int? CurrentStatus { get; set; }
         }
