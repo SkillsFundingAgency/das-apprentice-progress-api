@@ -1,7 +1,9 @@
 ﻿using System;
+using System.Diagnostics.CodeAnalysis;
 
 namespace SFA.DAS.ApprenticeProgress.Domain.Entities
 {
+    [ExcludeFromCodeCoverage]
     public class KSBProgressStatusHistory
     {
         public int KSBProgressStatusHistoryId { get; set; }
