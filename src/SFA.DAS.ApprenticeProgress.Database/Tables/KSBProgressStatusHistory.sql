@@ -1,11 +1,15 @@
-﻿CREATE TABLE [dbo].[KSBProgressStatusHistory](
-    [KSBProgressId] [int] NOT NULL,
-    [Status] [int] NULL,
-    [StatusTime] [datetime2](7) NULL
-) ON [PRIMARY]
-GO
-ALTER TABLE [dbo].[KSBProgressStatusHistory] ADD PRIMARY KEY CLUSTERED 
+﻿CREATE TABLE [dbo].[KSBProgressStatusHistory]
 (
-    [KSBProgressId] ASC
-)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, SORT_IN_TEMPDB = OFF, IGNORE_DUP_KEY = OFF, ONLINE = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+    [KSBProgressStatusHistoryId] INT IDENTITY(1,1) NOT NULL,
+    [KSBProgressId] INT NOT NULL,
+    [Status] INT NULL,
+    [StatusTime] DATETIME2(7) NULL,
+
+    CONSTRAINT [PK_KSBProgressStatusHistory]
+        PRIMARY KEY CLUSTERED ([KSBProgressStatusHistoryId] ASC)
+) ON [PRIMARY];
+GO
+
+CREATE INDEX [IX_KSBProgressStatusHistory_KSBProgressId]
+    ON [dbo].[KSBProgressStatusHistory] ([KSBProgressId]);
 GO
