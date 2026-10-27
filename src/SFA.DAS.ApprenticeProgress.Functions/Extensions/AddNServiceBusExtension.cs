@@ -17,9 +17,10 @@ internal static class AddNServiceBusExtension
     //public const string EndpointName = "SFA.DAS.PushNotifications";
     public static void AddNServiceBus(this IServiceCollection services, IConfiguration configuration)
     {
-        //NServiceBusConfiguration nServiceBusConfiguration = new();
-        //configuration.GetSection(nameof(NServiceBusConfiguration)).Bind(nServiceBusConfiguration);
+        NServiceBusConfiguration nServiceBusConfiguration = new();
+        configuration.GetSection(nameof(NServiceBusConfiguration)).Bind(nServiceBusConfiguration);
 
+        //var connectionString = configuration["NServiceBusConfiguration:NServiceBusConnectionString"];
         var connectionString = configuration["NServiceBusConnectionString"];
         var license = configuration["NServiceBusLicense"];
 
@@ -34,36 +35,43 @@ internal static class AddNServiceBusExtension
             endpointConfiguration.UseLicense(license);
         }
 
-        endpointConfiguration.SendOnly();
+        endpointConfiguration.SendOnly();        
 
-        var startServiceBusEndpoint = false;
+        var transport =
+            endpointConfiguration.UseTransport<AzureServiceBusTransport>();
+
+        transport.ConnectionString(connectionString);
 
         if (configuration["EnvironmentName"] == "LOCAL")
         {
-            var transport = endpointConfiguration.UseTransport<AzureServiceBusTransport>();
             transport.UseWebSockets();
-            transport.Routing().RouteToEndpoint(typeof(SendNotificationCommand), EndpointName);
-            //transport.Routing().RouteToEndpoint(typeof(SendPushNotificationCommand), EndpointName);
-            //var connectionString = nServiceBusConfiguration.NServiceBusConnectionString;            
-            transport.ConnectionString(connectionString);
-            startServiceBusEndpoint = true;
+
+            transport.Routing()
+                .RouteToEndpoint(
+                    typeof(SendNotificationCommand),
+                    EndpointName);
+
+            transport.Routing()
+                .RouteToEndpoint(
+                    typeof(SendPushNotificationCommand),
+                    EndpointName);
         }
         else
         {
-            endpointConfiguration.UseAzureServiceBusTransport(connectionString, s => s.AddRouting());
-            startServiceBusEndpoint = true;
+            transport.Routing()
+                .RouteToEndpoint(
+                    typeof(SendNotificationCommand),
+                    EndpointName);
         }
 
-        if (startServiceBusEndpoint)
-        {
-            var test = connectionString;
+        var endpointInstance =
+           Endpoint.Start(endpointConfiguration)
+               .GetAwaiter()
+               .GetResult();
 
-            var endpointInstance = Endpoint.Start(endpointConfiguration).GetAwaiter().GetResult();
-
-            services
-                .AddSingleton(p => endpointInstance)
-                .AddSingleton<IMessageSession>(p => p.GetService<IEndpointInstance>());
-        }
+        services
+            .AddSingleton(endpointInstance)
+            .AddSingleton<IMessageSession>(endpointInstance);
     }
 }
 
