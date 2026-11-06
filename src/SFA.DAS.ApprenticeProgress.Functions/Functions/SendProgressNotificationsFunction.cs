@@ -64,7 +64,7 @@ public class SendProgressNotificationsFunction
                         Category = notificationId,
                         Heading = content.Heading,
                         Body = content.Description,
-                        LinkUrl = content.Slug,
+                        LinkUrl = $"/Support/Category/{content.Slug}",
                         NotificationTime = DateTime.Now
                     };
 
