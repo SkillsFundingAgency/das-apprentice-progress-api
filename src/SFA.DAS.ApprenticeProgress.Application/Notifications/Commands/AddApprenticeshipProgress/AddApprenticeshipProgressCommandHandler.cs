@@ -28,6 +28,19 @@ namespace SFA.DAS.ApprenticeProgress.Application.Notifications.Commands.AddAppre
         {
                 await using var transaction = await _ApprenticeProgressDataContext.Database.BeginTransactionAsync(cancellationToken);
 
+            var alreadyExists = await _ApprenticeProgressDataContext
+            .Set<Domain.Entities.ApprenticeshipProgress>()
+            .AnyAsync(
+                p => p.ApprenticeAccountId == request.ApprenticeIdentifier,
+                cancellationToken);
+
+            if (alreadyExists)
+            {
+                await transaction.CommitAsync(cancellationToken);
+                return;
+            }
+
+
             var apprenticeshipProgress = new Domain.Entities.ApprenticeshipProgress
             {
                 ApprenticeAccountId = request.ApprenticeIdentifier,
@@ -36,14 +49,13 @@ namespace SFA.DAS.ApprenticeProgress.Application.Notifications.Commands.AddAppre
             };            
 
             _ApprenticeProgressDataContext.Add(apprenticeshipProgress);
-
             await _ApprenticeProgressDataContext.SaveChangesAsync(cancellationToken);
 
-                var notifications = await _ApprenticeProgressDataContext.ProgressNotification
-                        .Where(n => n.IsEnabled)
-                        .ToListAsync(cancellationToken);
+            var notifications = await _ApprenticeProgressDataContext.ProgressNotification
+                .Where(n => n.IsEnabled)
+                .ToListAsync(cancellationToken);
 
-                foreach (var notification in notifications)
+            foreach (var notification in notifications)
             {
                 _ApprenticeProgressDataContext.Add(new Domain.Entities.ApprenticeshipProgressNotification
                 {                    
@@ -54,11 +66,10 @@ namespace SFA.DAS.ApprenticeProgress.Application.Notifications.Commands.AddAppre
             }
 
             await _ApprenticeProgressDataContext.SaveChangesAsync(cancellationToken);
-
             await transaction.CommitAsync(cancellationToken);
-            });
+        });
 
-            return Unit.Value;
+        return Unit.Value;
         }
     }
 }
